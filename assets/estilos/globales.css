@@ -1,0 +1,75 @@
+/* Globales */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary:#067EB2;
+    --secondary: #000032;
+    --third:#2B2B4B;
+    --quarter:#C2D83E
+}
+
+.login{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.login .img {
+    background-color: var(--primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 50%;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.img-login{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-login img{
+    width: 90%;
+}
+
+.img-letras{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.img-letras .img-controls {
+    display:  flex;
+}
+.img-letras .img-controls div{
+    width: 10px;
+    height: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+.img-letras .img-controls div:first-child{
+    margin-left: 0px;
+}
+
+.img-letras .img-controls .controls-false{
+    background-color: transparent;
+    border: 1px solid white;
+}
+
+
+
+
+
+
