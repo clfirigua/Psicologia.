@@ -1,10 +1,12 @@
 const usuarios = {
     nombres: String,
     apellidos: String,
-    telefono:String,
+    telefono:Number,
     email: String,
     cc:Number,
     rol:String,
+    usuario:String,
+    password:String,
     forms:[
         {
             nombreForm:String,
