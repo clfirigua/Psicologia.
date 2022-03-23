@@ -1,10 +1,12 @@
-import {roles} from "../../components/checks.js";
+import { roles } from "../../components/checks.js";
+import { menu } from "../../shared/menu.js";
 const controles = document.getElementById('contRoles');
 const btn = document.getElementById('ver');
 const nombreRol = document.getElementById('nombreRol');
 const cabeceraTabla = document.getElementById('cabeceraTabla');
 
-roles.forEach((data)=>{
+
+roles.forEach((data) => {
     $(controles).append(
         `
             <div class="form-check">
@@ -20,30 +22,30 @@ roles.forEach((data)=>{
             <th scope="col">${data.texto}</th>
         `
     )
- })
+})
 
- const dashboard = document.getElementById('dashboard');
- const usuarios = document.getElementById('usuarios');
- const rolesgroup = document.getElementById('roles');
- const formularios = document.getElementById('formularios');
- const grupos = document.getElementById('grupos');
- const informes = document.getElementById('informes');
- const copiaDeSeguridad = document.getElementById('copiaDeSeguridad');
-
-
+const dashboard = document.getElementById('dashboard');
+const usuarios = document.getElementById('usuarios');
+const rolesgroup = document.getElementById('roles');
+const formularios = document.getElementById('formularios');
+const grupos = document.getElementById('grupos');
+const informes = document.getElementById('informes');
+const copiaDeSeguridad = document.getElementById('copiaDeSeguridad');
 
 
-btn.addEventListener('click', ()=>{
+
+
+btn.addEventListener('click', () => {
     const rolValidar = {
-        dashboard:dashboard.checked,
-        usuarios:usuarios.checked,
-        roles:rolesgroup.checked,
-        formularios:formularios.checked,
-        grupos:grupos.checked,
-        informes:informes.checked,
-        copiaDeSeguridad:copiaDeSeguridad.checked,
-        nombreRol:nombreRol.value
+        dashboard: dashboard.checked,
+        usuarios: usuarios.checked,
+        roles: rolesgroup.checked,
+        formularios: formularios.checked,
+        grupos: grupos.checked,
+        informes: informes.checked,
+        copiaDeSeguridad: copiaDeSeguridad.checked,
+        nombreRol: nombreRol.value
     }
 
-    console.log(rolValidar)
+    menu(rolValidar);
 })

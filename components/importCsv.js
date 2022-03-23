@@ -1,5 +1,6 @@
 let arrUser = [];
 const usersData = [];
+const userDataError = []
 
 function parseCSV(text) {
     // Obtenemos las lineas del texto
@@ -44,17 +45,24 @@ function parseCSV(text) {
 
     arrUser.forEach((data)=>{
         const arr = data.split(';')
-        
-        const userArrConver = {
-          nombres: arr[0],
-          apellidos: arr[1],
-          telefono: arr[2],
-          email: arr[3],
-          cc: arr[4],
-          usuario: arr[5],
-          password: arr[6],
+        if(arr.length == 7 && arr[3].includes('@') && arr[3].includes('.com') && arr[2].length == 10){
+
+            const userArrConver = {
+              nombres: arr[0],
+              apellidos: arr[1],
+              telefono: arr[2],
+              email: arr[3],
+              cc: arr[4],
+              usuario: arr[5],
+              password: arr[6],
+            }
+            usersData.push(userArrConver)
+
+        }else{
+          userDataError.push(data);
         }
-        usersData.push(userArrConver)
+
+
     })
 
   }

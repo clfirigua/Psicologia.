@@ -1,27 +1,27 @@
 const roles = [
     {
         texto:'dashboard',
-        ruta:''
+        ruta:'../dashboard/dashboard.html'
     },
     {
         texto:'usuarios',
-        ruta:''
+        ruta:'../users/user.html'
     },
     {
         texto:'roles',
-        ruta:''
+        ruta:'../roles/roles.html'
     },
     {
         texto:'formularios',
-        ruta:''
+        ruta:'../forms/forms.html'
     },
     {
         texto:'grupos',
-        ruta:''
+        ruta:'../groups/groups.html'
     },
     {
         texto:'informes',
-        ruta:''
+        ruta:'../informes/informes.html'
     },
     {
         texto:'copiaDeSeguridad',
