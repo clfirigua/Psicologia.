@@ -5,18 +5,14 @@ const importCSV = document.getElementById('import');
 const cargarScv = document.getElementById('cargarScv');
 const tcabecera = document.getElementById('tableCabecera');
 const tcuerpo = document.getElementById('cuerpoTabla');
+const btnGuardar = document.getElementById('guardar');
 importCSV.addEventListener('change', readFile, false);
-const required = (data) =>{
-    if(data){
-        return 'required'
-    }
-    return
-}
+
 Modelusuarios.forEach(data => {
     $(modelUser).append(
         `
-            <input type="${data.type}" class="form-control mb-2" placeholder="${data.placeholder}" aria-label="Username" id="nombreRol"
-            ${required(data.required)} 
+            <input type="${data.type}" class="form-control mb-2 usuarios" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
+    
             >
         `
     );
@@ -48,6 +44,20 @@ cargarScv.addEventListener('click', ()=>{
     });
 
 })
+
+
+btnGuardar.addEventListener('click', ()=>{
+    const dataUser= document.getElementsByClassName('usuarios');
+
+    for (let i = 0; i < dataUser.length; i++) {
+        const element = dataUser[i];
+        console.log(element.value)
+    }
+
+})
+
+
+
 
 
 

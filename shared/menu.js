@@ -1,11 +1,12 @@
-
 import { roles } from "../components/checks.js";
-
-
 const listaDatos = document.getElementById('listaDatos')
+
+
+
 
 const menu = (arr) =>{
 
+    // TODO: Opcional Manejar los datos el  localStorage
     const valores = Object.values(arr);
     valores.pop()
     roles.forEach((data, index) => {
