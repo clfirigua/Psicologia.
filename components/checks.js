@@ -5,7 +5,7 @@ const roles = [
     },
     {
         texto:'usuarios',
-        ruta:'../users/user.html'
+        ruta:'../userRoles/userRoles.html'
     },
     {
         texto:'roles',
@@ -27,6 +27,7 @@ const roles = [
         texto:'copiaDeSeguridad',
         ruta:''
     }
+
 ];
 
 export {

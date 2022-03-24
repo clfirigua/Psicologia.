@@ -13,8 +13,8 @@ const menu = (arr) =>{
 
         if (valores[index] == true) {
             $(listaDatos).append(`
-            <li class="nav-item">
-                <a class="nav-link " href="${data.ruta}">${data.texto}</a>
+            <li class="nav-item m-3 text-capitalize">
+                <a class="nav-link " aria-current="page" href="${data.ruta}">${data.texto}</a>
             </li>
         `)
         }
