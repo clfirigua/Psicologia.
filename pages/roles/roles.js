@@ -42,6 +42,7 @@ btn.addEventListener('click', () => {
     
     if(nombreRol.value == ''){return alert('Nombre del rol invalido')}
     btn.setAttribute('disabled', '')
+
     const rolValidar = {
         dashboard: dashboard.checked,
         usuarios: usuarios.checked,
