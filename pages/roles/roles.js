@@ -1,4 +1,5 @@
 import { roles } from "../../components/checks.js";
+import { menu } from "../../shared/menu.js";
 import { addData,onGetData } from "../../services/crudservice.js";
 
 
@@ -34,6 +35,7 @@ const formularios = document.getElementById('formularios');
 const grupos = document.getElementById('grupos');
 const informes = document.getElementById('informes');
 const copiaDeSeguridad = document.getElementById('copiaDeSeguridad');
+const cargarUsuarios = document.getElementById('cargarUsuarios');
 
 
 
@@ -51,11 +53,13 @@ btn.addEventListener('click', () => {
         grupos: grupos.checked,
         informes: informes.checked,
         copiaDeSeguridad: copiaDeSeguridad.checked,
-        nombreRol: nombreRol.value
+        cargarUsuarios:cargarUsuarios.checked,
+        nombreRol: nombreRol.value,
     }
 
     try {
-        addData(rolValidar, 'roles');
+        // addData(rolValidar, 'roles');
+        menu(rolValidar)
         reiniciarForm();
     } catch (error) {
         alert(error)
@@ -73,6 +77,7 @@ const reiniciarForm = () => {
     grupos.checked = false;
     informes.checked = false;
     copiaDeSeguridad.checked = false;
+    cargarUsuarios.checked = false;
     nombreRol.value = '';
 }
 
@@ -91,6 +96,7 @@ $(document).ready(function () {
                     <td>${obj.data().grupos}</td>
                     <td>${obj.data().informes}</td>
                     <td>${obj.data().copiaDeSeguridad}</td>
+                    <td>${obj.data().cargarUsuarios}</td>
                 </tr>
             `)
         });

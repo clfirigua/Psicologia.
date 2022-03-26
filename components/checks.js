@@ -9,7 +9,7 @@ const roles = [
     },
     {
         texto:'roles',
-        ruta:'../roles/roles.html'
+        ruta:'../userRoles/userRoles.html'
     },
     {
         texto:'formularios',
@@ -25,6 +25,10 @@ const roles = [
     },
     {
         texto:'copiaDeSeguridad',
+        ruta:''
+    },
+    {
+        texto:'cargarUsuarios',
         ruta:''
     }
 

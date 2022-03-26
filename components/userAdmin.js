@@ -1,4 +1,4 @@
-const Modelusuarios = [ 
+const ModelusuariosAdmin = [ 
     {
         texto: 'nombres',
         type: 'text',
@@ -41,9 +41,15 @@ const Modelusuarios = [
         placeholder:'Contraseña',
         required:true
     },
+    {
+        texto: 'rol',
+        type: 'select',
+        placeholder:'Selecciona un rol',
+        required:true
+    },
 
 ]
 
 export{
-    Modelusuarios
+    ModelusuariosAdmin
 }
