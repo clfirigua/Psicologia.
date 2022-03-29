@@ -2,13 +2,13 @@ import { roles } from "../../components/checks.js";
 import { menu } from "../../shared/menu.js";
 import { addData,onGetData } from "../../services/crudservice.js";
 
-
 const controles = document.getElementById('contRoles');
 const btn = document.getElementById('ver');
 const nombreRol = document.getElementById('nombreRol');
 const cabeceraTabla = document.getElementById('cabeceraTabla');
 const dataTable = document.getElementById('dataTable');
 
+menu();
 
 roles.forEach((data) => {
     $(controles).append(
@@ -58,8 +58,7 @@ btn.addEventListener('click', () => {
     }
 
     try {
-        // addData(rolValidar, 'roles');
-        menu(rolValidar)
+        addData(rolValidar, 'roles');
         reiniciarForm();
     } catch (error) {
         alert(error)

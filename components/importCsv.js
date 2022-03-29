@@ -55,6 +55,7 @@ function parseCSV(text) {
               cc: arr[4],
               usuario: arr[5],
               password: arr[6],
+              rol:false
             }
             usersData.push(userArrConver)
 
