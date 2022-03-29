@@ -1,12 +1,17 @@
 import {Modelusuarios} from "../../components/user.js";
 import {readFile, usersData} from "../../components/importCsv.js";
+import { menu } from "../../shared/menu.js";
+import { addData } from "../../services/crudservice.js";
 const modelUser =  document.getElementById('contUser');
 const importCSV = document.getElementById('import');
 const cargarScv = document.getElementById('cargarScv');
 const tcabecera = document.getElementById('tableCabecera');
 const tcuerpo = document.getElementById('cuerpoTabla');
 const btnGuardar = document.getElementById('guardar');
+const btnGuardarfire = document.getElementById('fire');
 importCSV.addEventListener('change', readFile, false);
+
+menu();
 
 Modelusuarios.forEach(data => {
     $(modelUser).append(
@@ -43,6 +48,14 @@ cargarScv.addEventListener('click', ()=>{
             )
     });
 
+});
+
+btnGuardarfire.addEventListener('click', ()=>{
+
+    usersData.forEach((data)=>{
+        addData(data,'pruebas')
+    })
+    // 
 })
 
 

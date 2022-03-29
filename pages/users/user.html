@@ -9,6 +9,21 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-3 ms-5" >PSICOLOGIA</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0  justify-content-center" id="listaDatos">
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
     <div class="container">
         
             <div class="input-group mt-3">
@@ -16,6 +31,7 @@
             </div>
             <button class="btn btn-success mt-4" id="guardar">Guardar</button>
             <button class="btn btn-success mt-4" id="cargarScv">Cargar CSV</button>
+            <button class="btn btn-success mt-4" id="fire">Guardar Firebase</button>
             <input class="btn btn-success mt-4" type="file" id="import">
     </div>
 

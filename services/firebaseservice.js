@@ -42,5 +42,8 @@ export{
     addDoc,
     collection,
     onSnapshot,
-    deleteDoc
-}
+    deleteDoc,
+    getDocs,
+    getDoc,
+    doc
+  }

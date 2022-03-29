@@ -1,12 +1,14 @@
 import {ModelusuariosAdmin} from "../../components/userAdmin.js";
 import { addData,onGetData } from "../../services/crudservice.js";
+import { menu } from "../../shared/menu.js";
+
 
 const inputData = document.getElementById('contUser');
 const btnGuardar = document.getElementById('guardar');
 const cabeceraTabla = document.getElementById('cabeceraTabla');
 const dataTable = document.getElementById('dataTable');
 const getRoles = [];
-
+menu();
 ModelusuariosAdmin.forEach(data => {
     if(data.type == 'select'){
         $(inputData).append(
