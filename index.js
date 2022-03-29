@@ -1,11 +1,5 @@
+const btnSignin = document.getElementById("btn-login");
 
 
-//
 
 
-// onGetUsers((callback) => {
-//   callback.forEach((doc) => {
-//     console.log(doc.data())
-//   })
-  
-// },'usuarios')

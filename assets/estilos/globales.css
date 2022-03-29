@@ -1,14 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Krub:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+@import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
 /* Globales */
+:root{
+    --primario : #2196f3;
+    --secundario: #0075A0;
+    --medio: #0075A0;
+    --darksecundario: #00425F;
+    --darkprimario: #001B2B;
+    --blanco:#ffffff;
+    --negro:#000000;
+}
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+html{
+    /* font-size: 62.5%; */
+    margin: 0%;
+}
+body{
+    /* font-size: 16px; */
+    font-family: 'Krub', sans-serif;
+}
+/*botones*/
+.btn-primary{
+    background-color: var(--darksecundario);
+    color: var(--blanco);
+}
+.btn-primary:hover{
+    background-color: var(--darkprimario);
+}
+.btn-primary:focus{
+    background-color:  var(--darkprimario);
+}
 
-.login{
-    width: 100%;
+.page-login{
+    display:flex;
+    flex-wrap: wrap;
     height: 100vh;
-    display: flex;
+}
+.row-login{
     align-items: center;
-    justify-content: center;
+    background-color:  var(--primario);
+    flex: 1.5;
+    padding: 0rem 0rem;
+}
+.row-img{
+    display: flex;
+    flex:2;
+
+}
+.img-login{
+    margin: auto;
+    height: 90vh;
+}
+.text-login{
+    font-family: 'Titan One';
+    color:  var(--blanco);
+    text-align: center;
+    margin:2rem 0rem 4rem 0rem;
+}
+p.text-login{
+    margin-top: 2rem;
+}
+.form-login{
+    height:100vh;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+.container-form{
+    display: flex;
+    background-color: var(--blanco);
+    border-radius: 33px;
+    width: 80%;
+    margin-top: 4rem;
+}
+i{color: var(--blanco);}
+i.far.fa-envelope, i.fas.fa-key {
+    padding: 1rem;
+    color: gray;
+}
+.input-login{
+    border: none;
+    background-color: rgba(0,0,0,0);  
+    width: 100%;
+}
+input::placeholder{
+    color: gray;
+}
+input:focus{
+    outline: none;
+    border-color: var(--darksecundario);
+}
+.sign-in{
+    font-family: 'Titan One';
+    padding: 1rem 3rem ;
+    background-color: var(--blanco);
+    border-radius: 33px;
+    border: none;
+    color: var(--primario);
 }
