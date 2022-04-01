@@ -31,7 +31,6 @@ const roles = [
         texto:'cargarUsuarios',
         ruta:'../users/user.html'
     }
-
 ];
 
 export {
