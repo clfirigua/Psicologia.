@@ -14,13 +14,13 @@ importCSV.addEventListener('change', readFile, false);
 menu();
 
 Modelusuarios.forEach(data => {
-    $(modelUser).append(
-        `
-            <input type="${data.type}" class="form-control mb-2 usuarios" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
+    // $(modelUser).append(
+    //     `
+    //         <input type="${data.type}" class="form-control mb-2 usuarios" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
     
-            >
-        `
-    );
+    //         >
+    //     `
+    // );
 
     $(tcabecera).append(
         `
@@ -55,7 +55,7 @@ btnGuardarfire.addEventListener('click', ()=>{
     usersData.forEach((data)=>{
         addData(data,'pruebas')
     })
-    // 
+    
 })
 
 
