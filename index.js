@@ -11,9 +11,8 @@ const  validarUSerLocal  = async()  =>{
     if(sess != null){
         const userJson = JSON.parse(localStorage.getItem('user'));
         const dataUser = await getData(userJson.id, 'usuarios');
-
         if(dataUser.id === userJson.id){
-            location.href ='../pages/dashboard/dashboard.html';
+          location.href ='../pages/dashboard/dashboard.html';
         }else{
             localStorage.removeItem('user');
         }
@@ -25,7 +24,12 @@ const  validarUSerLocal  = async()  =>{
 
 validarUSerLocal();
 
-
+document.addEventListener("keyup", (e)=>{
+    const key = "Enter";
+    if(e.key === key){
+       validarUSer(email.value, password.value)
+    }
+})
 
 btnEnviar.addEventListener('click', ()=>{
 

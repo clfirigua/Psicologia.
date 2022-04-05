@@ -1,8 +1,6 @@
 import {ModelusuariosAdmin} from "../../components/userAdmin.js";
 import { addData,onGetData } from "../../services/crudservice.js";
 import { menu } from "../../shared/menu.js";
-
-
 const inputData = document.getElementById('contUser');
 const btnGuardar = document.getElementById('guardar');
 const cabeceraTabla = document.getElementById('cabeceraTabla');
@@ -22,7 +20,7 @@ ModelusuariosAdmin.forEach(data => {
     }else{
         $(inputData).append(
             `
-                <input type="${data.type}" class="form-control mb-2 userAdmin" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
+                <input type="${data.type}"  class="form-control mb-2 userAdmin" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
         
                 >
             `

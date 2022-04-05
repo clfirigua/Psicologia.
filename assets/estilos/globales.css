@@ -106,3 +106,8 @@ input:focus{
     border: none;
     color: var(--primario);
 }
+[placeholder]:focus::-webkit-input-placeholder {
+    transition: text-indent 1s 0.1s ease; 
+    text-indent: -100%;
+    opacity: 1;
+ }
