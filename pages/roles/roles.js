@@ -10,10 +10,11 @@ const dataTable = document.getElementById('dataTable');
 
 menu();
 
+
 roles.forEach((data) => {
     $(controles).append(
         `
-            <div class="form-check">
+            <div class="form-check mt-2">
             <input class="form-check-input validar" type="checkbox" value="" id="${data.texto}">
             <label class="form-check-label" for="flexCheckDefault">
                 ${data.texto}
