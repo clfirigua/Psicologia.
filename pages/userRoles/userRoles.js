@@ -1,5 +1,6 @@
 import {ModelusuariosAdmin} from "../../components/userAdmin.js";
-import { addData,onGetData } from "../../services/crudservice.js";
+import {notConfirmar} from "../../components/alerts.js";
+import { addData,onGetData,deleteData } from "../../services/crudservice.js";
 import { menu } from "../../shared/menu.js";
 const inputData = document.getElementById('contUser');
 const btnGuardar = document.getElementById('guardar');
@@ -64,7 +65,7 @@ const buscarRol = (idRol) => {
 }
 
 onGetData((data)=>{
-    // dataTable.innerHTML = ``
+    dataTable.innerHTML = ``
     data.forEach((obj) => {
         $(dataTable).append(`
             <tr>
@@ -75,9 +76,30 @@ onGetData((data)=>{
             <td scope="col">${obj.data().cc}</td>
             <td scope="col">${obj.data().usuario}</td>
             <td scope="col">${obj.data().password}</td>
-            <td scope="col">${buscarRol(obj.data().rol)}</th>
+            <td scope="col">${buscarRol(obj.data().rol)}</td>
+            <td scope="col"><button class= "btn btn-warning editar" data-id="${obj.id}" >Editar</button></td>
+            <td scope="col"><button class= "btn btn-danger eliminar" data-id="${obj.id}" >Eliminar</button></td>
             </tr>
         `);
+        const eliminar = document.querySelectorAll(".eliminar"); 
+        eliminar.forEach(btn => { 
+            btn.addEventListener('click', (e) => {
+                
+                let identificador = e.target.dataset.id ;
+                notConfirmar(identificador,'',deleteData(identificador, 'usuarios') );
+
+            })
+        });
+        const editar = document.querySelectorAll('.editar');
+        editar.forEach(btn => { 
+
+            btn.addEventListener('click', async (e) =>  {
+                
+                let identificador = e.target.dataset.id;
+                console.log(identificador);
+
+            })
+        });
     });
 
 }, 'usuarios')

@@ -1,4 +1,4 @@
-import {db,addDoc,collection, onSnapshot, getDoc,doc} from "./firebaseservice.js";
+import {db,addDoc,collection, onSnapshot, getDoc,doc,deleteDoc} from "./firebaseservice.js";
 
 
 // Data real time

@@ -1,4 +1,4 @@
-import {menu} from "../../shared/menu.js";
+import {menu} from "../../s/hared/menu.js";
 
 const nameForm = document.getElementById("nombreFormulario")
 const localname = localStorage.getItem("Nameform") 

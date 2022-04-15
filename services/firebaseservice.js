@@ -45,5 +45,6 @@ export{
     deleteDoc,
     getDocs,
     getDoc,
-    doc
+    doc,
+    
   }
