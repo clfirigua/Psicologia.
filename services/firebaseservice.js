@@ -46,5 +46,6 @@ export{
     getDocs,
     getDoc,
     doc,
+    updateDoc
     
   }
