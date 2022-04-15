@@ -81,7 +81,8 @@ p.text-login{
     width: 80%;
     margin-top: 4rem;
 }
-i{color: var(--blanco);}
+i {color:gray;}
+
 i.far.fa-envelope, i.fas.fa-key {
     padding: 1rem;
     color: gray;
@@ -98,6 +99,10 @@ input:focus{
     outline: none;
     border-color: var(--darksecundario);
 }
+select:focus{
+    outline: none;
+    border-color: var(--darksecundario);
+}
 .sign-in{
     font-family: 'Titan One';
     padding: 1rem 3rem ;
@@ -107,7 +112,14 @@ input:focus{
     color: var(--primario);
 }
 [placeholder]:focus::-webkit-input-placeholder {
-    transition: text-indent 1s 0.1s ease; 
-    text-indent: -100%;
+    transition: text-indent 2s 0.2s ease; 
+    text-indent: -150%;
     opacity: 1;
  }
+ 
+.card-shadow{
+    background-color: var(--blanco);
+    border-radius: 0.5rem;
+    -webkit-box-shadow: 0px 0px 32px -4px #000000; 
+    box-shadow: 0px 0px 15px -10px #000000;
+}
