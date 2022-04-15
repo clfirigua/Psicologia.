@@ -1,52 +1,53 @@
 const ModelusuariosAdmin = [ 
     {
-        texto: 'nombres',
+        texto: 'Nombres',
         type: 'text',
         placeholder:'Nombres',
         required:true
     },
     {
-        texto: 'apellidos',
+        texto: 'Apellidos',
         type: 'text',
         placeholder:'Apellidos',
         required:true
     },
     {
-        texto: 'telefono',
+        texto: 'Telefono',
         type: 'number',
         placeholder:'Telefono',
         required:true
     },
     {
-        texto: 'email',
+        texto: 'Email',
         type: 'email',
         placeholder:'email',
         required:false
     },
     {
-        texto: 'cc',
+        texto: 'CC',
         type: 'number',
         placeholder:'CC',
         required:true
     },
     {
-        texto: 'usuario',
+        texto: 'Usuario',
         type: 'text',
         placeholder:'User Name',
         required:true
     },
     {
-        texto: 'password',
+        texto: 'Password',
         type: 'password',
         placeholder:'Contraseña',
         required:true
     },
     {
-        texto: 'rol',
+        texto: 'Rol',
         type: 'select',
         placeholder:'Selecciona un rol',
         required:true
     },
+
 
 ]
 
