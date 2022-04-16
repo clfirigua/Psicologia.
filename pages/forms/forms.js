@@ -7,12 +7,16 @@ const nameForm = document.getElementById("nombreFormulario");
 
 menu()
 
-btnModal.addEventListener("click", (e)=>{
-    addData({
+btnModal.addEventListener("click", async (e)=>{
+    e.preventDefault();
+    let data =  await addData({
         nombre:nameForm.value,
         preguntas:[],
         varemoMedicion:"",
-    },"formularios")
-    localStorage.setItem("Nameform",nameForm.value)
-    // window.location="../newForm/newForm.html";
+    },"formularios");
+    if(data.id){
+        localStorage.setItem("idForm",data.id);
+        window.location="../newForm/newForm.html";
+    }
+
 })
