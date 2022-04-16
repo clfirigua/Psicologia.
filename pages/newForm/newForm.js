@@ -40,7 +40,7 @@ question.forEach(data =>{
     case "button":
       $(addQuestion).append(
         ` 
-        <button></button>
+        <button class="btn btn-success">hola</button>
         `
       );
       break;
