@@ -1,5 +1,6 @@
 const forms = {
     nombre:String,
+    id:String,
     preguntas:[
         {
             cabecera:String,
@@ -15,5 +16,8 @@ const forms = {
                 
             ]
         }
+    ],
+    informe:[
+        
     ]
 }

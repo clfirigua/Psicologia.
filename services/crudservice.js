@@ -1,4 +1,4 @@
-import {db,addDoc,collection, onSnapshot, getDoc,doc} from "./firebaseservice.js";
+import {db,addDoc,collection, onSnapshot, getDoc,doc,deleteDoc, updateDoc} from "./firebaseservice.js";
 
 
 // Data real time
@@ -14,7 +14,7 @@ const deleteData = (id, nameCollection ) => deleteDoc(doc(db,nameCollection, id)
 const getData = (id,nameCollection) => getDoc(doc(db, nameCollection, id));
 
 /*actualizar  */
-const updateData = (id, newFields) => updateDoc(doc(db, "Usuarios", id), newFields);
+const updateData = (id, newFields, nameCollection) => updateDoc(doc(db, nameCollection, id), newFields);
 
 export{
     onGetData,
