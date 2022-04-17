@@ -9,7 +9,7 @@ const question = [
     {
         texto: 'Seleccione el tipo de respuesta a usar',
         id:'tpRespuesta',
-        type: 'select',
+        type: 'tpselect',
         placeholder:'Tipo de respuesta',
         required:true
     },
@@ -30,7 +30,7 @@ const question = [
     {
         texto: 'Ingrese el varemo correspondiente',
         id:'varemo',
-        type: 'text',
+        type: 'select',
         placeholder:'Varemo de medicion',
         required:true
     },

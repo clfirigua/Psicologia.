@@ -12,3 +12,6 @@ i{padding:1rem;}
 option::selection{
     color:gray ;
 }
+.red{
+    color:rgb(169, 0, 0);
+}

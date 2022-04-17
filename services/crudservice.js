@@ -1,8 +1,11 @@
-import {db,addDoc,collection, onSnapshot, getDoc,doc,deleteDoc, updateDoc} from "./firebaseservice.js";
+import {db,addDoc,collection, onSnapshot, getDoc,doc,deleteDoc, updateDoc,arrayUnion, arrayRemove} from "./firebaseservice.js";
 
 
 // Data real time
 const onGetData = (data,nameCollection) => onSnapshot(collection(db, nameCollection), data);
+
+//data real time one
+const onGetDocument = (nameCollection,id) =>onSnapshot(doc(db,nameCollection,id),(doc));
 
 // agregar Data
 const addData = (obj,nameCollection) => addDoc(collection(db, nameCollection), obj );
@@ -18,8 +21,14 @@ const updateData = (id, newFields, nameCollection) => updateDoc(doc(db, nameColl
 
 export{
     onGetData,
+    onGetDocument,
     deleteData,
     getData,
     updateData,
-    addData
+    addData,
+    arrayUnion,
+    arrayRemove,
+    doc,
+    db,
+    onSnapshot
 }
