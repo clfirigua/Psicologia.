@@ -21,7 +21,7 @@ const question = [
         required:false
     },
     {
-        texto: 'Seleecione de la respuesta que depende',
+        texto: 'Selecione de la respuesta que depende',
         id:'dRespuesta',
         type: 'select',
         placeholder:'Listado de respuestas',

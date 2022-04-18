@@ -29,7 +29,7 @@ function mostrarFormulario() {
           `
         <label for="${data.id}" class="form-label">${data.texto}</label>
         <select class="form-control mb-2" id="${data.id}">
-          <option selected disabled>${data.placeholder}</option>
+          <option selected disabled value="false">${data.placeholder}</option>
         </select>
         `
         );
@@ -37,7 +37,7 @@ function mostrarFormulario() {
       case "button":
         $(addQuestion).append(
           `
-          <button class="btn btn-success">hola</button>
+          <button class="btn btn-success">Agregar Respuestas</button>
           `
         );
         break;
@@ -76,26 +76,45 @@ function cargarFormularios() {
 
     nameForm.innerHTML = nombre
 
-    modalVaremo.innerHTML = ''
+    modalVaremo.innerHTML = ""
 
+
+    selectVaremo.innerHTML= `<option selected disabled value="false">Varemo de medicion</option>`
     //si depende de alguna pregunta
 
     preguntas.forEach((data,i) => {
       $(preguntaDepende).append(
         `
-          <option value="${data.pregunta}" class="seleccionar" data-id="${i}">${data.pregunta}</option>
+          <option value="${i}" class="seleccionar" >${data.pregunta}</option>
           `
       )
-
-      const seleccion = document.querySelectorAll(".seleccionar");
-      seleccion.forEach(btn => { 
-        btn.addEventListener('click', (e) =>  {
-            console.log(e)
-        })
-    });
     })
 
-    // respuesta dependiente
+    //varemos form
+    varemos.forEach((data,i) => {
+      $(selectVaremo).append(
+        `
+          <option value="${i}" class="seleccionar" >${data}</option>
+          `
+      )
+    })
+
+        // respuesta dependiente
+    $(preguntaDepende).on("change", function (e) {
+      
+      const idFormPregunta = $(this).val();
+      let respuestasForm = preguntas[idFormPregunta].Respuestas;
+
+      respuestaDepende.innerHTML=""
+      respuestasForm.forEach((data,i) => {
+
+        $(respuestaDepende).append(
+          `
+            <option value="${i}" class="seleccionar" >${data}</option>
+            `
+        )
+      })
+    })
 
     //varemos
     try {

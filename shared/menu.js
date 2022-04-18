@@ -12,7 +12,7 @@ const menu = async(arr) =>{
     Object.entries(valores.data()).forEach((data)=>{
 
         for (let i = 0; i < roles.length; i++) {
-            if(data[0] ==  roles[1].texto && data[1] == true ){
+            if(data[0] ==  roles[i].texto && data[1] == true ){
                 $(listaDatos).append(`
                 <li class="nav-item m-3 text-capitalize">
                     <a class="nav-link " aria-current="page" href="${roles[i].ruta}">${roles[i].texto}</a>
@@ -20,15 +20,6 @@ const menu = async(arr) =>{
             `)
             }
         }
-        // roles.forEach((rol)=>{
-        //     if(data[0] == rol.texto && data[1] == true){
-        //         $(listaDatos).append(`
-        //         <li class="nav-item m-3 text-capitalize">
-        //             <a class="nav-link " aria-current="page" href="${rol.ruta}">${rol.texto}</a>
-        //         </li>
-        //     `)
-        //     }
-        // });
     })
 
 
