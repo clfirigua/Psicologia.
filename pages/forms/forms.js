@@ -11,7 +11,7 @@ btnModal.addEventListener("click", async (e)=>{
     e.preventDefault();
     let data =  await addData({
         nombre:nameForm.value,
-        preguntas:{},
+        preguntas:[],
         varemoMedicion:"",
     },"formularios");
     if(data.id){

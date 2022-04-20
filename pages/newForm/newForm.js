@@ -1,5 +1,6 @@
 import { question } from "../../components/questions.js";
 import { updateData, arrayUnion, arrayRemove, doc, db, onSnapshot } from "../../services/crudservice.js";
+import { updateDoc } from "../../services/firebaseservice.js";
 import { menu } from "../../shared/menu.js";
 
 const nameForm = document.getElementById("nombreFormulario")
@@ -8,7 +9,8 @@ const addQuestion = document.getElementById("añadirPreguntas")
 const modalVaremo = document.getElementById("varemos");
 const inpVaremo = document.getElementById("recipient-name");
 const btnvaremo = document.getElementById("btnGuardarVaremo");
-const btnRespuesta = document.getElementById("btnGuardarRespuesta")
+const btnRespuesta = document.getElementById("btnGuardarRespuesta");
+const btnGuardar = document.getElementById("guardarPregunta");
 const inpRespuesta = document.getElementById("inpRespuestas");
 const idForm = localStorage.getItem("idForm");
 menu();
@@ -74,6 +76,7 @@ function cargarFormularios() {
     let varemos = doc.data().varemoMedicion
     let preguntas = doc.data().preguntas
     let nombre = doc.data().nombre
+    let datosForm = doc.data()
 
 
 
@@ -83,30 +86,33 @@ function cargarFormularios() {
 
 
     selectVaremo.innerHTML= `<option selected disabled value="false">Varemo de medicion</option>`
-    //si depende de alguna pregunta
-
+    //si depende de alguna pregunt
+    // const preguntas2 = [];
     btnRespuesta.addEventListener("click", async (e)=>{
       e.preventDefault()
-      console.log(inpRespuesta.value);
-      var respuestass = []
       
-      respuestass.push(inpRespuesta.value)
+      if(doc.data().preguntas.lenght == undefined){
+        datosForm.preguntas.push({
+          respuesta:inpRespuesta.value
+        })
+        // datosForm.preguntas = preguntas2;
+        updateData(doc.id,datosForm,'formularios')
+        console.log('exito')
+        
+      }
       
     })
-    console.log(respuestass);
-    
 
-    preguntas.forEach((data,i) => {
+    if(preguntas.lenght > 0){
+      preguntas.forEach((data,i) => {
       
-      $(preguntaDepende).append(
-        `
-          <option value="${i}" class="seleccionar" >${data.pregunta}</option>
+        $(preguntaDepende).append(
           `
-      )
-    })
-    // catch{
-    //   console.log("errorpre");
-    // }
+            <option value="${i}" class="seleccionar" >${data.pregunta}</option>
+            `
+        )
+      })
+    }
 
     //varemos form
     try{
@@ -160,4 +166,8 @@ btnvaremo.addEventListener("click", (e) => {
   inpVaremo.value = ""
 })
 
+btnGuardar.addEventListener('click', (e)=>{
+  e.preventDefault();
+  console.log('hola');
+})
 
