@@ -1,0 +1,241 @@
+[debug] [2022-04-25T03:00:58.601Z] ----------------------------------------------------------------------
+[debug] [2022-04-25T03:00:58.604Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-04-25T03:00:58.604Z] CLI Version:   9.23.1
+[debug] [2022-04-25T03:00:58.605Z] Platform:      win32
+[debug] [2022-04-25T03:00:58.605Z] Node Version:  v16.13.1
+[debug] [2022-04-25T03:00:58.606Z] Time:          Sun Apr 24 2022 22:00:58 GMT-0500 (hora estándar de Colombia)
+[debug] [2022-04-25T03:00:58.607Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-04-25T03:00:58.611Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2022-04-25T03:00:58.645Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-04-25T03:00:58.646Z] > authorizing via signed-in user (danielacero@unisangil.edu.co)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Documentos\GitHub\carlos\Psicologia
+
+[debug] [2022-04-25T03:00:59.193Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2022-04-25T03:00:59.194Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-04-25T03:01:44.602Z] > refreshing access token with scopes: []
+[debug] [2022-04-25T03:01:44.603Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-04-25T03:01:45.571Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Mon, 25 Apr 2022 03:01:45 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-25T03:01:45.630Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2022-04-25T03:01:48.288Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2022-04-25T03:01:48.289Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project psicologico-fd2fc (Psicologico) 
+[info] 
+=== Hosting:github Setup
+[info] 
+[info] i  Detected a .git folder at D:\Documentos\GitHub\carlos\Psicologia 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=278241473&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2022-04-25T03:01:57.547Z] >>> HTTP REQUEST POST https://github.com/login/oauth/access_token  
+ {"client_id":"89cf50f02ac6aaed3484","client_secret":"3330d14abc895d9a74d5f17cd7a00711fa2c5bf0","code":"38521ed89dea71ce36f2","redirect_uri":"http://localhost:9005","state":"278241473"}
+[debug] [2022-04-25T03:01:58.588Z] <<< HTTP RESPONSE 200 {"server":"GitHub.com","date":"Mon, 25 Apr 2022 03:01:59 GMT","content-type":"application/json; charset=utf-8","transfer-encoding":"chunked","vary":"X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With","permissions-policy":"interest-cohort=()","etag":"W/\"70b8ed0e804b313164482b3e0352f7cd\"","cache-control":"max-age=0, private, must-revalidate","strict-transport-security":"max-age=31536000; includeSubdomains; preload","x-frame-options":"deny","x-content-type-options":"nosniff","x-xss-protection":"0","referrer-policy":"origin-when-cross-origin, strict-origin-when-cross-origin","expect-ct":"max-age=2592000, report-uri=\"https://api.github.com/_private/browser/errors\"","content-security-policy":"default-src 'none'; base-uri 'self'; block-all-mixed-content; child-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: github.githubassets.com identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/","x-github-request-id":"C391:5AD3:1F684D4:3314A9D:62660F26"}
+[debug] [2022-04-25T03:01:58.598Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2022-04-25T03:01:59.189Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2022-04-25T03:01:59.189Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"aceros123","id":57160341,"node_id":"MDQ6VXNlcjU3MTYwMzQx","avatar_url":"https://avatars.githubusercontent.com/u/57160341?v=4","gravatar_id":"","url":"https://api.github.com/users/aceros123","html_url":"https://github.com/aceros123","followers_url":"https://api.github.com/users/aceros123/followers","following_url":"https://api.github.com/users/aceros123/following{/other_user}","gists_url":"https://api.github.com/users/aceros123/gists{/gist_id}","starred_url":"https://api.github.com/users/aceros123/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/aceros123/subscriptions","organizations_url":"https://api.github.com/users/aceros123/orgs","repos_url":"https://api.github.com/users/aceros123/repos","events_url":"https://api.github.com/users/aceros123/events{/privacy}","received_events_url":"https://api.github.com/users/aceros123/received_events","type":"User","site_admin":false,"name":null,"company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"twitter_username":null,"public_repos":5,"public_gists":0,"followers":1,"following":2,"created_at":"2019-10-30T00:31:18Z","updated_at":"2022-03-21T16:53:33Z","private_gists":0,"total_private_repos":12,"owned_private_repos":12,"disk_usage":40662,"collaborators":7,"two_factor_authentication":false,"plan":{"name":"pro","space":976562499,"collaborators":0,"private_repos":9999}}
+[info] 
+[info] +  Success! Logged into GitHub as aceros123 
+[info] 
+[debug] [2022-04-25T03:06:04.625Z] >>> [apiv2][query] GET https://api.github.com/repos/clfirigua/Psicologia03/actions/secrets/public-key type=owner
+[debug] [2022-04-25T03:06:05.184Z] <<< [apiv2][status] GET https://api.github.com/repos/clfirigua/Psicologia03/actions/secrets/public-key 200
+[debug] [2022-04-25T03:06:05.185Z] <<< [apiv2][body] GET https://api.github.com/repos/clfirigua/Psicologia03/actions/secrets/public-key {"key_id":"568250167242549743","key":"6FAntrxpvM+QO5eA7qphL47B9DbaxHJlxqq7zbtYB18="}
+[debug] [2022-04-25T03:06:05.192Z] >>> [apiv2][query] GET https://api.github.com/repos/clfirigua/Psicologia03 [none]
+[debug] [2022-04-25T03:06:05.755Z] <<< [apiv2][status] GET https://api.github.com/repos/clfirigua/Psicologia03 200
+[debug] [2022-04-25T03:06:05.756Z] <<< [apiv2][body] GET https://api.github.com/repos/clfirigua/Psicologia03 {"id":472073713,"node_id":"R_kgDOHCNF8Q","name":"Psicologia03","full_name":"clfirigua/Psicologia03","private":false,"owner":{"login":"clfirigua","id":71801587,"node_id":"MDQ6VXNlcjcxODAxNTg3","avatar_url":"https://avatars.githubusercontent.com/u/71801587?v=4","gravatar_id":"","url":"https://api.github.com/users/clfirigua","html_url":"https://github.com/clfirigua","followers_url":"https://api.github.com/users/clfirigua/followers","following_url":"https://api.github.com/users/clfirigua/following{/other_user}","gists_url":"https://api.github.com/users/clfirigua/gists{/gist_id}","starred_url":"https://api.github.com/users/clfirigua/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/clfirigua/subscriptions","organizations_url":"https://api.github.com/users/clfirigua/orgs","repos_url":"https://api.github.com/users/clfirigua/repos","events_url":"https://api.github.com/users/clfirigua/events{/privacy}","received_events_url":"https://api.github.com/users/clfirigua/received_events","type":"User","site_admin":false},"html_url":"https://github.com/clfirigua/Psicologia03","description":null,"fork":false,"url":"https://api.github.com/repos/clfirigua/Psicologia03","forks_url":"https://api.github.com/repos/clfirigua/Psicologia03/forks","keys_url":"https://api.github.com/repos/clfirigua/Psicologia03/keys{/key_id}","collaborators_url":"https://api.github.com/repos/clfirigua/Psicologia03/collaborators{/collaborator}","teams_url":"https://api.github.com/repos/clfirigua/Psicologia03/teams","hooks_url":"https://api.github.com/repos/clfirigua/Psicologia03/hooks","issue_events_url":"https://api.github.com/repos/clfirigua/Psicologia03/issues/events{/number}","events_url":"https://api.github.com/repos/clfirigua/Psicologia03/events","assignees_url":"https://api.github.com/repos/clfirigua/Psicologia03/assignees{/user}","branches_url":"https://api.github.com/repos/clfirigua/Psicologia03/branches{/branch}","tags_url":"https://api.github.com/repos/clfirigua/Psicologia03/tags","blobs_url":"https://api.github.com/repos/clfirigua/Psicologia03/git/blobs{/sha}","git_tags_url":"https://api.github.com/repos/clfirigua/Psicologia03/git/tags{/sha}","git_refs_url":"https://api.github.com/repos/clfirigua/Psicologia03/git/refs{/sha}","trees_url":"https://api.github.com/repos/clfirigua/Psicologia03/git/trees{/sha}","statuses_url":"https://api.github.com/repos/clfirigua/Psicologia03/statuses/{sha}","languages_url":"https://api.github.com/repos/clfirigua/Psicologia03/languages","stargazers_url":"https://api.github.com/repos/clfirigua/Psicologia03/stargazers","contributors_url":"https://api.github.com/repos/clfirigua/Psicologia03/contributors","subscribers_url":"https://api.github.com/repos/clfirigua/Psicologia03/subscribers","subscription_url":"https://api.github.com/repos/clfirigua/Psicologia03/subscription","commits_url":"https://api.github.com/repos/clfirigua/Psicologia03/commits{/sha}","git_commits_url":"https://api.github.com/repos/clfirigua/Psicologia03/git/commits{/sha}","comments_url":"https://api.github.com/repos/clfirigua/Psicologia03/comments{/number}","issue_comment_url":"https://api.github.com/repos/clfirigua/Psicologia03/issues/comments{/number}","contents_url":"https://api.github.com/repos/clfirigua/Psicologia03/contents/{+path}","compare_url":"https://api.github.com/repos/clfirigua/Psicologia03/compare/{base}...{head}","merges_url":"https://api.github.com/repos/clfirigua/Psicologia03/merges","archive_url":"https://api.github.com/repos/clfirigua/Psicologia03/{archive_format}{/ref}","downloads_url":"https://api.github.com/repos/clfirigua/Psicologia03/downloads","issues_url":"https://api.github.com/repos/clfirigua/Psicologia03/issues{/number}","pulls_url":"https://api.github.com/repos/clfirigua/Psicologia03/pulls{/number}","milestones_url":"https://api.github.com/repos/clfirigua/Psicologia03/milestones{/number}","notifications_url":"https://api.github.com/repos/clfirigua/Psicologia03/notifications{?since,all,participating}","labels_url":"https://api.github.com/repos/clfirigua/Psicologia03/labels{/name}","releases_url":"https://api.github.com/repos/clfirigua/Psicologia03/releases{/id}","deployments_url":"https://api.github.com/repos/clfirigua/Psicologia03/deployments","created_at":"2022-03-20T18:53:31Z","updated_at":"2022-04-16T01:13:20Z","pushed_at":"2022-04-20T03:37:50Z","git_url":"git://github.com/clfirigua/Psicologia03.git","ssh_url":"git@github.com:clfirigua/Psicologia03.git","clone_url":"https://github.com/clfirigua/Psicologia03.git","svn_url":"https://github.com/clfirigua/Psicologia03","homepage":null,"size":98,"stargazers_count":0,"watchers_count":0,"language":"JavaScript","has_issues":true,"has_projects":true,"has_downloads":true,"has_wiki":true,"has_pages":false,"forks_count":0,"mirror_url":null,"archived":false,"disabled":false,"open_issues_count":0,"license":null,"allow_forking":true,"is_template":false,"topics":[],"visibility":"public","forks":0,"open_issues":0,"watchers":0,"default_branch":"master","permissions":{"admin":false,"maintain":false,"push":true,"triage":true,"pull":true},"temp_clone_token":"","allow_squash_merge":true,"allow_merge_commit":true,"allow_rebase_merge":true,"allow_auto_merge":false,"delete_branch_on_merge":false,"allow_update_branch":false,"network_count":0,"subscribers_count":1}
+[debug] [2022-04-25T03:06:05.764Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2022-04-25T03:06:05.764Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-04-25T03:06:06.129Z] <<< HTTP RESPONSE 200 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Mon, 25 Apr 2022 03:06:06 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-25T03:06:06.176Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/psicologico-fd2fc/serviceAccounts  
+ {"accountId":"github-action-472073713","serviceAccount":{"displayName":"GitHub Actions (clfirigua/Psicologia03)","description":"A service account with permission to deploy to Firebase Hosting for the GitHub repository clfirigua/Psicologia03"}}
+[debug] [2022-04-25T03:06:07.258Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 25 Apr 2022 03:06:08 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-25T03:06:07.262Z] >>> HTTP REQUEST GET https://iam.googleapis.com/v1/projects/psicologico-fd2fc/serviceAccounts/github-action-472073713@psicologico-fd2fc.iam.gserviceaccount.com  
+ 
+[debug] [2022-04-25T03:06:07.264Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/psicologico-fd2fc:getIamPolicy  
+ 
+[debug] [2022-04-25T03:06:07.823Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 25 Apr 2022 03:06:08 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-25T03:06:08.067Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 25 Apr 2022 03:06:08 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=466","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-25T03:06:08.070Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/psicologico-fd2fc:setIamPolicy  
+ {"policy":{"version":1,"etag":"BwXa8gGunmg=","bindings":[{"role":"roles/editor","members":["serviceAccount:psicologico-fd2fc@appspot.gserviceaccount.com"]},{"role":"roles/firebase.managementServiceAgent","members":["serviceAccount:firebase-service-account@firebase-sa-management.iam.gserviceaccount.com","serviceAccount:service-247106661610@gcp-sa-firebase.iam.gserviceaccount.com"]},{"role":"roles/firebase.sdkAdminServiceAgent","members":["serviceAccount:firebase-adminsdk-q7qiz@psicologico-fd2fc.iam.gserviceaccount.com"]},{"role":"roles/firebaseauth.admin","members":["serviceAccount:firebase-adminsdk-q7qiz@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-444986233@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-447802019@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-472073713@psicologico-fd2fc.iam.gserviceaccount.com"]},{"role":"roles/firebasehosting.admin","members":["serviceAccount:github-action-444986233@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-447802019@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-472073713@psicologico-fd2fc.iam.gserviceaccount.com"]},{"role":"roles/firebaserules.system","members":["serviceAccount:service-247106661610@firebase-rules.iam.gserviceaccount.com"]},{"role":"roles/firestore.serviceAgent","members":["serviceAccount:service-247106661610@gcp-sa-firestore.iam.gserviceaccount.com"]},{"role":"roles/iam.serviceAccountTokenCreator","members":["serviceAccount:firebase-adminsdk-q7qiz@psicologico-fd2fc.iam.gserviceaccount.com"]},{"role":"roles/owner","members":["user:clfirigua2020@gmail.com","user:danielacero@unisangil.edu.co"]},{"role":"roles/run.viewer","members":["serviceAccount:github-action-444986233@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-447802019@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-472073713@psicologico-fd2fc.iam.gserviceaccount.com"]},{"role":"roles/serviceusage.apiKeysViewer","members":["serviceAccount:github-action-444986233@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-447802019@psicologico-fd2fc.iam.gserviceaccount.com","serviceAccount:github-action-472073713@psicologico-fd2fc.iam.gserviceaccount.com"]},{"role":"roles/storage.admin","members":["serviceAccount:firebase-adminsdk-q7qiz@psicologico-fd2fc.iam.gserviceaccount.com"]}]},"updateMask":"bindings"}
+[debug] [2022-04-25T03:06:09.157Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 25 Apr 2022 03:06:09 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","server-timing":"gfet4t7; dur=857","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-25T03:06:09.161Z] >>> HTTP REQUEST POST https://iam.googleapis.com/v1/projects/psicologico-fd2fc/serviceAccounts/github-action-472073713@psicologico-fd2fc.iam.gserviceaccount.com/keys  
+ {"keyAlgorithm":"KEY_ALG_UNSPECIFIED","privateKeyType":"TYPE_GOOGLE_CREDENTIALS_FILE"}
+[debug] [2022-04-25T03:06:09.988Z] <<< HTTP RESPONSE 200 {"content-type":"application/json; charset=UTF-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","date":"Mon, 25 Apr 2022 03:06:10 GMT","server":"ESF","cache-control":"private","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[info] 
+[info] +  Created service account github-action-472073713 with Firebase Hosting admin permissions. 
+[debug] [2022-04-25T03:06:10.115Z] >>> [apiv2][query] PUT https://api.github.com/repos/clfirigua/Psicologia03/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PSICOLOGICO_FD2FC [none]
+[debug] [2022-04-25T03:06:10.115Z] >>> [apiv2][body] PUT https://api.github.com/repos/clfirigua/Psicologia03/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PSICOLOGICO_FD2FC {"encrypted_value":"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","key_id":"568250167242549743"}
+[debug] [2022-04-25T03:06:10.956Z] <<< [apiv2][status] PUT https://api.github.com/repos/clfirigua/Psicologia03/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PSICOLOGICO_FD2FC 201
+[debug] [2022-04-25T03:06:10.957Z] <<< [apiv2][body] PUT https://api.github.com/repos/clfirigua/Psicologia03/actions/secrets/FIREBASE_SERVICE_ACCOUNT_PSICOLOGICO_FD2FC {}
+[info] +  Uploaded service account JSON to GitHub as secret FIREBASE_SERVICE_ACCOUNT_PSICOLOGICO_FD2FC. 
+[info] i  You can manage your secrets at https://github.com/clfirigua/Psicologia03/settings/secrets. 
+[info] 
+[debug] [2022-04-25T03:06:11.245Z] TypeError: Cannot read properties of undefined (reading 'predeploy')
+    at Object.initGitHub [as hosting:github] (C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\hosting\github.js:65:30)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async init (C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:19:9)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2022-04-25T03:06:26.559Z] ----------------------------------------------------------------------
+[debug] [2022-04-25T03:06:26.562Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-04-25T03:06:26.563Z] CLI Version:   9.23.1
+[debug] [2022-04-25T03:06:26.563Z] Platform:      win32
+[debug] [2022-04-25T03:06:26.563Z] Node Version:  v16.13.1
+[debug] [2022-04-25T03:06:26.565Z] Time:          Sun Apr 24 2022 22:06:26 GMT-0500 (hora estándar de Colombia)
+[debug] [2022-04-25T03:06:26.565Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-04-25T03:06:26.575Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-04-25T03:06:26.575Z] > authorizing via signed-in user (danielacero@unisangil.edu.co)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Documentos\GitHub\carlos\Psicologia
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-04-25T03:06:52.564Z] > refreshing access token with scopes: []
+[debug] [2022-04-25T03:06:52.564Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2022-04-25T03:06:53.121Z] <<< HTTP RESPONSE 200 {"pragma":"no-cache","expires":"Mon, 01 Jan 1990 00:00:00 GMT","date":"Mon, 25 Apr 2022 03:06:53 GMT","cache-control":"no-cache, no-store, max-age=0, must-revalidate","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2022-04-25T03:06:53.140Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2022-04-25T03:06:53.977Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2022-04-25T03:06:53.977Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project psicologico-fd2fc (Psicologico) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2022-04-25T03:09:33.291Z] ----------------------------------------------------------------------
+[debug] [2022-04-25T03:09:33.293Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2022-04-25T03:09:33.294Z] CLI Version:   9.23.1
+[debug] [2022-04-25T03:09:33.294Z] Platform:      win32
+[debug] [2022-04-25T03:09:33.294Z] Node Version:  v16.13.1
+[debug] [2022-04-25T03:09:33.296Z] Time:          Sun Apr 24 2022 22:09:33 GMT-0500 (hora estándar de Colombia)
+[debug] [2022-04-25T03:09:33.296Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-04-25T03:09:33.306Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-04-25T03:09:33.306Z] > authorizing via signed-in user (danielacero@unisangil.edu.co)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Documentos\GitHub\carlos\Psicologia
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2022-04-25T03:39:54.931Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=100
+[debug] [2022-04-25T03:39:55.657Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2022-04-25T03:39:55.657Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
+[info] i  Using project psicologico-fd2fc (Psicologico) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] +  Wrote public/404.html 
+[debug] [2022-04-25T03:40:30.360Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2022-04-25T03:40:30.727Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2022-04-25T03:40:30.727Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"9.6.11","browserURL":"https://www.gstatic.com/firebasejs/9.6.11/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/9.6.11/firebase.tgz"},"live":{"version":"9.6","browserURL":"https://www.gstatic.com/firebasejs/live/9.6/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/9.6/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/9.6.11/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/9.6.11/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/9.6.11/firebase-auth/cordova.js","auth/react-native":"https://www.gstatic.com/firebasejs/9.6.11/firebase-auth/react-native.js","functions":"https://www.gstatic.com/firebasejs/9.6.11/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore/lite.js","storage":"https://www.gstatic.com/firebasejs/9.6.11/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/9.6.11/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/9.6.11/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/9.6.11/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/9.6.11/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js","firestore.memory":"https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.memory.js"}}
+[info] +  Wrote public/index.html 
+[info] 
+[info] i  Detected a .git folder at D:\Documentos\GitHub\carlos\Psicologia 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=409978335&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2022-04-25T03:40:32.075Z] >>> HTTP REQUEST POST https://github.com/login/oauth/access_token  
+ {"client_id":"89cf50f02ac6aaed3484","client_secret":"3330d14abc895d9a74d5f17cd7a00711fa2c5bf0","code":"3792ae6c896a5c218627","redirect_uri":"http://localhost:9005","state":"409978335"}
+[debug] [2022-04-25T03:40:32.638Z] <<< HTTP RESPONSE 200 {"server":"GitHub.com","date":"Mon, 25 Apr 2022 03:40:33 GMT","content-type":"application/json; charset=utf-8","transfer-encoding":"chunked","vary":"X-PJAX, X-PJAX-Container, Accept-Encoding, Accept, X-Requested-With","permissions-policy":"interest-cohort=()","etag":"W/\"01df9313039173682425651d5b7c0238\"","cache-control":"max-age=0, private, must-revalidate","strict-transport-security":"max-age=31536000; includeSubdomains; preload","x-frame-options":"deny","x-content-type-options":"nosniff","x-xss-protection":"0","referrer-policy":"origin-when-cross-origin, strict-origin-when-cross-origin","expect-ct":"max-age=2592000, report-uri=\"https://api.github.com/_private/browser/errors\"","content-security-policy":"default-src 'none'; base-uri 'self'; block-all-mixed-content; child-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com objects-origin.githubusercontent.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com cdn.optimizely.com logx.optimizely.com/v1/events translator.github.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com online.visualstudio.com/api/v1/locations github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com; font-src github.githubassets.com; form-action 'self' github.com gist.github.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src render.githubusercontent.com viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: github.githubassets.com identicons.github.com github-cloud.s3.amazonaws.com secured-user-images.githubusercontent.com/ *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com/; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; worker-src github.com/assets-cdn/worker/ gist.github.com/assets-cdn/worker/","x-github-request-id":"C57F:04E7:E1C6B0:1D4899B:62661831"}
+[debug] [2022-04-25T03:40:32.646Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2022-04-25T03:40:33.239Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2022-04-25T03:40:33.239Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"aceros123","id":57160341,"node_id":"MDQ6VXNlcjU3MTYwMzQx","avatar_url":"https://avatars.githubusercontent.com/u/57160341?v=4","gravatar_id":"","url":"https://api.github.com/users/aceros123","html_url":"https://github.com/aceros123","followers_url":"https://api.github.com/users/aceros123/followers","following_url":"https://api.github.com/users/aceros123/following{/other_user}","gists_url":"https://api.github.com/users/aceros123/gists{/gist_id}","starred_url":"https://api.github.com/users/aceros123/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/aceros123/subscriptions","organizations_url":"https://api.github.com/users/aceros123/orgs","repos_url":"https://api.github.com/users/aceros123/repos","events_url":"https://api.github.com/users/aceros123/events{/privacy}","received_events_url":"https://api.github.com/users/aceros123/received_events","type":"User","site_admin":false,"name":null,"company":null,"blog":"","location":null,"email":null,"hireable":null,"bio":null,"twitter_username":null,"public_repos":5,"public_gists":0,"followers":1,"following":2,"created_at":"2019-10-30T00:31:18Z","updated_at":"2022-03-21T16:53:33Z","private_gists":0,"total_private_repos":12,"owned_private_repos":12,"disk_usage":40662,"collaborators":7,"two_factor_authentication":false,"plan":{"name":"pro","space":976562499,"collaborators":0,"private_repos":9999}}
+[info] 
+[info] +  Success! Logged into GitHub as aceros123 
+[info] 
+[debug] [2022-04-25T03:40:46.770Z] >>> [apiv2][query] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key type=owner
+[debug] [2022-04-25T03:40:47.191Z] <<< [apiv2][status] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key 404
+[debug] [2022-04-25T03:40:47.191Z] <<< [apiv2][body] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2022-04-25T03:40:51.518Z] >>> [apiv2][query] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key type=owner
+[debug] [2022-04-25T03:40:51.935Z] <<< [apiv2][status] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key 404
+[debug] [2022-04-25T03:40:51.936Z] <<< [apiv2][body] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2022-04-25T03:41:13.210Z] >>> [apiv2][query] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key type=owner
+[debug] [2022-04-25T03:41:13.653Z] <<< [apiv2][status] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key 404
+[debug] [2022-04-25T03:41:13.653Z] <<< [apiv2][body] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2022-04-25T03:41:13.760Z] >>> [apiv2][query] GET https://api.github.com/repos//actions/secrets/public-key type=owner
+[debug] [2022-04-25T03:41:14.235Z] <<< [apiv2][status] GET https://api.github.com/repos//actions/secrets/public-key 404
+[debug] [2022-04-25T03:41:14.235Z] <<< [apiv2][body] GET https://api.github.com/repos//actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[debug] [2022-04-25T03:41:14.983Z] >>> [apiv2][query] GET https://api.github.com/repos//actions/secrets/public-key type=owner
+[debug] [2022-04-25T03:41:15.369Z] <<< [apiv2][status] GET https://api.github.com/repos//actions/secrets/public-key 404
+[debug] [2022-04-25T03:41:15.370Z] <<< [apiv2][body] GET https://api.github.com/repos//actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest"}
+[debug] [2022-04-25T03:41:31.103Z] >>> [apiv2][query] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key type=owner
+[debug] [2022-04-25T03:41:31.525Z] <<< [apiv2][status] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key 404
+[debug] [2022-04-25T03:41:31.525Z] <<< [apiv2][body] GET https://api.github.com/repos/clfirigua/psicologia3/actions/secrets/public-key {"message":"Not Found","documentation_url":"https://docs.github.com/rest/reference/actions#get-a-repository-public-key"}
+[debug] [2022-04-26T03:50:53.134Z] ----------------------------------------------------------------------
+[debug] [2022-04-26T03:50:53.139Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2022-04-26T03:50:53.141Z] CLI Version:   9.23.1
+[debug] [2022-04-26T03:50:53.143Z] Platform:      win32
+[debug] [2022-04-26T03:50:53.144Z] Node Version:  v16.13.1
+[debug] [2022-04-26T03:50:53.146Z] Time:          Mon Apr 25 2022 22:50:53 GMT-0500 (hora estándar de Colombia)
+[debug] [2022-04-26T03:50:53.146Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-04-26T03:50:53.164Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-04-26T03:50:53.165Z] > authorizing via signed-in user (danielacero@unisangil.edu.co)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Documentos\GitHub\carlos\Psicologia
+
