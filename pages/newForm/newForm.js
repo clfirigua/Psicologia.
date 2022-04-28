@@ -15,15 +15,18 @@ const selectVaremo = document.getElementById('varemo');
 const btnGuardarPregunta = document.getElementById('guardarPregunta');
 const btnGuardarVaremo = document.getElementById('btnGuardarVaremo');
 const btnGuardarRespuesta = document.getElementById('btnGuardarRespuesta');
+const btnModalRespuestas = document.getElementById('modalRespuestas');
 
 const divVaremos = document.getElementById('varemos');
 const divRespuestas = document.getElementById('containerRespuestas');
 const divPreguntas = document.getElementById('targetPreguntas');
 
 
+
 let Preguntas = [];
 let varemos = [];
 let respuestas = [];
+let idUpdate = '';
 
 
 const dataForm = () => {
@@ -35,6 +38,14 @@ const dataForm = () => {
     varemo: selectVaremo.value,
     respuestas: []
   }
+}
+
+const dataBd = (nombrePregunta, tipoDeRespuesta, preguntaDepende, respuestaDepende, varemo) => {
+  inptPregunta.value = nombrePregunta;
+  selectTipoRespuesta.value = tipoDeRespuesta;
+  selectPreguntaDepende.value = preguntaDepende;
+  selectRespuestaDepende.value = respuestaDepende;
+  selectVaremo.value = varemo;
 }
 
 const generarVaremos = (varemos = []) => {
@@ -60,18 +71,27 @@ const generarVaremos = (varemos = []) => {
 
 }
 
+const mostrarRespuestas = (respuestas = []) => {
+  divRespuestas.innerHTML = '';
+  respuestas.forEach(element => {
+    $(divRespuestas).append(`
+         <p>${element}</p>
+      `);
+  });
+}
+
 const generarTargetas = (preguntas) => {
 
-  if(preguntas.length === 0){
+  if (preguntas.length === 0) {
     $(divPreguntas).append(`
       <p>Sin Preguntas Guardadas</p>
     `);
     return
   }
 
-  divPreguntas.innerHTML='';
+  divPreguntas.innerHTML = '';
 
-  preguntas.forEach((pregunta, index)=>{
+  preguntas.forEach((pregunta, index) => {
 
     $(divPreguntas).append(`
         <div class="card-shadow mt-3 p-2">
@@ -84,15 +104,45 @@ const generarTargetas = (preguntas) => {
           <ul class="list-group" id="${index}">
 
           </ul>
+          <input type="button" class="btn btn-primary mt-2 editar" data-id="${index}"value="Editar">
+          <input type="button" class="btn btn-danger mt-2 eliminar" data-id="${index}" value="Eliminar">
         </div>
     `);
 
     const list = document.getElementById(index);
-    pregunta.respuestas.forEach((respuesta,index)=>{
+    pregunta.respuestas.forEach((respuesta, index) => {
       $(list).append(`
-        <li class="list-group-item">${index+1}. ${respuesta}</li>
+        <li class="list-group-item">${index + 1}. ${respuesta}</li>
       `);
-    })
+    });
+
+    const eliminar = document.querySelectorAll(".eliminar");
+    eliminar.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+
+        Preguntas.splice(e.target.dataset.id, 1);
+        updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
+
+
+      })
+    });
+    const editar = document.querySelectorAll('.editar');
+    editar.forEach(btn => {
+
+      btn.addEventListener('click', async (e) => {
+        const id = e.target.dataset.id;
+        const { nombrePregunta, preguntaDepende, respuestaDepende, tipoDeRespuesta, varemo } = preguntas[id];
+
+        respuestas = preguntas[id].respuestas;
+        selecPreguntadepende(false, id, respuestas);
+        dataBd(nombrePregunta, tipoDeRespuesta, preguntaDepende, respuestaDepende, varemo);
+        mostrarRespuestas(respuestas);
+        btnGuardarPregunta.value = 'Actualizar'
+        idUpdate = id;
+
+
+      })
+    });
 
   })
 
@@ -126,18 +176,27 @@ const cargarDatosForm = () => {
 }
 
 btnGuardarPregunta.addEventListener('click', (event) => {
-  const formTerminado = dataForm();
-  if (respuestas.length == 0) {
-    alert('No tienes respuestas Cargadas');
-    return
+
+  if (idUpdate == '') {
+    const formTerminado = dataForm();
+    if (respuestas.length == 0) {
+      alert('No tienes respuestas Cargadas');
+      return
+    }
+
+    formTerminado.respuestas = respuestas;
+    Preguntas.push(formTerminado);
+
+    updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
+    respuestas = [];
+    divRespuestas.innerHTML = '';
+  } else {
+    Preguntas[idUpdate]=dataForm();
+    Preguntas[idUpdate].respuestas = respuestas;
+    updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
+    respuestas = [];
+    divRespuestas.innerHTML = '';
   }
-
-  formTerminado.respuestas = respuestas;
-  Preguntas.push(formTerminado);
-
-  updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
-  respuestas = [];
-  divRespuestas.innerHTML = '';
 
 })
 
@@ -155,31 +214,41 @@ btnGuardarRespuesta.addEventListener('click', (event) => {
   inptNombreRespuesta.value = '';
   divRespuestas.innerHTML = '';
 
-  respuestas.forEach(element => {
-    $(divRespuestas).append(`
-         <p>${element}</p>
-      `);
-  });
-  
+  mostrarRespuestas(respuestas)
+
 
 })
 
 
 $(selectPreguntaDepende).on("change", function (e) {
 
-  const idFormPregunta = $(this).val();
-  let respuestasForm = Preguntas[idFormPregunta].respuestas;
+  selecPreguntadepende(true, $(this).val());
 
+})
+const selecPreguntadepende = (tipo, id, repuestas = []) => {
   selectRespuestaDepende.innerHTML = "";
-  respuestasForm.forEach((data, i) => {
-    $(selectRespuestaDepende).append(
-      `
-        <option value="${i}" class="seleccionar" >${data}</option>
+
+  if (tipo == true) {
+    let respuestasForm = Preguntas[id].respuestas;
+    respuestasForm.forEach((data, i) => {
+      $(selectRespuestaDepende).append(
         `
+          <option value="${i}" class="seleccionar" >${data}</option>
+          `
+      )
+    }
+    )
+  } else {
+    repuestas.forEach((data, i) => {
+      $(selectRespuestaDepende).append(
+        `
+          <option value="${i}" class="seleccionar" >${data}</option>
+          `
+      )
+    }
     )
   }
-  )
-})
+}
 
 
 $(document).ready(function () {
