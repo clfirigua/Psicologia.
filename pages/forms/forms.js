@@ -12,7 +12,7 @@ btnModal.addEventListener("click", async (e)=>{
     let data =  await addData({
         nombre:nameForm.value,
         preguntas:[],
-        varemoMedicion:"",
+        varemoMedicion:[],
     },"formularios");
     if(data.id){
         localStorage.setItem("idForm",data.id);
