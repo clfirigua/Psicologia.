@@ -28,3 +28,7 @@ const menu = async(arr) =>{
 export{
     menu
 }
+
+/* prueba */
+let dataUpload , dataDownload = []
+console.log(dataUpload);
