@@ -149,7 +149,7 @@ const generarTargetas = (preguntas) => {
 
 }
 
-const generarPReguntas = (preguntas = []) => {
+const generarPreguntas = (preguntas = []) => {
   if (preguntas.length == 0) {
     return
   }
@@ -168,7 +168,7 @@ const cargarDatosForm = () => {
     Preguntas = doc.data().preguntas;
     varemos = doc.data().varemoMedicion;
 
-    generarPReguntas(Preguntas)
+    generarPreguntas(Preguntas)
     generarTargetas(Preguntas);
     generarVaremos(varemos);
 
