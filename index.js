@@ -1,5 +1,6 @@
-import {validarUSer} from "../../components/login.js"
+import {validarUSer} from "./components/login.js"
 import {getData} from "./services/crudservice.js";
+import { redireccion } from "./components/redireccion.js"
 const btnEnviar = document.getElementById('enviar');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
@@ -12,12 +13,11 @@ const  validarUSerLocal  = async()  =>{
         const userJson = JSON.parse(localStorage.getItem('user'));
         const dataUser = await getData(userJson.id, 'usuarios');
         if(dataUser.id === userJson.id){
-          location.href ='../pages/dashboard/dashboard.html';
+          const url = redireccion(JSON.stringify(userJson.id))
+          location.href =url;
         }else{
             localStorage.removeItem('user');
-        }
-        
-        
+        }       
     }
     
 }
@@ -32,6 +32,5 @@ document.addEventListener("keyup", (e)=>{
 })
 
 btnEnviar.addEventListener('click', ()=>{
-
     validarUSer(email.value, password.value)
 })

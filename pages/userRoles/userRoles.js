@@ -101,6 +101,7 @@ onGetData((data)=>{
                 let user = await getData( e.target.dataset.id, 'usuarios');
                 editarusuarios(user.data());
                 idUpdate = e.target.dataset.id;
+                btnGuardar.value = 'Actualizar';
             })
         });
     });
@@ -121,6 +122,7 @@ btnGuardar.addEventListener('click', ()=>{
             password: input[6].value,
             rol: roles.value,
         }, 'usuarios')
+        btnGuardar.value = "Guardar"
         return
     }
    
