@@ -1,5 +1,6 @@
 import { updateData, doc, db, onSnapshot, getData, onGetDocument } from "../../services/crudservice.js";
 import { menu } from "../../shared/menu.js";
+import {validarSession} from "../../components/validador.js"
 
 const idFormulario = localStorage.getItem('idForm');
 
@@ -254,6 +255,7 @@ const selecPreguntadepende = (tipo, id, repuestas = []) => {
 $(document).ready(function () {
 
   menu();
+  validarSession();
   cargarDatosForm();
 
 

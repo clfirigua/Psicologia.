@@ -2,6 +2,8 @@ import {Modelusuarios} from "../../components/user.js";
 import {readFile, usersData} from "../../components/importCsv.js";
 import { menu } from "../../shared/menu.js";
 import { addData } from "../../services/crudservice.js";
+import {validarSession} from "../../components/validador.js"
+
 const modelUser =  document.getElementById('contUser');
 const importCSV = document.getElementById('import');
 const cargarScv = document.getElementById('cargarScv');
@@ -12,6 +14,7 @@ const btnGuardarfire = document.getElementById('fire');
 importCSV.addEventListener('change', readFile, false);
 
 menu();
+validarSession();
 
 Modelusuarios.forEach(data => {
         // $(modelUser).append(

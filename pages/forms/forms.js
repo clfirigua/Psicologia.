@@ -1,10 +1,11 @@
 import {menu} from "../../shared/menu.js"
 import { addData,onGetData,deleteData, getData, updateData } from "../../services/crudservice.js";
+import {validarSession} from "../../components/validador.js"
 
 const btnModal = document.getElementById("btnModalSiguiente");
 const nameForm = document.getElementById("nombreFormulario");
 
-
+validarSession()
 menu()
 
 btnModal.addEventListener("click", async (e)=>{

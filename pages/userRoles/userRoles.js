@@ -2,6 +2,7 @@ import {ModelusuariosAdmin, editarusuarios} from "../../components/userAdmin.js"
 import {notConfirmar} from "../../components/alerts.js";
 import { addData,onGetData,deleteData, getData, updateData } from "../../services/crudservice.js";
 import { menu } from "../../shared/menu.js";
+import {validarSession} from "../../components/validador.js"
 
 const inputData = document.getElementById('contUser');
 const btnGuardar = document.getElementById('guardar');
@@ -9,7 +10,9 @@ const cabeceraTabla = document.getElementById('cabeceraTabla');
 const dataTable = document.getElementById('dataTable');
 const getRoles = [];
 let idUpdate = 0;
+
 menu();
+validarSession();
 
 ModelusuariosAdmin.forEach(data => {
     if(data.type == 'select'){
