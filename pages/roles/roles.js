@@ -1,6 +1,8 @@
 import { roles } from "../../components/checks.js";
 import { menu } from "../../shared/menu.js";
-import { addData,onGetData } from "../../services/crudservice.js";
+import {notConfirmar} from "../../components/alerts.js";
+import { validarSession } from "../../components/validador.js";
+import { addData,onGetData, deleteData, getData, updateData } from "../../services/crudservice.js";
 
 const controles = document.getElementById('contRoles');
 const btn = document.getElementById('ver');
@@ -9,13 +11,13 @@ const cabeceraTabla = document.getElementById('cabeceraTabla');
 const dataTable = document.getElementById('dataTable');
 
 menu();
-
+validarSession()
 
 roles.forEach((data) => {
     $(controles).append(
         `
             <div class="form-check mt-2">
-            <input class="form-check-input validar" type="checkbox" value="" id="${data.texto}">
+            <input class="form-check-input validar" type="checkbox" value="" id="${data.slug}">
             <label class="form-check-label" for="flexCheckDefault">
                 ${data.texto}
             </label>
@@ -29,14 +31,14 @@ roles.forEach((data) => {
     )
 })
 
-const dashboard = document.getElementById('dashboard');
-const usuarios = document.getElementById('usuarios');
-const rolesgroup = document.getElementById('roles');
-const formularios = document.getElementById('formularios');
-const grupos = document.getElementById('grupos');
-const informes = document.getElementById('informes');
-const copiaDeSeguridad = document.getElementById('copiaDeSeguridad');
-const cargarUsuarios = document.getElementById('cargarUsuarios');
+const dashboard = document.getElementById('Dashboard');
+const usuarios = document.getElementById('Usuarios');
+const rolesgroup = document.getElementById('Roles');
+const formularios = document.getElementById('Formularios');
+const asignaciones = document.getElementById('Asignaciones');
+const informes = document.getElementById('Informes');
+const copiaDeSeguridad = document.getElementById('Copia_de_seguridad');
+const cerrarSesion = document.getElementById('Cerrar_sesion');
 
 
 
@@ -47,14 +49,14 @@ btn.addEventListener('click', () => {
     
 
     const rolValidar = {
-        dashboard: dashboard.checked,
-        usuarios: usuarios.checked,
-        roles: rolesgroup.checked,
-        formularios: formularios.checked,
-        grupos: grupos.checked,
-        informes: informes.checked,
-        copiaDeSeguridad: copiaDeSeguridad.checked,
-        cargarUsuarios:cargarUsuarios.checked,
+        Dashboard: dashboard.checked,
+        Usuarios: usuarios.checked,
+        Roles: rolesgroup.checked,
+        Formularios: formularios.checked,
+        Asignaciones: asignaciones.checked,
+        Informes: informes.checked,
+        Copia_de_seguridad: copiaDeSeguridad.checked,
+        Cerrar_sesion:cerrarSesion.checked,
         nombreRol: nombreRol.value,
     }
 
@@ -74,10 +76,10 @@ const reiniciarForm = () => {
     usuarios.checked = false;
     rolesgroup.checked = false;
     formularios.checked = false;
-    grupos.checked = false;
+    asignaciones.checked = false;
     informes.checked = false;
     copiaDeSeguridad.checked = false;
-    cargarUsuarios.checked = false;
+    cerrarSesion.checked = false;
     nombreRol.value = '';
 }
 
@@ -89,16 +91,37 @@ $(document).ready(function () {
             $(dataTable).append(`
                 <tr>
                     <td>${obj.data().nombreRol}</td>
-                    <td>${obj.data().dashboard}</td>
-                    <td>${obj.data().usuarios}</td>
-                    <td>${obj.data().roles}</td>
-                    <td>${obj.data().formularios}</td>
-                    <td>${obj.data().grupos}</td>
-                    <td>${obj.data().informes}</td>
-                    <td>${obj.data().copiaDeSeguridad}</td>
-                    <td>${obj.data().cargarUsuarios}</td>
+                    <td>${obj.data().Dashboard}</td>
+                    <td>${obj.data().Usuarios}</td>
+                    <td>${obj.data().Roles}</td>
+                    <td>${obj.data().Formularios}</td>
+                    <td>${obj.data().Asignaciones}</td>
+                    <td>${obj.data().Informes}</td>
+                    <td>${obj.data().Copia_de_seguridad}</td>
+                    <td>${obj.data().Cerrar_sesion}</td>
+                    <td scope="col"><button class= "btn btn-warning editar" data-id="${obj.id}" >Editar</button></td>
+                    <td scope="col"><button class= "btn btn-danger eliminar" data-id="${obj.id}" >Eliminar</button></td>
                 </tr>
             `)
+            const eliminar = document.querySelectorAll(".eliminar"); 
+            eliminar.forEach(btn => { 
+                btn.addEventListener('click', (e) => {
+                    let identificador = e.target.dataset.id ;
+                    let reference = obj.data().nombreRol
+                    notConfirmar(reference,identificador,'roles');
+                })
+            });
+            const editar = document.querySelectorAll('.editar');
+            editar.forEach(btn => { 
+
+                btn.addEventListener('click', async (e) =>  {
+
+                    let user = await getData( e.target.dataset.id, 'usuarios');
+                    editarusuarios(user.data());
+                    idUpdate = e.target.dataset.id;
+                    btnGuardar.value = 'Actualizar';
+                })
+            });
         });
     }, 'roles')
 });

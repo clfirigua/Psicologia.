@@ -92,7 +92,8 @@ onGetData((data)=>{
             btn.addEventListener('click', (e) => {
                 
                 let identificador = e.target.dataset.id ;
-                notConfirmar(identificador,'',deleteData(identificador, 'usuarios') );
+                let reference = obj.data().nombres
+                notConfirmar(reference,identificador,'usuarios');
 
             })
         });

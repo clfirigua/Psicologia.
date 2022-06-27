@@ -13,7 +13,7 @@ const menu = async(arr) =>{
     Object.entries(valores.data()).forEach((data)=>{
 
         for (let i = 0; i < roles.length; i++) {
-            if(data[0] ==  roles[i].texto && data[1] == true ){
+            if(data[0] ==  roles[i].slug && data[1] == true ){
                 a.push(roles[i]);
                 
             //     $(listaDatos).append(`
@@ -24,12 +24,13 @@ const menu = async(arr) =>{
             }
         }
     })
-    a = roles.sort((a, b) => a.texto.localeCompare(b.texto))
+    a = roles.sort((a, b) => a.slug.localeCompare(b.slug))
+    console.log(a)
     Object.entries(valores.data()).forEach((data)=>{
         
         for (let i = 0; i < a.length; i++) {
-            if(a[i].texto==data[0] && data[1] == true ){                
-
+            if(a[i].slug==data[0] && data[1] == true ){                
+                console.log(data[0]," ",data[1], " ",roles)
                 $(listaDatos).append(`
                 <li class="nav-item m-3 text-capitalize">
                     <a class="nav-link " aria-current="page" href="${a[i].ruta}">${a[i].texto}</a>
