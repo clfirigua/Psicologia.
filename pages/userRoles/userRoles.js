@@ -2,6 +2,7 @@ import {ModelusuariosAdmin, editarusuarios} from "../../components/userAdmin.js"
 import {notConfirmar} from "../../components/alerts.js";
 import { addData,onGetData,deleteData, getData, updateData } from "../../services/crudservice.js";
 import { menu } from "../../shared/menu.js";
+import {validarSession} from "../../components/validador.js"
 
 const inputData = document.getElementById('contUser');
 const btnGuardar = document.getElementById('guardar');
@@ -9,7 +10,9 @@ const cabeceraTabla = document.getElementById('cabeceraTabla');
 const dataTable = document.getElementById('dataTable');
 const getRoles = [];
 let idUpdate = 0;
+
 menu();
+validarSession();
 
 ModelusuariosAdmin.forEach(data => {
     if(data.type == 'select'){
@@ -89,7 +92,8 @@ onGetData((data)=>{
             btn.addEventListener('click', (e) => {
                 
                 let identificador = e.target.dataset.id ;
-                notConfirmar(identificador,'',deleteData(identificador, 'usuarios') );
+                let reference = obj.data().nombres
+                notConfirmar(reference,identificador,'usuarios');
 
             })
         });
@@ -101,6 +105,7 @@ onGetData((data)=>{
                 let user = await getData( e.target.dataset.id, 'usuarios');
                 editarusuarios(user.data());
                 idUpdate = e.target.dataset.id;
+                btnGuardar.value = 'Actualizar';
             })
         });
     });
@@ -121,6 +126,7 @@ btnGuardar.addEventListener('click', ()=>{
             password: input[6].value,
             rol: roles.value,
         }, 'usuarios')
+        btnGuardar.value = "Guardar"
         return
     }
    

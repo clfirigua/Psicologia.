@@ -44,7 +44,7 @@ function parseCSV(text) {
   const convertidor = () =>{
 
     arrUser.forEach((data)=>{
-        const arr = data.split(';')
+        const arr = data.split(';Z')
         if(arr.length == 7 && arr[3].includes('@') && arr[3].includes('.com') && arr[2].length == 10){
 
             const userArrConver = {

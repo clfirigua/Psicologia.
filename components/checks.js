@@ -1,35 +1,43 @@
 const roles = [
     {
-        texto:'dashboard',
-        ruta:'../dashboard/dashboard.html'
+        texto:'Dashboard',
+        ruta:'../dashboard/dashboard.html',
+        slug:'Dashboard'
     },
     {
-        texto:'usuarios',
-        ruta:'../userRoles/userRoles.html'
+        texto:'Usuarios',
+        ruta:'../userRoles/userRoles.html',
+        slug:'Usuarios'
     },
     {
-        texto:'roles',
-        ruta:'../roles/roles.html'
+        texto:'Roles',
+        ruta:'../roles/roles.html',
+        slug:'Roles'
     },
     {
-        texto:'formularios',
-        ruta:'../forms/forms.html'
+        texto:'Formularios',
+        ruta:'../forms/forms.html',
+        slug:'Formularios'
     },
     {
-        texto:'grupos',
-        ruta:'../groups/groups.html'
+        texto:'Asignaciones',
+        ruta:'../asignacion/asignacion.html',
+        slug:'Asignaciones'
     },
     {
-        texto:'informes',
-        ruta:'../informes/informes.html'
+        texto:'Informes',
+        ruta:'../informes/informes.html',
+        slug:'Informes'
     },
     {
-        texto:'copiaDeSeguridad',
-        ruta:''
+        texto:'Copia de seguridad',
+        ruta:'../pages/copias/copias.html',
+        slug:'Copia_de_seguridad'
     },
     {
-        texto:'cargarUsuarios',
-        ruta:'../users/user.html'
+        texto:'Cerrar sesion',
+        ruta:'', //../users/user.html
+        slug:'Cerrar_sesion'
     }
 ];
 

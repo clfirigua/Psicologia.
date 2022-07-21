@@ -1,5 +1,6 @@
 import { updateData, doc, db, onSnapshot, getData, onGetDocument } from "../../services/crudservice.js";
 import { menu } from "../../shared/menu.js";
+import {validarSession} from "../../components/validador.js"
 
 const idFormulario = localStorage.getItem('idForm');
 
@@ -149,7 +150,7 @@ const generarTargetas = (preguntas) => {
 
 }
 
-const generarPReguntas = (preguntas = []) => {
+const generarPreguntas = (preguntas = []) => {
   if (preguntas.length == 0) {
     return
   }
@@ -168,7 +169,7 @@ const cargarDatosForm = () => {
     Preguntas = doc.data().preguntas;
     varemos = doc.data().varemoMedicion;
 
-    generarPReguntas(Preguntas)
+    generarPreguntas(Preguntas)
     generarTargetas(Preguntas);
     generarVaremos(varemos);
 
@@ -254,6 +255,7 @@ const selecPreguntadepende = (tipo, id, repuestas = []) => {
 $(document).ready(function () {
 
   menu();
+  validarSession();
   cargarDatosForm();
 
 

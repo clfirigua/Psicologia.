@@ -2,7 +2,7 @@ import {db,addDoc,collection, onSnapshot, getDoc,doc,deleteDoc, updateDoc,arrayU
 
 
 // Data real time
-const onGetData = (data,nameCollection) => onSnapshot(collection(db, nameCollection), data);
+const onGetData = (data,nameCollection) => onSnapshot(collection(db, nameCollection), (data));
 
 //data real time one
 const onGetDocument = (nameCollection,id) =>onSnapshot(doc(db,nameCollection,id),(doc));
@@ -18,6 +18,8 @@ const getData = (id,nameCollection) => getDoc(doc(db, nameCollection, id));
 
 /*actualizar  */
 const updateData = (id, newFields, nameCollection) => updateDoc(doc(db, nameCollection, id), newFields);
+
+
 
 export{
     onGetData,

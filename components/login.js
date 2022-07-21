@@ -1,5 +1,5 @@
 import {onGetData} from "../services/crudservice.js"
-
+import { redireccion } from "./redireccion.js";
 
 const validarUSer = (email='', password='') =>{
 
@@ -19,7 +19,8 @@ const validarUSer = (email='', password='') =>{
                     rol:user.rol
                 }
                 localStorage.setItem('user',JSON.stringify(usuario));
-                location.href ='../pages/dashboard/dashboard.html';
+                const url = redireccion(JSON.stringify(usuario.rol))
+                location.href = url;
                 ingreso = true;
             };
            

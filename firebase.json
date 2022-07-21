@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "../Psicologia",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

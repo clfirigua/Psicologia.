@@ -1,6 +1,7 @@
 import { question } from "../../components/questions.js";
 import { updateData, doc, db, onSnapshot, getData} from "../../services/crudservice.js";
 import { menu } from "../../shared/menu.js";
+import {validarSession} from "../../components/validador.js"
 
 const nameForm = document.getElementById("nombreFormulario")
 const localname = localStorage.getItem("Nameform")
@@ -13,6 +14,7 @@ const btnGuardar = document.getElementById("guardarPregunta");
 const inpRespuesta = document.getElementById("inpRespuestas");
 const idForm = localStorage.getItem("idForm");
 menu();
+validarSession();
 mostrarFormulario();
 cargarFormularios();
 
