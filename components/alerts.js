@@ -1,11 +1,11 @@
 import { deleteData } from "../services/crudservice.js"
 
 //eliminar datos
-const notConfirmar = (reference, id, collection) =>{
+const notConfirmar = ( id, collection) =>{
 
     Swal.fire({
         title: "Eliminar",
-        text:`¿Esta seguro de eliminar la informacion referenciada? ${reference}`,
+        text:`¿Esta seguro de eliminar el rol?`,
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Confirmar',
