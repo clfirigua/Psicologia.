@@ -113,12 +113,6 @@ btnGuardar.addEventListener('click', () => {
             alert(error)
         }
     }
-
-    
-
-    
-
-    
 })
 
 // const addbtncancelar = (id) => {
