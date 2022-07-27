@@ -34,11 +34,23 @@
         </select>
         <!-- fin cuadro de seleccion de formularios -->
         <div class="row">
-            <div class="col-6" id="">
+            <div class="col-md-6 p-1 border rounded" >
                 <input type="search" class="form-control" name="usuarioAsignacion" id="usuarioAsignacion">
+                <div id="asignar">
+
+                </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-1">
+                <button class="btn btn-light" id="asignarUno">></button>
+                <button class="btn btn-light" id="asignarTodos">>></button>
+                <button class="btn btn-light" id="desasignarTodos"><<</button>
+                <button class="btn btn-light" id="desasignarUno"><</button>
+            </div>
+            <div class="col-md-5 p-1 border rounded" >
                 <input type="search" class="form-control" name="usuarioAsignado" id="usuarioAsignado">
+                <div id="asignados">
+
+                </div>
             </div>
         </div>
     </section>

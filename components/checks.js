@@ -36,7 +36,7 @@ const roles = [
     },
     {
         texto:'Cerrar sesion',
-        ruta:'', //../users/user.html
+        ruta:'../../../index.html', //../users/user.html
         slug:'Cerrar_sesion'
     }
 ];
