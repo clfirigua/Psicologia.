@@ -6,7 +6,7 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-
 
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.4/firebase-auth.js"
 
-import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc,updateDoc, setDoc,arrayUnion,arrayRemove, query, where} from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
+import { getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc,updateDoc, setDoc,arrayUnion,arrayRemove, query, where, orderBy} from "https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js";
 
 const firebaseConfig = {
 
@@ -50,6 +50,6 @@ export{
     arrayUnion,
     arrayRemove,
     query,
-    where
-    
+    where,
+    orderBy
   }
