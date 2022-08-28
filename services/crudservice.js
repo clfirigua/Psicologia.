@@ -32,5 +32,6 @@ export{
     arrayRemove,
     doc,
     db,
-    onSnapshot
+    onSnapshot,
+    collection,
 }

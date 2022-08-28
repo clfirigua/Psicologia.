@@ -55,7 +55,7 @@ const generarVaremos = (varemos = []) => {
 
   if (varemos.length === 0) {
     $(divVaremos).append(`
-      <p>Sin varmos Cargados</p>
+      <p>Sin baremos Cargados</p>
     `);
     return
   }
