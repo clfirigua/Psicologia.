@@ -93,7 +93,7 @@ onGetData((data)=>{
                 
                 let identificador = e.target.dataset.id ;
                 let reference = obj.data().nombres
-                notConfirmar(reference,identificador,'usuarios');
+                notConfirmar(identificador,'usuarios');
 
             })
         });
