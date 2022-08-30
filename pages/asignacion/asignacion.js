@@ -5,10 +5,6 @@ import {validarSession} from "../../components/validador.js"
 import { query, where, orderBy } from "../../services/firebaseservice.js";
 
 
-menu();
-validarSession();
-
-
 const formularios = document.getElementById('formularios')
 const usuarioAsignacion = document.getElementById('usuarioAsignacion')
 const usuarioAsignado = document.getElementById('usuarioAsignado')
@@ -18,86 +14,76 @@ const asignarUno = document.getElementById('asignarUno')
 const asignarTodos = document.getElementById('asignarTodos')
 const desasignarTodos = document.getElementById('desasignarTodos')
 const desasignarUno = document.getElementById('desasignarUno')
-
+const filtro = query(collection(db, "formularios"), orderBy("nombre", "asc"));
+let idformulario = '';
+menu();
+validarSession();
 cargarFormularios(); 
-cargarUsuariosAsignar();
+
 
 function cargarFormularios(){
-    const q = query(collection(db, "formularios"), orderBy("nombre", "asc"));
-    const unsuscribe = onSnapshot(q,(querySnapshot)=>{
-        const nombreFormularios = []
-        querySnapshot.forEach((doc)=>{
-            nombreFormularios.push(doc)
+    
+    onSnapshot(filtro,(forms)=>{
+        formularios.innerHTML = ``;
+        forms.forEach((doc)=>{
+            $(formularios).append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
         });
-        nombreFormularios.forEach((data)=>{
-            $(formularios).append(`
-            <option value="${data.id}">${data.data().nombre}</option>
-          `);
-        })
     })
 }
 
-function cargarUsuariosAsignar(){
-    onGetData((data)=>{
-        asignar.innerHTML = '';
-        data.forEach((obj)=>{
-            if(obj.data().rol == ""){
-            $(asignar).append(`
-                <div class="form-check mt-2">
-                <input class="form-check-input validar" type="checkbox" id="${obj.id}" >
-                <label class="form-check-label" for="flexCheckDefault">
-                    ${obj.data().nombres} ${obj.data().apellidos}
-                </label>
-                </div>
-            `
-            )
-        }
-        })
-    },'usuarios')
-}
+
 formularios.addEventListener('change', (e)=>{
-    let seleccionFormulario = e.target.value;
-    let formularioAsignado=[]
-    let asignacionCreada =false
-    onGetData((data)=>{
-        data.forEach((obj)=>{
-            formularioAsignado.push(obj.data().formulario);
-        })
-        formularioAsignado.forEach(e => {
-            console.log(seleccionFormulario, e)
-            if(seleccionFormulario == e){
-                asignacionCreada = true
-                console.log("son iguales");
-            //     addData({
-            //         formulario:null, 
-            //         usuarioll
-            //     },"asignaciones")
-                }
-            else{
-                console.log("son diferentes");
+    idformulario = e.target.value;
+    validarUsuarios(idformulario);
+})
+
+const validarUsuarios =  (id) =>{
+    const usuariosAsignados = [];
+    const busqueda = query(collection(db, "asignaciones"), where("formulario", "==", id));
+
+    onSnapshot(busqueda,(asignacion)=>{
+        asignacion.forEach(data =>{
+            if(data.data().usuario.lenght != 0){
+                data.data().usuario.forEach(usuario =>usuariosAsignados.push(usuario.id));
+            }else{
+                console.log('Sin usarios Asignados');
             }
-            console.log(asignacionCreada)
+            
+        })
+    });
+
+    mostrarListaUsuarios(usuariosAsignados)
+}
+
+
+const mostrarListaUsuarios = (userCa) =>{
+    asignar.innerHTML = '';
+    asignados.innerHTML = '';
+    onGetData((data)=>{
+        data.forEach(usuario => {
+            const id = usuario.id;
+            const {nombres, apellidos} = usuario.data()
+            if(userCa.includes(id)){
+                mostrarLista(asignados,id,nombres,apellidos)
+            }else{
+                
+                mostrarLista(asignar,id,nombres,apellidos)
+               
+            }
         });
-    },'asignaciones')
-})
-asignarUno.addEventListener("click", (e)=>{
+    },'usuarios')
 
-    const validarCheck = document.querySelectorAll('.validar:checked');
-    const validarCheckId = [];
-    validarCheck.forEach((data)=>{
-        let id=data.id;
-        let resuelto=false;
-            validarCheckId.push({id,
-                resuelto
-            })
-        }
-    )
-    const usuario = validarCheckId;
-    const data = {
-        formulario: formularios.value,
-        usuario: usuario
-        
-    }
-    addData(data, "asignaciones")
+}
 
-})
+
+const mostrarLista = (lista, id, nombre, apellido) =>{
+    // console.log(lista)
+    $(lista).append(`
+    <div class="form-check mt-2">
+    <input class="form-check-input validar" type="checkbox" id="${id}" >
+    <label class="form-check-label" for="flexCheckDefault">
+        ${nombre} ${apellido}
+    </label>
+    </div>
+`)
+}
