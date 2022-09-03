@@ -1,5 +1,11 @@
-.grafico1{
-    width: 500px;
-    height: 500px;
-    /* background-color: red; */
+.cardGrafico{
+    display: flex;
+    flex-wrap: wrap;
 }
+
+
+.chartdiv {
+    width: 90%;
+    height: 300px;
+}
+
