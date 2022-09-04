@@ -14,12 +14,15 @@ const validarUSer = (email='', password='') =>{
         data.forEach(users => {
             const user = users.data();
             if(user.email === email &&  user.password===password ){
+                if(user.rol == ''){
+                    user.rol = null
+                }
                 const usuario ={
                     id:users.id,
                     rol:user.rol
                 }
                 localStorage.setItem('user',JSON.stringify(usuario));
-                const url = redireccion(JSON.stringify(usuario.rol))
+                const url = redireccion(usuario.rol)
                 location.href = url;
                 ingreso = true;
             };
