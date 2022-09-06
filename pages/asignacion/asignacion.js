@@ -15,7 +15,10 @@ const asignarTodos = document.getElementById('asignarTodos')
 const desasignarTodos = document.getElementById('desasignarTodos')
 const desasignarUno = document.getElementById('desasignarUno')
 const filtro = query(collection(db, "formularios"), orderBy("nombre", "asc"));
+let datosLocal 
 let idformulario = '';
+let formularioexistente = false;
+let asignacionexistente 
 menu();
 validarSession();
 cargarFormularios(); 
@@ -43,8 +46,15 @@ const validarUsuarios =  (id) =>{
 
     onSnapshot(busqueda,(asignacion)=>{
         asignacion.forEach(data =>{
+            asignacionexistente =data.id
+            // datosLocal = {
+            //     formulario:data.data().formulario
+                
+            // }
             if(data.data().usuario.lenght != 0){
                 data.data().usuario.forEach(usuario =>usuariosAsignados.push(usuario.id));
+                formularioexistente = true;
+                console.log("existes")
             }else{
                 console.log('Sin usarios Asignados');
             }
@@ -65,9 +75,11 @@ const mostrarListaUsuarios = (userCa) =>{
             const {nombres, apellidos} = usuario.data()
             if(userCa.includes(id)){
                 mostrarLista(asignados,id,nombres,apellidos)
+                
             }else{
                 
                 mostrarLista(asignar,id,nombres,apellidos)
+                
                
             }
         });
@@ -87,3 +99,42 @@ const mostrarLista = (lista, id, nombre, apellido) =>{
     </div>
 `)
 }
+
+const validarSeleccion = ()=>{
+    const validarCheck = document.querySelectorAll('.validar:checked');
+    const validarCheckId = [];
+    validarCheck.forEach((data)=>{
+        let id=data.id;
+        let resuelto=false;
+        console.log(idformulario)
+            validarCheckId.push({id,
+                resuelto
+            })
+        }
+    )
+    const usuario = validarCheckId;
+    const data = {
+        formulario: idformulario,
+        usuario: usuario
+    }
+    return data
+}
+ asignarUno.addEventListener("click", (e)=>{
+    const data = validarSeleccion()
+    if(formularioexistente == false){
+    addData(data, "asignaciones")
+    }
+    else{
+        updateData(asignacionexistente,data, "asignaciones")
+    }   
+})
+
+desasignarUno.addEventListener("click", (e)=>{
+    const data = validarSeleccion()
+    updateData(asignacionexistente, 
+        {
+
+        },
+         "asignaciones")
+
+})
