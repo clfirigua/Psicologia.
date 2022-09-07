@@ -38,7 +38,7 @@ const verformulario = () => {
             llenarForm.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                      localStorage.setItem('idformuser', e.target.dataset.id );
-                     location.href = '../answer/answe.html';
+                     location.href = '../answer/answer.html';
                 }
             )
             });
