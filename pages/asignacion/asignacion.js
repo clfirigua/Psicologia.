@@ -43,7 +43,7 @@ formularios.addEventListener('change', (e)=>{
 const validarUsuarios =  (id) =>{
     const usuariosAsignados = [];
     const busqueda = query(collection(db, "asignaciones"), where("formulario", "==", id));
-
+    console.log(busqueda);
     onSnapshot(busqueda,(asignacion)=>{
         asignacion.forEach(data =>{
             asignacionexistente =data.id
