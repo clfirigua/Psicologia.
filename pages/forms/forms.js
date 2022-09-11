@@ -1,11 +1,13 @@
 import {menu} from "../../shared/menu.js"
-import { addData,onGetData,deleteData, getData, updateData } from "../../services/crudservice.js";
+import { addData,onGetData, getData } from "../../services/crudservice.js";
 import {validarSession} from "../../components/validador.js"
 import { notConfirmar } from "../../components/alerts.js";
 
 const btnModal = document.getElementById("btnModalSiguiente");
 const nameForm = document.getElementById("nombreFormulario");
 const formList = document.getElementById("forms");
+const tiempo = document.getElementById("tiempo");
+const datosUser = JSON.parse(localStorage.getItem('user'));
 
 validarSession()
 menu()
@@ -16,6 +18,8 @@ btnModal.addEventListener("click", async (e)=>{
     let data =  await addData({
         nombre:nameForm.value,
         preguntas:[],
+        usuario:datosUser.id,
+        tiempo:tiempo.value,
         varemoMedicion:[],
     },"formularios");
     if(data.id){
@@ -24,6 +28,7 @@ btnModal.addEventListener("click", async (e)=>{
     }
 
 })
+
 
 function formularios(){
     onGetData((data)=>{
