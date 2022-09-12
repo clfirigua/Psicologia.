@@ -1,4 +1,5 @@
-const redireccion = (rolUser)=>{
+const redireccion = (rolUser="")=>{
+
    let url = ''
     if (rolUser != null) {
        url = "../pages/dashboard/dashboard.html";
