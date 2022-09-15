@@ -50,44 +50,52 @@ const dataForm = () => {
   }
 }
 
-const dataBd = (nombrePregunta, tipoDeRespuesta, preguntaDepende, respuestaDepende, varemo) => {
+const dataBd = (nombrePregunta, tipoDeRespuesta, preguntaDepende, respuestaDepende, baremo) => {
   inptPregunta.value = nombrePregunta;
   selectTipoRespuesta.value = tipoDeRespuesta;
   selectPreguntaDepende.value = preguntaDepende;
   selectRespuestaDepende.value = respuestaDepende;
-  selectBaremo.value = varemo;
+  selectBaremo.value = baremo;
 }
 
-const generarVaremos = (varemos = []) => {
+const generarVaremos = (baremos = []) => {
+ 
+  let eliminado = false;
   divBaremos.innerHTML = '';
   selectBaremo.innerHTML = '<option value="false">Varemo de medicion</option>';
 
-  if (varemos.length === 0) {
+  if (baremos.length === 0) {
     $(divBaremos).append(`
       <p>Sin baremos Cargados</p>
     `);
     return
   }
-  varemos.forEach((varemo,index) => {
-    console.log(varemo,index);
+  baremos.forEach((baremo,index) => {
+    
+    console.log(baremo,index);
     $(selectBaremo).append(`
-      <option value="${varemo.baremo}">${varemo.baremo}</option>
+      <option value="${baremo.baremo}">${baremo.baremo}</option>
     `);
     console.log(index);
     // <p>${varemo.baremo}</p>
     $(divBaremos).append(`
       <tr>
-      <th scope="row">${varemo.baremo}</th>
-      <td>${varemo.media}</td>
-      <td>${varemo.desviacion}</td>
+      <th scope="row">${baremo.baremo}</th>
+      <td>${baremo.media}</td>
+      <td>${baremo.desviacion}</td>
       <td><input type="button" class="btn btn-danger mt-2 eliminar" data-id="${index}" value="Eliminar"></td>
     </tr>
     `);
         const eliminar = document.querySelectorAll(".eliminar");
-    eliminar.forEach(btn => {
+        
+      eliminar.forEach(btn => {
       btn.addEventListener('click', (e) => {
-
-        console.log(varemos.splice(e.target.dataset.id, 1));
+        if(eliminado == false){
+          console.log(e.target.dataset.id);
+          eliminado = true
+        }
+          
+        // console.log(baremos.splice(e.target.dataset.id, 1));
         // updateData(idFormulario, { varemoMedicion: varemos }, 'formularios');
 
 
