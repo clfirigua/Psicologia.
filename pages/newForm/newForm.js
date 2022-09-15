@@ -214,6 +214,7 @@ btnGuardarRespuesta.addEventListener('click', (event) => {
   respuestas.push(inptNombreRespuesta.value);
   inptNombreRespuesta.value = '';
   divRespuestas.innerHTML = '';
+  selectRespuestaDepende.innerHTML='';
 
   mostrarRespuestas(respuestas)
 
