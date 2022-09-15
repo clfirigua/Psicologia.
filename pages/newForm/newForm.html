@@ -29,8 +29,8 @@
 
 
   <div class="container mt-1">
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">crear varemos</button>
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAsignacion">Asignar</button>
+    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">crear baremos</button>
+    <!-- <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalAsignacion">Asignar</button> -->
   </div>
 
   <div class="modal fade" id="modalAsignacion" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -102,23 +102,43 @@
       </div>
     </div>
   </div>
-  <!-- modal varemos -->
+  <!-- modal baremos -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Añadir varemos de medicion</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Añadir baremos de medicion</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form>
             <div class="mb-3">
               <!-- <label for="recipient-name" class="col-form-label">Recipient:</label> -->
-              <input type="text" class="form-control" id="recipient-name">
+              <div class="container">
+                <div class="row">
+                  <div class="col-4"><input type="text" class="form-control" id="baremoName" placeholder="Baremo"></div>
+                  <div class="col-4"><input type="text" class="form-control" id="baremoMedia" placeholder="Media"></div>
+                  <div class="col-4"><input type="text" class="form-control" id="baremoDE" placeholder="D.E"></div>
+                </div>
+              </div>
+              <!-- <input type="text" class="form-control" id="recipient-name"> -->
+
             </div>
           </form>
-          <div class="container" id="varemos">
-           
+          <div class="container" >
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Baremo</th>
+                  <th scope="col">Media</th>
+                  <th scope="col">D.E</th>
+                  <th scope="col">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody id="varemos">
+
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="modal-footer">

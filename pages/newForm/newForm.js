@@ -5,20 +5,22 @@ import {validarSession} from "../../components/validador.js"
 const idFormulario = localStorage.getItem('idForm');
 
 const inptPregunta = document.getElementById('pregunta');
-const inptNombreVaremo = document.getElementById('recipient-name');
+const inptNombreBaremo = document.getElementById('baremoName');
+const inptMediaBaremo = document.getElementById('baremoMedia');
+const inptDEBaremo = document.getElementById('baremoDE');
 const inptNombreRespuesta = document.getElementById('inpRespuestas');
 
 const selectTipoRespuesta = document.getElementById('tpRespuesta');
 const selectPreguntaDepende = document.getElementById('dPregunta');
 const selectRespuestaDepende = document.getElementById('dRespuesta');
-const selectVaremo = document.getElementById('varemo');
+const selectBaremo = document.getElementById('varemo');
 
 const btnGuardarPregunta = document.getElementById('guardarPregunta');
-const btnGuardarVaremo = document.getElementById('btnGuardarVaremo');
+const btnGuardarBaremo = document.getElementById('btnGuardarVaremo');
 const btnGuardarRespuesta = document.getElementById('btnGuardarRespuesta');
 const btnModalRespuestas = document.getElementById('modalRespuestas');
 
-const divVaremos = document.getElementById('varemos');
+const divBaremos = document.getElementById('varemos');
 const divRespuestas = document.getElementById('containerRespuestas');
 const divPreguntas = document.getElementById('targetPreguntas');
 
@@ -29,6 +31,13 @@ let varemos = [];
 let respuestas = [];
 let idUpdate = '';
 
+const databaremo = () =>{
+  return {
+    baremo:inptNombreBaremo.value,
+    media:inptMediaBaremo.value,
+    desviacion: inptDEBaremo.value
+  }
+}
 
 const dataForm = () => {
   return {
@@ -36,38 +45,62 @@ const dataForm = () => {
     tipoDeRespuesta: selectTipoRespuesta.value,
     preguntaDepende: selectPreguntaDepende.value,
     respuestaDepende: selectRespuestaDepende.value,
-    varemo: selectVaremo.value,
+    varemo: selectBaremo.value,
     respuestas: []
   }
 }
 
-const dataBd = (nombrePregunta, tipoDeRespuesta, preguntaDepende, respuestaDepende, varemo) => {
+const dataBd = (nombrePregunta, tipoDeRespuesta, preguntaDepende, respuestaDepende, baremo) => {
   inptPregunta.value = nombrePregunta;
   selectTipoRespuesta.value = tipoDeRespuesta;
   selectPreguntaDepende.value = preguntaDepende;
   selectRespuestaDepende.value = respuestaDepende;
-  selectVaremo.value = varemo;
+  selectBaremo.value = baremo;
 }
 
-const generarVaremos = (varemos = []) => {
-  divVaremos.innerHTML = '';
-  selectVaremo.innerHTML = '<option value="false">Varemo de medicion</option>';
+const generarVaremos = (baremos = []) => {
+ 
+  let eliminado = false;
+  divBaremos.innerHTML = '';
+  selectBaremo.innerHTML = '<option value="false">Varemo de medicion</option>';
 
-  if (varemos.length === 0) {
-    $(divVaremos).append(`
+  if (baremos.length === 0) {
+    $(divBaremos).append(`
       <p>Sin baremos Cargados</p>
     `);
     return
   }
-
-  varemos.forEach(varemo => {
-    $(selectVaremo).append(`
-      <option value="${varemo}">${varemo}</option>
+  baremos.forEach((baremo,index) => {
+    
+    console.log(baremo,index);
+    $(selectBaremo).append(`
+      <option value="${baremo.baremo}">${baremo.baremo}</option>
     `);
-
-    $(divVaremos).append(`
-      <p>${varemo}</p>
+    console.log(index);
+    // <p>${varemo.baremo}</p>
+    $(divBaremos).append(`
+      <tr>
+      <th scope="row">${baremo.baremo}</th>
+      <td>${baremo.media}</td>
+      <td>${baremo.desviacion}</td>
+      <td><input type="button" class="btn btn-danger mt-2 eliminar" data-id="${index}" value="Eliminar"></td>
+    </tr>
     `);
+        const eliminar = document.querySelectorAll(".eliminar");
+        
+      eliminar.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if(eliminado == false){
+          console.log(e.target.dataset.id);
+          eliminado = true
+        }
+          
+        // console.log(baremos.splice(e.target.dataset.id, 1));
+        // updateData(idFormulario, { varemoMedicion: varemos }, 'formularios');
+
+
+      })
+    });
   });
 
 }
@@ -184,7 +217,6 @@ btnGuardarPregunta.addEventListener('click', (event) => {
       alert('No tienes respuestas Cargadas');
       return
     }
-
     formTerminado.respuestas = respuestas;
     Preguntas.push(formTerminado);
 
@@ -201,10 +233,12 @@ btnGuardarPregunta.addEventListener('click', (event) => {
 
 })
 
-btnGuardarVaremo.addEventListener('click', (event) => {
-
-  varemos.push(inptNombreVaremo.value);
-  inptNombreVaremo.value = "";
+btnGuardarBaremo.addEventListener('click', (event) => {
+  const baremoTerminado = databaremo()
+  varemos.push(baremoTerminado);
+  inptNombreBaremo.value = "";
+  inptDEBaremo.value="";
+  inptMediaBaremo.value="";
   updateData(idFormulario, { varemoMedicion: varemos }, 'formularios');
 
 })
