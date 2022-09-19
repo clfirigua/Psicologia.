@@ -72,12 +72,9 @@ const generarVaremos = (baremos = []) => {
   }
   baremos.forEach((baremo,index) => {
     
-    console.log(baremo,index);
     $(selectBaremo).append(`
       <option value="${baremo.baremo}">${baremo.baremo}</option>
     `);
-    console.log(index);
-    // <p>${varemo.baremo}</p>
     $(divBaremos).append(`
       <tr>
       <th scope="row">${baremo.baremo}</th>

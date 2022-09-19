@@ -139,7 +139,6 @@ btnGuardar.addEventListener('click', ()=>{
         usuario: input[5].value,
         password: input[6].value,
         rol: roles.value,
-        formularios:[]
     }
     addData(data, 'usuarios');
 })
