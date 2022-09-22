@@ -1,6 +1,6 @@
 const informes = {
-    formulario:String, // opcional
-    usuario:String, // opcional
+    formulario:String, // obcio
+    usuario:String,
     respuestas:String,
     informe:[{
         indexbaremo:number,
