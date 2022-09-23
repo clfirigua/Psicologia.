@@ -30,6 +30,7 @@ function cargarFormularios(){
     
     onSnapshot(filtro,(forms)=>{
         formularios.innerHTML = ``;
+        formularios.innerHTML = `<option value="disable" selected disabled > Seleccione un formulario </option>`
         forms.forEach((doc)=>{
             $(formularios).append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
         });

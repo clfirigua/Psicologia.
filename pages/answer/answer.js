@@ -42,6 +42,7 @@ const formulario = async () => {
   const form = await getData(id, 'formularios');
   titulo.innerText = form.data().nombre;
   preguntasform = form.data().preguntas;
+  console.log(preguntasform, pregunta)
   cargarpregunta(pregunta);
   s=form.data().tiempo;
   tiempo();
