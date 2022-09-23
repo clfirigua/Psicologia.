@@ -7,3 +7,4 @@ const informes = {
         calculo:number
     }]
 }
+export {informes}

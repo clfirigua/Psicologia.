@@ -1,8 +1,27 @@
 import {menu} from "../../shared/menu.js";
 import {validarSession} from "../../components/validador.js"
+//import {informes} from "../../models/informes.js"
+import { addData,onGetData,deleteData, getData, updateData, onSnapshot, doc, collection ,db} from "../../services/crudservice.js";
+import { query, where, orderBy } from "../../services/firebaseservice.js";
+
+
+const filtro = query(collection(db, "formularios"), orderBy("nombre", "asc"));
+const formularios = document.getElementById('formularios')
 
 menu()
 validarSession()
+cargarFormularios()
+
+function cargarFormularios  () {
+  onSnapshot(filtro,(forms)=>{
+    formularios.innerHTML = ``;
+    forms.forEach((doc)=>{
+        $(formularios).append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
+    });
+})
+}
+
+// function cargarusuarios
 
 am5.ready(function() {
 
