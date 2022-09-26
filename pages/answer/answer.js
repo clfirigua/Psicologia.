@@ -69,6 +69,16 @@ const cargarRespuestas = (index, respuestas) =>{
 }
 
 btn.addEventListener('click', ()=>{
+  const radios = document.getElementsByName(pregunta);
+  let valor = '';
+  for (let i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      valor = radios[i].value;
+      break;
+    }
+  }
+  if(valor != ''){
+
   respuestas.push({
     index:pregunta,
     respuesta:$(`input:radio[name=${pregunta}]:checked`).val(),
@@ -77,5 +87,17 @@ btn.addEventListener('click', ()=>{
   console.log(respuestas)
   pregunta++
   cargarpregunta(pregunta)
+  }else{
+    alert('Seleccione una respuesta')
+  }
+ 
+  if(pregunta == preguntasform.length-1){
+    btn.innerText = 'Finalizar'
+    btn.addEventListener('click', ()=>{
+      localStorage.setItem('respuestas', JSON.stringify(respuestas));
+      window.location.href = '/pages/formsAnswer/formAnswer.html'
+    })
+  }  
 
-})
+
+})  
