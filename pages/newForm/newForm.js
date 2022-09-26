@@ -24,7 +24,8 @@ const divBaremos = document.getElementById('varemos');
 const divRespuestas = document.getElementById('containerRespuestas');
 const divPreguntas = document.getElementById('targetPreguntas');
 
-
+const modalRespuestas = document.getElementById('modalRespuestas');
+const modalbaremos = document.getElementById('modalBaremos');
 
 let Preguntas = [];
 let varemos = [];
@@ -230,27 +231,46 @@ btnGuardarPregunta.addEventListener('click', (event) => {
 
 })
 
-btnGuardarBaremo.addEventListener('click', (event) => {
+modalbaremos.addEventListener('show.bs.modal', e => {
+
+  btnGuardarBaremo.addEventListener('click', (e) => {
+   guardarBaremo();
+  })
+  document.addEventListener("keyup", (e)=>{
+    if(e.key=="Enter"){
+      guardarBaremo();
+    }
+  })
+})
+
+const guardarBaremo = () => {
   const baremoTerminado = databaremo()
   varemos.push(baremoTerminado);
   inptNombreBaremo.value = "";
   inptDEBaremo.value="";
   inptMediaBaremo.value="";
   updateData(idFormulario, { varemoMedicion: varemos }, 'formularios');
+}
 
-})
+modalRespuestas.addEventListener('show.bs.modal', e => {
+  btnGuardarRespuesta.addEventListener('click', (e) => {
+   guardarRespuestas();
+  })
+  document.addEventListener("keyup", (e)=>{
+    if(e.key=="Enter"){
+      guardarRespuestas();
+    };
+  });
+});
 
-btnGuardarRespuesta.addEventListener('click', (event) => {
-
+const guardarRespuestas = () => {
+  console.log(respuestas);
   respuestas.push(inptNombreRespuesta.value);
   inptNombreRespuesta.value = '';
   divRespuestas.innerHTML = '';
   selectRespuestaDepende.innerHTML='';
-
   mostrarRespuestas(respuestas)
-
-
-})
+};
 
 
 $(selectPreguntaDepende).on("change", function (e) {
@@ -292,3 +312,4 @@ $(document).ready(function () {
 
 
 });
+

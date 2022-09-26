@@ -1,8 +1,39 @@
 import {menu} from "../../shared/menu.js";
 import {validarSession} from "../../components/validador.js"
+//import {informes} from "../../models/informes.js"
+import { addData,onGetData,deleteData, getData, updateData, onSnapshot, doc, collection ,db} from "../../services/crudservice.js";
+import { query, where, orderBy } from "../../services/firebaseservice.js";
+
+
+const filtroFormularios = query(collection(db, "formularios"), orderBy("nombre", "asc"));
+const filtroUsuarios = query(collection(db, "usuarios"), orderBy("nombres", "asc"));
+const formularios = document.getElementById('formularios')
+const usuarios = document.getElementById('usuarios')
 
 menu()
 validarSession()
+cargarFormularios()
+cargarUsuarios()
+
+function cargarFormularios  () {
+  onSnapshot(filtroFormularios,(forms)=>{
+    formularios.innerHTML = ``;
+    formularios.innerHTML = `<option value="disable" selected disabled > Seleccione un formulario </option>`
+    forms.forEach((doc)=>{
+        $(formularios).append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
+    });
+})
+}
+function cargarUsuarios  () {
+  onSnapshot(filtroUsuarios,(forms)=>{
+    usuarios.innerHTML = ``;
+    usuarios.innerHTML = `<option value="disable" selected disabled > Seleccione un usuarios </option>`
+    forms.forEach((doc)=>{
+        $(usuarios).append(`<option value="${doc.id}">${doc.data().nombres} ${doc.data().apellidos}</option>`)
+    });
+})
+}
+// function cargarusuarios
 
 am5.ready(function() {
 

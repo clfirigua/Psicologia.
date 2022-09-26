@@ -5,11 +5,11 @@ const notConfirmar = ( id, collection) =>{
 
     Swal.fire({
         title: "Eliminar",
-        text:`¿Esta seguro de eliminar el rol?`,
+        text:`¿Esta seguro de eliminar?`,
         showDenyButton: true,
         showCancelButton: true,
-        confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
+        confirmButtonText: 'eliminar',
+        denyButtonText: `no eliminar`,
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
