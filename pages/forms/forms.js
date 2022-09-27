@@ -9,7 +9,7 @@ const formList = document.getElementById("forms");
 const tiempo = document.getElementById("tiempo");
 const datosUser = JSON.parse(localStorage.getItem('user'));
 
-validarSession()
+validarSession() 
 menu()
 formularios()
 
@@ -19,7 +19,7 @@ btnModal.addEventListener("click", async (e)=>{
         nombre:nameForm.value,
         preguntas:[],
         usuario:datosUser.id,
-        tiempo:tiempo.value,
+        tiempo:tiempo.value* 60,
         varemoMedicion:[],
     },"formularios");
     if(data.id){
