@@ -257,6 +257,7 @@ modalRespuestas.addEventListener('show.bs.modal', e => {
    guardarRespuestas();
   })
   document.addEventListener("keyup", (e)=>{
+    e.preventDefault()
     if(e.key=="Enter"){
       guardarRespuestas();
     };
@@ -304,8 +305,8 @@ const selecPreguntadepende = (tipo, id, repuestas = []) => {
 }
 
 
-$(document).ready(function () {
-
+$(document).ready(function (e) {
+  // e.preventDefault()
   menu();
   validarSession();
   cargarDatosForm();
