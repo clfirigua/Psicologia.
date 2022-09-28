@@ -11,7 +11,7 @@ let s = 0;
 const respuestas = [];
 let varemo = '';
 
-const tiempo = () => {
+const tiempo = (s) => {
   setInterval(function () {
     var hour = Math.floor(s / 3600);
     hour = (hour < 10) ? '0' + hour : hour;
@@ -45,7 +45,7 @@ const formulario = async () => {
   console.log(preguntasform, pregunta)
   cargarpregunta(pregunta);
   s=form.data().tiempo;
-  tiempo();
+  tiempo(s);
 }
 
 formulario();
@@ -67,8 +67,7 @@ const cargarRespuestas = (index, respuestas) =>{
 
   return lista
 }
-
-btn.addEventListener('click', ()=>{
+function validacionRespuesta (){
   const radios = document.getElementsByName(pregunta);
   let valor = '';
   for (let i = 0; i < radios.length; i++) {
@@ -87,17 +86,30 @@ btn.addEventListener('click', ()=>{
   console.log(respuestas)
   pregunta++
   cargarpregunta(pregunta)
+  return true
   }else{
     alert('Seleccione una respuesta')
+    return false;
   }
- 
+}
+function ultimaRespuesta (validacion){
   if(pregunta == preguntasform.length-1){
     btn.innerText = 'Finalizar'
-    btn.addEventListener('click', ()=>{
-      localStorage.setItem('respuestas', JSON.stringify(respuestas));
-      window.location.href = '/pages/formsAnswer/formAnswer.html'
-    })
+    btn.onclick = () => {
+      if(validacion){ 
+        localStorage.setItem('respuestas', JSON.stringify(respuestas));
+        window.location.href = '/pages/answer/answer2.html'
+      }
+
+
   }  
+}
+}
+btn.addEventListener('click', ()=>{
+  let validacion = false
+  validacion = validacionRespuesta();
+  ultimaRespuesta(validacion)
+  
 
 
 })  
