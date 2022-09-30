@@ -24,7 +24,7 @@ const verformulario = () => {
         form.forEach(card => {
             if (forms.includes(card.id)) {
                 $(verform).append(`
-                <div class="card" style="width: 18rem;">
+                <div class="card m-auto mb-3" style="width: 18rem;">
                 <img src="${url}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">${card.data().nombre}</h5>

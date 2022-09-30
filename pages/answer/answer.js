@@ -1,5 +1,5 @@
-import { getData, onGetData } from "../../services/crudservice.js";
-
+import { addData, getData, onGetData, updateData } from "../../services/crudservice.js";
+import { respuestas as respuestasSave} from "../../models/respuestas.js";
 const cardForms = document.getElementById("cardForms");
 const titulo = document.getElementById('nombreFormulario');
 const timer = document.getElementById('tiempo');
@@ -10,6 +10,7 @@ let preguntasform = [];
 let s = 0;
 const respuestas = [];
 let varemo = '';
+let respuestasFinales
 
 const tiempo = (s) => {
   setInterval(function () {
@@ -52,6 +53,7 @@ formulario();
 
 const cargarRespuestas = (index, respuestas) =>{
   let lista = '';
+  console.log(index);
   respuestas.forEach(respuesta =>{
       lista = lista +  `
               
@@ -68,7 +70,8 @@ const cargarRespuestas = (index, respuestas) =>{
   return lista
 }
 function validacionRespuesta (){
-  const radios = document.getElementsByName(pregunta);
+  try {
+    const radios = document.getElementsByName(pregunta);
   let valor = '';
   for (let i = 0; i < radios.length; i++) {
     if (radios[i].checked) {
@@ -77,10 +80,10 @@ function validacionRespuesta (){
     }
   }
   if(valor != ''){
-
+console.log($(`input:radio[name=${pregunta}]:checked`).val());
   respuestas.push({
     index:pregunta,
-    respuesta:$(`input:radio[name=${pregunta}]:checked`).val(),
+    respuesta:[$(`input:radio[name=${pregunta}]:checked`).val()],
     varemo
   });
   console.log(respuestas)
@@ -91,14 +94,25 @@ function validacionRespuesta (){
     alert('Seleccione una respuesta')
     return false;
   }
+  } catch (error) {
+      console.log(error);
+  }
+  
 }
 function ultimaRespuesta (validacion){
   if(pregunta == preguntasform.length-1){
     btn.innerText = 'Finalizar'
     btn.onclick = () => {
       if(validacion){ 
-        localStorage.setItem('respuestas', JSON.stringify(respuestas));
-        window.location.href = '/pages/answer/answer2.html'
+        respuestasFinales = JSON.stringify(respuestas);
+        console.log(respuestasFinales )
+        respuestasSave.formulario = id;
+        respuestasSave.usuario = localStorage.getItem('user');
+        respuestasSave.respuestas = respuestas;
+        addData(respuestasSave, 'respuestas');
+        updateData(id,'asignaciones', {resuelto:true})// revisar toca tomar el id del usuario para actualizarlo
+        
+        //window.location.href = '/pages/formsAnswer/formAnswer.html';
       }
 
 

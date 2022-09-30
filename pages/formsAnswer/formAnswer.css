@@ -6,10 +6,3 @@
 .header h2 {
     color: var(--blanco);
 }
-.verform{
-    display: flex;
-}
-
-.verform div{
-    margin-right: 25px;
-}
