@@ -3,8 +3,11 @@ import { respuestas as respuestasSave} from "../../models/respuestas.js";
 const cardForms = document.getElementById("cardForms");
 const titulo = document.getElementById('nombreFormulario');
 const timer = document.getElementById('tiempo');
-const id = localStorage.getItem("idformuser");
 const btn = document.getElementById('siguiente');
+const id = localStorage.getItem("idformuser");
+const idAsignacion = localStorage.getItem('idAsignacion');
+const idUser  = JSON.parse(localStorage.getItem('user'));
+
 let pregunta = 0;
 let preguntasform = [];
 let s = 0;
@@ -109,8 +112,9 @@ function ultimaRespuesta (validacion){
         respuestasSave.formulario = id;
         respuestasSave.usuario = localStorage.getItem('user');
         respuestasSave.respuestas = respuestas;
-        addData(respuestasSave, 'respuestas');
-        updateData(id,'asignaciones', {resuelto:true})// revisar toca tomar el id del usuario para actualizarlo
+        actualizarAsignacion();
+        //addData(respuestasSave, 'respuestas');
+        //// revisar toca tomar el id del usuario para actualizarlo
         
         //window.location.href = '/pages/formsAnswer/formAnswer.html';
       }
@@ -123,7 +127,27 @@ btn.addEventListener('click', ()=>{
   let validacion = false
   validacion = validacionRespuesta();
   ultimaRespuesta(validacion)
-  
-
-
 })  
+
+const actualizarAsignacion = async () => {
+  onGetData((asignaciones) => {  
+
+     asignaciones.forEach(asignacion => {
+      if(asignacion.data().formulario == id){
+        let dataUser = asignacion.data().usuario
+        console.log(dataUser)
+
+        asignacion.data().usuario.forEach(user => {
+          if (user.id == idUser.id) {
+              let ubicacion = dataUser.indexOf(user)
+              console.log(dataUser,"  ",user," ",ubicacion );
+              //updateData(idAsignacion,'asignaciones', user)
+          }
+      })
+      }
+
+      });
+    }, 'asignaciones');
+  }
+
+// End of pages\answer\answer.js
