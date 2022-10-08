@@ -1,17 +1,21 @@
-import { getData, onGetData } from "../../services/crudservice.js";
-
+import { addData, getData, onGetData, updateData } from "../../services/crudservice.js";
+import { respuestas as respuestasSave} from "../../models/respuestas.js";
 const cardForms = document.getElementById("cardForms");
 const titulo = document.getElementById('nombreFormulario');
 const timer = document.getElementById('tiempo');
-const id = localStorage.getItem("idformuser");
 const btn = document.getElementById('siguiente');
+const id = localStorage.getItem("idformuser");
+const idAsignacion = localStorage.getItem('idAsignacion');
+const idUser  = JSON.parse(localStorage.getItem('user'));
+
 let pregunta = 0;
 let preguntasform = [];
 let s = 0;
 const respuestas = [];
 let varemo = '';
+let respuestasFinales
 
-const tiempo = (seg) => {
+const tiempo = (s) => {
   setInterval(function () {
     var hour = Math.floor(s / seg);
     hour = (hour < 10) ? '0' + hour : hour;
@@ -52,6 +56,7 @@ formulario();
 
 const cargarRespuestas = (index, respuestas) =>{
   let lista = '';
+  console.log(index);
   respuestas.forEach(respuesta =>{
       lista = lista +  `
               
@@ -67,9 +72,9 @@ const cargarRespuestas = (index, respuestas) =>{
 
   return lista
 }
-
-btn.addEventListener('click', ()=>{
-  const radios = document.getElementsByName(pregunta);
+function validacionRespuesta (){
+  try {
+    const radios = document.getElementsByName(pregunta);
   let valor = '';
   for (let i = 0; i < radios.length; i++) {
     if (radios[i].checked) {
@@ -78,26 +83,71 @@ btn.addEventListener('click', ()=>{
     }
   }
   if(valor != ''){
-
+console.log($(`input:radio[name=${pregunta}]:checked`).val());
   respuestas.push({
     index:pregunta,
-    respuesta:$(`input:radio[name=${pregunta}]:checked`).val(),
+    respuesta:[$(`input:radio[name=${pregunta}]:checked`).val()],
     varemo
   });
   console.log(respuestas)
   pregunta++
   cargarpregunta(pregunta)
+  return true
   }else{
     alert('Seleccione una respuesta')
+    return false;
   }
- 
+  } catch (error) {
+      console.log(error);
+  }
+  
+}
+function ultimaRespuesta (validacion){
   if(pregunta == preguntasform.length-1){
     btn.innerText = 'Finalizar'
-    btn.addEventListener('click', ()=>{
-      localStorage.setItem('respuestas', JSON.stringify(respuestas));
-      window.location.href = '/pages/formsAnswer/formAnswer.html'
-    })
+    btn.onclick = () => {
+      if(validacion){ 
+        respuestasFinales = JSON.stringify(respuestas);
+        console.log(respuestasFinales )
+        respuestasSave.formulario = id;
+        respuestasSave.usuario = localStorage.getItem('user');
+        respuestasSave.respuestas = respuestas;
+        actualizarAsignacion();
+        //addData(respuestasSave, 'respuestas');
+        //// revisar toca tomar el id del usuario para actualizarlo
+        
+        //window.location.href = '/pages/formsAnswer/formAnswer.html';
+      }
+
+
   }  
-
-
+}
+}
+btn.addEventListener('click', ()=>{
+  let validacion = false
+  validacion = validacionRespuesta();
+  ultimaRespuesta(validacion)
 })  
+
+const actualizarAsignacion = async () => {
+  onGetData((asignaciones) => {  
+
+     asignaciones.forEach(asignacion => {
+      if(asignacion.data().formulario == id){
+        let dataUser = asignacion.data().usuario
+        console.log(dataUser)
+
+        asignacion.data().usuario.forEach(user => {
+          if (user.id == idUser.id) {
+              let ubicacion = dataUser.indexOf(user)
+              console.log(dataUser,"  ",user," ",ubicacion );
+              //updateData(idAsignacion,'asignaciones', user)
+          }
+      })
+      }
+
+      });
+    }, 'asignaciones');
+  }
+
+// End of pages\answer\answer.js

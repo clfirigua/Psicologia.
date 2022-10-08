@@ -164,7 +164,7 @@ const generarTargetas = (preguntas) => {
       btn.addEventListener('click', async (e) => {
         const id = e.target.dataset.id;
         const { nombrePregunta, preguntaDepende, respuestaDepende, tipoDeRespuesta, varemo } = preguntas[id];
-
+        console.log(id,preguntas[id]);
         respuestas = preguntas[id].respuestas;
         selecPreguntadepende(false, id, respuestas);
         dataBd(nombrePregunta, tipoDeRespuesta, preguntaDepende, respuestaDepende, varemo);
