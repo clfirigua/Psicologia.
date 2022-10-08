@@ -1,10 +1,10 @@
 const informes = {
-    formulario:String, // obcio
+    formulario:String,
     usuario:String,
     respuestas:String,
     informe:[{
-        indexbaremo:number,
-        calculo:number
+        indexbaremo:Number,
+        calculo:Number
     }]
 }
 export {informes}

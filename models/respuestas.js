@@ -3,7 +3,7 @@ const respuestas = {
     usuario:String,
     respuestas: [{
         indexpregunta:int, 
-        indexrespuesta:[int],
+        indexrespuesta:[],//int
         indexbaremo:int
     }]
 }

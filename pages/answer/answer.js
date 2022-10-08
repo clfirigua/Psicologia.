@@ -11,9 +11,9 @@ let s = 0;
 const respuestas = [];
 let varemo = '';
 
-const tiempo = () => {
+const tiempo = (seg) => {
   setInterval(function () {
-    var hour = Math.floor(s / 3600);
+    var hour = Math.floor(s / seg);
     hour = (hour < 10) ? '0' + hour : hour;
     var minute = Math.floor((s / 60) % 60);
     minute = (minute < 10) ? '0' + minute : minute;
@@ -45,7 +45,7 @@ const formulario = async () => {
   console.log(preguntasform, pregunta)
   cargarpregunta(pregunta);
   s=form.data().tiempo;
-  tiempo();
+  tiempo(s);
 }
 
 formulario();
