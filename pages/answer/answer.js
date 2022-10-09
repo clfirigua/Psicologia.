@@ -28,6 +28,9 @@ const tiempo = (s) => {
   }, 1000)
 }
 
+window.onbeforeunload = function() {
+  return "¿Estás seguro que deseas salir de la actual página?"
+}
 
 const cargarpregunta = (pregunta) => {
   cardForms.innerHTML = '';
@@ -110,16 +113,17 @@ function ultimaRespuesta (validacion){
         respuestasFinales = JSON.stringify(respuestas);
         console.log(respuestasFinales )
         respuestasSave.formulario = id;
-        respuestasSave.usuario = localStorage.getItem('user');
+        respuestasSave.usuario = idUser.id;
         respuestasSave.respuestas = respuestas;
         actualizarAsignacion();
-        //addData(respuestasSave, 'respuestas');
-        //// revisar toca tomar el id del usuario para actualizarlo
+        addData(respuestasSave, 'respuestas');
+        // revisar toca tomar el id del usuario para actualizarlo
         
-        //window.location.href = '/pages/formsAnswer/formAnswer.html';
+       setTimeout(() => {
+        window.location.href = '/pages/formsAnswer/formAnswer.html';
+       }, 2000);
+       
       }
-
-
   }  
 }
 }
@@ -131,21 +135,22 @@ btn.addEventListener('click', ()=>{
 
 const actualizarAsignacion = async () => {
   onGetData((asignaciones) => {  
-
      asignaciones.forEach(asignacion => {
       if(asignacion.data().formulario == id){
         let dataUser = asignacion.data().usuario
-        console.log(dataUser)
-
-        asignacion.data().usuario.forEach(user => {
-          if (user.id == idUser.id) {
-              let ubicacion = dataUser.indexOf(user)
-              console.log(dataUser,"  ",user," ",ubicacion );
-              //updateData(idAsignacion,'asignaciones', user)
+        for (let i = 0; i < dataUser.length; i++) {
+          const element = dataUser[i];
+          if (dataUser[i].id == idUser.id) {
+              let ubicacion = dataUser.indexOf(element)
+              if (ubicacion !== -1) {
+                dataUser.splice(ubicacion, 1);
+                dataUser.push({id:idUser.id,
+                  resuelto:true,})
+            }
+              updateData(idAsignacion, {usuario:dataUser},'asignaciones')
           }
-      })
-      }
-
+        }
+       }
       });
     }, 'asignaciones');
   }

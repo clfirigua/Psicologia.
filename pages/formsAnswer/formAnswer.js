@@ -11,9 +11,13 @@ onGetData((asignaciones) => {
     asignaciones.forEach(asignacion => {
         asignacion.data().usuario.forEach(card => {
             if (card.id == id) {
-                console.log(card);
-                idAsignacion =asignacion.id;
-                forms.push(asignacion.data().formulario);
+                if (card.resuelto == false) {
+                    console.log(card);
+                    idAsignacion =asignacion.id;
+                    forms.push(asignacion.data().formulario);
+                }else{
+                    alert('No tienes formularios pendientes');
+                    }
             }
         })
     });
