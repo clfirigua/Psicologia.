@@ -72,13 +72,14 @@ const mostrarListaUsuarios = (userCa) =>{
          await data.forEach(( usuario) => {
             
             const id = usuario.id;
-            const {nombres, apellidos} = usuario.data()
-            
-            if (userCa.includes(id)){
-                
-                mostrarLista(asignados,id,nombres,apellidos)
-            }else{
-                mostrarLista(asignar,id,nombres,apellidos)
+            const {nombres, apellidos} = usuario.data();
+            if(usuario.data().rol == ''){
+                if (userCa.includes(id)){
+                    
+                    mostrarLista(asignados,id,nombres,apellidos)
+                }else{
+                    mostrarLista(asignar,id,nombres,apellidos)
+                }
             }
         });
     },'usuarios')

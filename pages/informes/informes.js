@@ -9,11 +9,12 @@ const filtroFormularios = query(collection(db, "formularios"), orderBy("nombre",
 const filtroUsuarios = query(collection(db, "usuarios"), orderBy("nombres", "asc"));
 const formularios = document.getElementById('formularios')
 const usuarios = document.getElementById('usuarios')
+let idFormulario
 
 menu()
 validarSession()
 cargarFormularios()
-cargarUsuarios()
+
 
 function cargarFormularios  () {
   onSnapshot(filtroFormularios,(forms)=>{
@@ -22,18 +23,48 @@ function cargarFormularios  () {
     forms.forEach((doc)=>{
         $(formularios).append(`<option value="${doc.id}">${doc.data().nombre}</option>`)
     });
-})
+  })
 }
-function cargarUsuarios  () {
+formularios.addEventListener('change', (e)=>{
+  idFormulario = e.target.value;
+  usuariosAsignados(idFormulario)
+}) 
+
+function usuariosAsignados  (formulario) {
+  const usuariosAsignados = [];
+  const busqueda = query(collection(db, "asignaciones"), where("formulario", "==", formulario));
+  onSnapshot(busqueda,(asignacion)=>{
+    asignacion.forEach(data =>{
+      if(data.data().usuario.lenght != 0){
+        data.data().usuario.forEach(usuario =>usuariosAsignados.push(usuario.id));
+      }else{
+        console.log('Sin usuarios ');
+      }
+    })
+  })
+  cargarUsuarios(usuariosAsignados)
+}
+
+function cargarUsuarios  (usuariosAsignados) {
   onSnapshot(filtroUsuarios,(forms)=>{
     usuarios.innerHTML = ``;
     usuarios.innerHTML = `<option value="disable" selected disabled > Seleccione un usuarios </option>`
     forms.forEach((doc)=>{
-        $(usuarios).append(`<option value="${doc.id}">${doc.data().nombres} ${doc.data().apellidos}</option>`)
-    });
+      for (let i = 0; i < usuariosAsignados.length; i++) {
+        const element = usuariosAsignados[i];
+        if(doc.id == usuariosAsignados[i]){
+          $(usuarios).append(`<option value="${doc.id}">${doc.data().nombres} ${doc.data().apellidos}</option>`)
+        }
+      }
+      }); 
 })
 }
+usuarios.addEventListener('change',  (e) =>{
+  
+})
 // function cargarusuarios
+
+
 
 am5.ready(function() {
 
