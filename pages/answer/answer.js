@@ -120,9 +120,7 @@ function ultimaRespuesta (validacion){
         // revisar toca tomar el id del usuario para actualizarlo
         
        setTimeout(() => {
-        window.location.href = '/pages/formsAnswer/formAnswer.html';
-       }, 2000);
-       
+        window.location.href = '/pages/formsAnswer/formAnswer.html'}, 2000);
       }
   }  
 }
