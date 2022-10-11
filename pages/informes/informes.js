@@ -9,7 +9,9 @@ const filtroFormularios = query(collection(db, "formularios"), orderBy("nombre",
 const filtroUsuarios = query(collection(db, "usuarios"), orderBy("nombres", "asc"));
 const formularios = document.getElementById('formularios')
 const usuarios = document.getElementById('usuarios')
+const tablaInformes = document.getElementById('tablaInformes')
 let idFormulario
+let idUsuario;
 
 menu()
 validarSession()
@@ -51,7 +53,6 @@ function cargarUsuarios  (usuariosAsignados) {
     usuarios.innerHTML = `<option value="disable" selected disabled > Seleccione un usuarios </option>`
     forms.forEach((doc)=>{
       for (let i = 0; i < usuariosAsignados.length; i++) {
-        const element = usuariosAsignados[i];
         if(doc.id == usuariosAsignados[i]){
           $(usuarios).append(`<option value="${doc.id}">${doc.data().nombres} ${doc.data().apellidos}</option>`)
         }
@@ -60,10 +61,13 @@ function cargarUsuarios  (usuariosAsignados) {
 })
 }
 usuarios.addEventListener('change',  (e) =>{
-  
+  idUsuario = e.target.value;
+  cargarResultados(idFormulario,idUsuario)
 })
 // function cargarusuarios
+function cargarResultados(formulario, usuario){
 
+}
 
 
 am5.ready(function() {
