@@ -1,7 +1,7 @@
 import {menu} from "../../shared/menu.js";
 import {validarSession} from "../../components/validador.js"
 //import {informes} from "../../models/informes.js"
-import { addData,onGetData,deleteData, getData, updateData, onSnapshot, doc, collection ,db} from "../../services/crudservice.js";
+import { addData,onGetData,deleteData, getData, updateData, onSnapshot, doc, collection ,db, onGetDocument} from "../../services/crudservice.js";
 import { query, where, orderBy } from "../../services/firebaseservice.js";
 
 
@@ -65,8 +65,24 @@ usuarios.addEventListener('change',  (e) =>{
   cargarResultados(idFormulario,idUsuario)
 })
 // function cargarusuarios
-function cargarResultados(formulario, usuario){
-
+function cargarResultados(idFormulario, idUsuario){
+  const formulario = onSnapshot(doc(db, "formularios", idFormulario), (doc) => {
+    console.log( doc.data().varemoMedicion);
+    const baremos = doc.data().varemoMedicion;
+    tablaInformes.innerHTML = ``;
+    baremos.forEach((baremo) => {
+      console.log(baremo);
+    $(tablaInformes).append(`
+                      <tr>
+                        <th scope="row">${baremo.baremo}</th>
+                        <td>${baremo.media}</td>
+                        <td>${baremo.desviacion}</td>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                      </tr>`);
+    });
+  });
 }
 
 
