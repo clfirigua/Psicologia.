@@ -4,7 +4,7 @@ const redireccion = (rolUser="")=>{
     if (rolUser != null) {
        url = "../pages/dashboard/dashboard.html";
    }else{
-     url = "../pages/formsAnswer/formAnswer.html";
+     url = "../pages/formsAnswers/formsAnswers.html";
    }
    return url;
 }
