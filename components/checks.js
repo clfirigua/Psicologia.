@@ -31,7 +31,7 @@ const roles = [
     },
     {
         texto:'Copia de seguridad',
-        ruta:'../pages/copias/copias.html',
+        ruta:'../copias/copias.html',
         slug:'Copia_de_seguridad'
     },
     {

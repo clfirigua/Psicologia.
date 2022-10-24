@@ -12,7 +12,9 @@ const usuarios = document.getElementById('usuarios')
 const tablaInformes = document.getElementById('tablaInformes')
 let idFormulario
 let idUsuario;
-
+let listBaremo = [];
+let listrespuestas = [];
+let suma 
 menu()
 validarSession()
 cargarFormularios()
@@ -65,13 +67,12 @@ usuarios.addEventListener('change',  (e) =>{
   cargarResultados(idFormulario,idUsuario)
 })
 // function cargarusuarios
-function cargarResultados(idFormulario, idUsuario){
+function cargarResultados(idFormulario,idUsuario){
   const formulario = onSnapshot(doc(db, "formularios", idFormulario), (doc) => {
-    console.log( doc.data().varemoMedicion);
     const baremos = doc.data().varemoMedicion;
     tablaInformes.innerHTML = ``;
     baremos.forEach((baremo) => {
-      console.log(baremo);
+    listBaremo.push(baremo.baremo)
     $(tablaInformes).append(`
                       <tr>
                         <th scope="row">${baremo.baremo}</th>
@@ -83,8 +84,34 @@ function cargarResultados(idFormulario, idUsuario){
                       </tr>`);
     });
   });
+  cargarRespuestas(idUsuario,listBaremo)
 }
 
+function cargarRespuestas(idUsuario, listBaremo){
+  const respuestas = query(collection(db, "respuestas"), where("usuario", "==", idUsuario), where("formulario", "==", idFormulario));
+
+  onSnapshot(respuestas,(respuestas)=>{
+    respuestas.forEach(data =>{
+      let respuesta = data.data().respuestas;
+      for (let i = 0; i < respuesta.length; i++) {
+        const element = respuesta[i];
+        listBaremo.find(item => {
+          if(item == element.varemo){
+            for (let j = 0; j < element.respuesta.length; j++) {
+              const element2 = parseInt(element.respuesta[j],10);
+              suma = suma + element2;
+              console.log(element2, suma);
+                       
+            }
+          }
+        })
+
+      }
+      
+    })
+
+  })
+}
 
 am5.ready(function() {
 
