@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "../Psicologia",
     "ignore": [
       "firebase.json",
       "**/.*",
