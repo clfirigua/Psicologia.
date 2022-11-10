@@ -90,27 +90,28 @@ function cargarResultados(idFormulario,idUsuario){
 function cargarRespuestas(idUsuario, listBaremo){
   const respuestas = query(collection(db, "respuestas"), where("usuario", "==", idUsuario), where("formulario", "==", idFormulario));
 
-  onSnapshot(respuestas,(respuestas)=>{
-    respuestas.forEach(data =>{
-      let respuesta = data.data().respuestas;
-      for (let i = 0; i < respuesta.length; i++) {
-        const element = respuesta[i];
-        listBaremo.find(item => {
-          if(item == element.varemo){
-            for (let j = 0; j < element.respuesta.length; j++) {
-              const element2 = parseInt(element.respuesta[j],10);
-              suma = suma + element2;
-              console.log(element2, suma);
+  
+  // onSnapshot(respuestas,(respuestas)=>{
+  //   respuestas.forEach(data =>{
+  //     let respuesta = data.data().respuestas;
+  //     console.log(respuesta);
+  //     for (let i = 0; i < respuesta.length; i++) {
+  //       const element = respuesta[i];
+  //       listBaremo.find(item => {
+  //         if(item == element.varemo){
+  //           for (let j = 0; j < element.respuesta.length; j++) {
+  //             const element2 = parseInt(element.respuesta[j],10);
+  //             suma = suma + element2;
                        
-            }
-          }
-        })
+  //           }
+  //         }
+  //       })
 
-      }
+  //     }
       
-    })
+  //   })
 
-  })
+  // })
 }
 
 am5.ready(function() {
