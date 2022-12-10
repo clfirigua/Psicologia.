@@ -72,46 +72,51 @@ function cargarResultados(idFormulario,idUsuario){
     const baremos = doc.data().varemoMedicion;
     tablaInformes.innerHTML = ``;
     baremos.forEach((baremo) => {
-    listBaremo.push(baremo.baremo)
+    listBaremo.push(baremo.baremo);
+    // console.log(baremo['desviacion']);
     $(tablaInformes).append(`
                       <tr>
                         <th scope="row">${baremo.baremo}</th>
                         <td>${baremo.media}</td>
                         <td>${baremo.desviacion}</td>
-                        <td>Otto</td>
+                        <td>${cargarRespuestas(idUsuario,baremo.baremo)}</td>
                         <td>Otto</td>
                         <td>@mdo</td>
                       </tr>`);
     });
   });
-  cargarRespuestas(idUsuario,listBaremo)
+  
 }
 
-function cargarRespuestas(idUsuario, listBaremo){
+
+function cargarRespuestas(idUsuario, baremo){
   const respuestas = query(collection(db, "respuestas"), where("usuario", "==", idUsuario), where("formulario", "==", idFormulario));
-
+  let sumaVaremo = 0;
   
-  // onSnapshot(respuestas,(respuestas)=>{
-  //   respuestas.forEach(data =>{
-  //     let respuesta = data.data().respuestas;
-  //     console.log(respuesta);
-  //     for (let i = 0; i < respuesta.length; i++) {
-  //       const element = respuesta[i];
-  //       listBaremo.find(item => {
-  //         if(item == element.varemo){
-  //           for (let j = 0; j < element.respuesta.length; j++) {
-  //             const element2 = parseInt(element.respuesta[j],10);
-  //             suma = suma + element2;
-                       
-  //           }
-  //         }
-  //       })
+  onSnapshot(respuestas,(respuestas)=>{
+    let respuestasUsuario = [] ;
+    respuestas.forEach(data =>{
+      respuestasUsuario = data.data().respuestas;
+    });
 
-  //     }
-      
-  //   })
+    if(respuestasUsuario.lenght == 0){
+      return;
+    }
 
-  // })
+    respuestasUsuario.forEach(respuesta =>{
+      if(respuesta['varemo'] == baremo){
+        respuesta['respuesta'].forEach((value) => {
+          sumaVaremo = value + sumaVaremo;
+        })
+      }
+    });
+
+    console.log(baremo, sumaVaremo)
+
+  });
+
+ 
+
 }
 
 am5.ready(function() {
