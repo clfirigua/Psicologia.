@@ -29,11 +29,11 @@ const roles = [
         ruta:'../informes/informes.html',
         slug:'Informes'
     },
-    {
-        texto:'Copia de seguridad',
-        ruta:'../copias/copias.html',
-        slug:'Copia_de_seguridad'
-    },
+    // {
+    //     texto:'Copia de seguridad',
+    //     ruta:'../copias/copias.html',
+    //     slug:'Copia_de_seguridad'
+    // },
     {
         texto:'Cerrar sesion',
         ruta:'../../../index.html', //../users/user.html
