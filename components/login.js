@@ -1,7 +1,7 @@
 import {onGetData} from "../services/crudservice.js"
 import { redireccion } from "./redireccion.js";
 
-const validarUSer = (email='', password='') =>{
+const validarUser = (email='', password='') =>{
 
     if(email == '' || password == ''){
         alert('Datos invalidos');
@@ -40,5 +40,5 @@ const validarUSer = (email='', password='') =>{
 
 
 export{
-    validarUSer
+    validarUser
 }

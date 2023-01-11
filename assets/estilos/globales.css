@@ -111,6 +111,7 @@ select:focus{
     border-radius: 33px;
     border: none;
     color: var(--primario);
+    margin-top: 2rem;
 }
 [placeholder]:focus::-webkit-input-placeholder {
     transition: text-indent 2s 0.2s ease; 
