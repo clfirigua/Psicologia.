@@ -1,8 +1,5 @@
-import {Modelusuarios} from "../../components/user.js";
 import {readFile, usersData,exportarData} from "../../components/importCsv.js";
-import { menu } from "../../shared/menu.js";
 import { addData } from "../../services/crudservice.js";
-import {validarSession} from "../../components/validador.js"
 
 
 const importCSV = document.getElementById('import');
@@ -13,22 +10,6 @@ const btnGuardar = document.getElementById('guardar');
 const exportar = document.getElementById("exportar");
 const btnGuardarfire = document.getElementById('fire');
 importCSV.addEventListener('change', readFile, false);
-
-// Modelusuarios.forEach(data => {
-//         $(modelUser).append(
-//             `
-//                 <input type="${data.type}" class="form-control mb-2 usuarios" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
-        
-//                 >
-//             `
-//         );
-
-//     $(tcabecera).append(
-//         `
-//             <th scope="col">${data.texto}</th>
-//         `
-//     )
-// });
 
 cargarScv.addEventListener('click', ()=>{
 console.log(usersData, readFile);
