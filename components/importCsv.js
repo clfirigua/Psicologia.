@@ -44,7 +44,7 @@ function parseCSV(text) {
   const convertidor = () =>{
 
     arrUser.forEach((data)=>{
-        const arr = data.split(';Z')
+        const arr = data.split(';')
         if(arr.length == 7 && arr[3].includes('@') && arr[3].includes('.com') && arr[2].length == 10){
 
             const userArrConver = {
@@ -55,7 +55,7 @@ function parseCSV(text) {
               cc: arr[4],
               usuario: arr[5],
               password: arr[6],
-              rol:false
+              rol:""
             }
             usersData.push(userArrConver)
 
@@ -68,9 +68,21 @@ function parseCSV(text) {
 
   }
 
+  const exportarData =(data, fileName) =>{
+    const a = document.createElement("a");
+    const contenido = data,
+    blob = new Blob([contenido],{type: "octect/stream"}),
+    url = window.URL.createObjectURL(blob);
+    a.href=url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  };
+
 
 
   export{
     readFile,
-    usersData
+    usersData,
+    exportarData
   }

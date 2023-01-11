@@ -1,39 +1,37 @@
 import {Modelusuarios} from "../../components/user.js";
-import {readFile, usersData} from "../../components/importCsv.js";
+import {readFile, usersData,exportarData} from "../../components/importCsv.js";
 import { menu } from "../../shared/menu.js";
 import { addData } from "../../services/crudservice.js";
 import {validarSession} from "../../components/validador.js"
 
-const modelUser =  document.getElementById('contUser');
+
 const importCSV = document.getElementById('import');
 const cargarScv = document.getElementById('cargarScv');
 const tcabecera = document.getElementById('tableCabecera');
 const tcuerpo = document.getElementById('cuerpoTabla');
 const btnGuardar = document.getElementById('guardar');
+const exportar = document.getElementById("exportar");
 const btnGuardarfire = document.getElementById('fire');
 importCSV.addEventListener('change', readFile, false);
 
-menu();
-validarSession();
-
-Modelusuarios.forEach(data => {
-        $(modelUser).append(
-            `
-                <input type="${data.type}" class="form-control mb-2 usuarios" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
+// Modelusuarios.forEach(data => {
+//         $(modelUser).append(
+//             `
+//                 <input type="${data.type}" class="form-control mb-2 usuarios" placeholder="${data.placeholder}" aria-label="${data.placeholder}"
         
-                >
-            `
-        );
+//                 >
+//             `
+//         );
 
-    $(tcabecera).append(
-        `
-            <th scope="col">${data.texto}</th>
-        `
-    )
-});
+//     $(tcabecera).append(
+//         `
+//             <th scope="col">${data.texto}</th>
+//         `
+//     )
+// });
 
 cargarScv.addEventListener('click', ()=>{
-
+console.log(usersData, readFile);
     usersData.forEach((data, index) => {
             $(tcuerpo).append(
                 `
@@ -50,16 +48,24 @@ cargarScv.addEventListener('click', ()=>{
                 `
             )
     });
-
-});
-
-btnGuardarfire.addEventListener('click', ()=>{
-
+    let confirmar = confirm("el archivo ya fue cargado y esta listo para guardar en base de datos")
+if(confirmar){
     usersData.forEach((data)=>{
         addData(data,'pruebas')
     })
+    alert("los datos se guardaron correctamente en la base de datos")
+
+}
+else{
+    alert("los datos no se guardaron en la base de datos")
+}
+});
+
+// btnGuardarfire.addEventListener('click', ()=>{
+
+
     
-})
+// })
 
 
 btnGuardar.addEventListener('click', ()=>{
@@ -72,6 +78,12 @@ btnGuardar.addEventListener('click', ()=>{
 
 })
 
+exportar.addEventListener('click',()=>{
+    alert("remplaza los datos correspondientes")
+const data = "nombres;apellidos;Celular;Correo;identificacion;usuario;contraseña"
+const nombreArchivo = "ejemplo.csv"
+exportarData(data, nombreArchivo)
+})
 
 
 

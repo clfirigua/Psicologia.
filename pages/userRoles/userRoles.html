@@ -32,10 +32,22 @@
                     <div id="contUser">
                     </div>
                 </div>
+                
                 <div class="row align-items-center">
                     <div class="col text-center">
                         <input type="button" class="btn btn-success regular-button mt-1 mb-3" id="guardar" value="Guardar">
+                        
                     </div>
+                
+                </div>
+                <div class="row align-items-center">
+                    <div class="col text-center">
+                        <button class="btn btn-success mt-2" id="exportar">Exportar ejemplo</button>
+                        <button class="btn btn-success mt-2" id="cargarScv">Cargar CSV</button>
+                        <!-- <button class="btn btn-success mt-2" id="fire">Guardar masivo</button> -->
+                        <input class="btn btn-success mt-2 import" type="file" id="import">
+                    </div>
+                
                 </div>
             </div>
             <div class="col-sm-9">
@@ -61,6 +73,7 @@
         crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module" src="userRoles.js"></script>
+    <script type="module" src="../users/user.js"></script>
 </body>
 
 </html>
