@@ -88,7 +88,7 @@
             <input type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalRespuestas"
               value="Agregar Respuestas" >
 
-            <input type="button" class="btn btn-success mt-2" id="guardarPregunta"
+            <input type="button" class="btn btn-success mt-2 " id="guardarPregunta"
               value="Guardar Pregunta">
             
           </form>
@@ -166,7 +166,18 @@
             </div>
           </form>
           <div class="container" id="containerRespuestas">
-            
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Respuesta</th>
+                  <th scope="col">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody id="respuestas">
+
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="modal-footer">

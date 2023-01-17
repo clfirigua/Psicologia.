@@ -89,8 +89,8 @@ function cargarResultados(idFormulario, idUsuario) {
         <td>${baremo.media}</td>
         <td>${baremo.desviacion}</td>
         <td>${result.suma}</td>
-        <td>${z}</td>
-        <td>${t}</td>
+        <td>${z.toFixed(2)}</td>
+        <td>${t.toFixed(2)}</td>
       </tr>`);
       console.log(baremos);
       

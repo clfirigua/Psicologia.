@@ -23,6 +23,7 @@ const btnModalRespuestas = document.getElementById('modalRespuestas');
 const divBaremos = document.getElementById('varemos');
 const divRespuestas = document.getElementById('containerRespuestas');
 const divPreguntas = document.getElementById('targetPreguntas');
+const addModalRespuestas = document.getElementById('respuestas')
 
 const modalRespuestas = document.getElementById('modalRespuestas');
 const modalbaremos = document.getElementById('modalBaremos');
@@ -86,16 +87,18 @@ const generarVaremos = (baremos = []) => {
     `);
         const eliminar = document.querySelectorAll(".eliminar");
         
-      eliminar.forEach(btn => {
+      eliminar.forEach((btn,index) => {
       btn.addEventListener('click', (e) => {
         if(eliminado == false){
-          console.log(e.target.dataset.id);
+          console.log(e.target.dataset.id, index);
           eliminado = true
+          console.log(baremos.splice(e.target.dataset.id, 1));
+          varemos = baremos;
+          updateData(idFormulario, { varemoMedicion: varemos }, 'formularios');
+  
+  
         }
           
-        // console.log(baremos.splice(e.target.dataset.id, 1));
-        // updateData(idFormulario, { varemoMedicion: varemos }, 'formularios');
-
 
       })
     });
@@ -104,11 +107,28 @@ const generarVaremos = (baremos = []) => {
 }
 
 const mostrarRespuestas = (respuestas = []) => {
-  divRespuestas.innerHTML = '';
-  respuestas.forEach(element => {
-    $(divRespuestas).append(`
-         <p>${element}</p>
+  let eliminado = false
+  addModalRespuestas.innerHTML = '';
+  respuestas.forEach((element,index) => {
+    $(addModalRespuestas).append(`
+    <tr>
+    <th scope="row"><p>${index+1}</p></th>
+    <td>${element}</td>
+    <td><input type="button" class="btn btn-danger mt-2 eliminar" data-id="${index}" value="Eliminar"></td>
+  </tr>
       `);
+      const eliminar = document.querySelectorAll(".eliminar");
+        
+      eliminar.forEach((btn,index) => {
+      btn.addEventListener('click', (e) => {
+        if(eliminado == false){
+          console.log(e.target.dataset.id, index);
+          eliminado = true
+          console.log(respuestas.splice(e.target.dataset.id, 1));
+          mostrarRespuestas(respuestas);
+        }        
+      })
+    });
   });
 }
 
@@ -154,7 +174,7 @@ const generarTargetas = (preguntas) => {
 
         Preguntas.splice(e.target.dataset.id, 1);
         updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
-
+        generarTargetas(preguntas)
 
       })
     });
@@ -199,9 +219,7 @@ const cargarDatosForm = () => {
 
     Preguntas = doc.data().preguntas;
     varemos = doc.data().varemoMedicion;
-
     generarPreguntas(Preguntas)
-    generarTargetas(Preguntas);
     generarVaremos(varemos);
 
   })
@@ -220,13 +238,13 @@ btnGuardarPregunta.addEventListener('click', (event) => {
 
     updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
     respuestas = [];
-    divRespuestas.innerHTML = '';
+    addModalRespuestas.innerHTML = '';
   } else {
     Preguntas[idUpdate]=dataForm();
     Preguntas[idUpdate].respuestas = respuestas;
     updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
     respuestas = [];
-    divRespuestas.innerHTML = '';
+    addModalRespuestas.innerHTML = '';
   }
 
 })
@@ -262,12 +280,16 @@ modalRespuestas.addEventListener('show.bs.modal', e => {
     };
   });
 });
+modalRespuestas.addEventListener('hidden.bs.modal', e => {
+  btnGuardarRespuesta.removeEventListener('click', guardarRespuestas);
+  document.removeEventListener("keyup", guardarRespuestas);
+});
 
 const guardarRespuestas = () => {
   console.log(respuestas);
   respuestas.push(inptNombreRespuesta.value);
   inptNombreRespuesta.value = '';
-  divRespuestas.innerHTML = '';
+  addModalRespuestas.innerHTML = '';
   selectRespuestaDepende.innerHTML='';
   mostrarRespuestas(respuestas)
 };
