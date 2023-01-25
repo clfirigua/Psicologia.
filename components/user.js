@@ -21,7 +21,7 @@ const Modelusuarios = [
         texto: 'email',
         type: 'email',
         placeholder:'email',
-        required:false
+        required:true
     },
     {
         texto: 'cc',
@@ -33,7 +33,7 @@ const Modelusuarios = [
         texto: 'usuario',
         type: 'text',
         placeholder:'User Name',
-        required:true
+        required:false
     },
     {
         texto: 'password',

@@ -7,13 +7,14 @@ import { query, where, orderBy, arrayRemove } from "../../services/firebaseservi
 
 const filtroFormularios = query(collection(db, "formularios"), orderBy("nombre", "asc"));
 const filtroUsuarios = query(collection(db, "usuarios"), orderBy("nombres", "asc"));
-const formularios = document.getElementById('formularios')
-const usuarios = document.getElementById('usuarios')
-const tablaInformes = document.getElementById('tablaInformes')
-let idFormulario
+const formularios = document.getElementById('formularios');
+const usuarios = document.getElementById('usuarios');
+const tablaInformes = document.getElementById('tablaInformes');
+const exportar = document.getElementById('exportar');
+let idFormulario;
 let idUsuario;
 var listBaremo = [];
-let z, t
+let z, t;
 
 menu()
 validarSession()
@@ -101,9 +102,7 @@ function cargarResultados(idFormulario, idUsuario) {
 
     });
 
-  });
-
-  
+  });  
 }
 
 
@@ -132,8 +131,11 @@ function cargarRespuestas(idUsuario, baremo) {
     });
   });
 }
+exportar.addEventListener('clic', ()=>{
+  
+})
 
- function  grafica  (list = ['carlos']) {
+ function  grafica  (list = [""]) {
 
   console.log(list)
   am5.ready(function () {

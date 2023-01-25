@@ -29,10 +29,10 @@ console.log(usersData, readFile);
                 `
             )
     });
-    let confirmar = confirm("el archivo ya fue cargado y esta listo para guardar en base de datos")
+    let confirmar = confirm("el archivo ya fue cargado y esta listo para guardar en base de datos, ¿desea continuar?")
 if(confirmar){
     usersData.forEach((data)=>{
-        addData(data,'pruebas')
+        addData(data,'usuarios')
     })
     alert("los datos se guardaron correctamente en la base de datos")
 
