@@ -220,6 +220,7 @@ const cargarDatosForm = () => {
     Preguntas = doc.data().preguntas;
     varemos = doc.data().varemoMedicion;
     generarPreguntas(Preguntas)
+    generarTargetas(Preguntas);
     generarVaremos(varemos);
 
   })
