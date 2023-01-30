@@ -1,9 +1,9 @@
-import {readFile, usersData,exportarData} from "../../components/importCsv.js";
+import {readFile, usersData,exportarData, userDataError} from "../../components/importCsv.js";
 import { addData } from "../../services/crudservice.js";
 
 
 const importCSV = document.getElementById('import');
-const cargarScv = document.getElementById('cargarScv');
+const cargarCsv = document.getElementById('cargarScv');
 const tcabecera = document.getElementById('tableCabecera');
 const tcuerpo = document.getElementById('cuerpoTabla');
 const btnGuardar = document.getElementById('guardar');
@@ -11,9 +11,10 @@ const exportar = document.getElementById("exportar");
 const btnGuardarfire = document.getElementById('fire');
 importCSV.addEventListener('change', readFile, false);
 
-cargarScv.addEventListener('click', ()=>{
-console.log(usersData, readFile);
-    usersData.forEach((data, index) => {
+cargarCsv.addEventListener('click', ()=>{
+    if(userDataError==[]){
+
+        usersData.forEach((data, index) => {
             $(tcuerpo).append(
                 `
                 <tr>
@@ -23,7 +24,6 @@ console.log(usersData, readFile);
                     <td>${data.telefono}</td>
                     <td>${data.email}</td>
                     <td>${data.cc}</td>
-                    <td>${data.usuario}</td>
                     <td>${data.password}</td>
                 </tr>
                 `
@@ -40,6 +40,9 @@ if(confirmar){
 else{
     alert("los datos no se guardaron en la base de datos")
 }
+    }else{
+        alert("error al subir la informacion")
+    }
 });
 
 // btnGuardarfire.addEventListener('click', ()=>{

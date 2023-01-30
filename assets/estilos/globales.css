@@ -26,6 +26,7 @@ body{
     font-family: 'Krub', sans-serif;
 }
 /*botones*/
+
 .btn-primary{
     background-color: var(--darksecundario);
     color: var(--blanco);

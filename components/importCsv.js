@@ -45,7 +45,7 @@ function parseCSV(text) {
 
     arrUser.forEach((data)=>{
         const arr = data.split(';')
-        if(arr.length == 7 && arr[3].includes('@') && arr[3].includes('.com') && arr[2].length == 10){
+        if(arr.length == 6 && arr[3].includes('@')  && arr[2].length == 10){
 
             const userArrConver = {
               nombres: arr[0],
@@ -53,12 +53,11 @@ function parseCSV(text) {
               telefono: arr[2],
               email: arr[3],
               cc: arr[4],
-              usuario: arr[5],
-              password: arr[6],
+              password: arr[5],
               rol:""
             }
             usersData.push(userArrConver)
-
+            console.log(usersData);
         }else{
           userDataError.push(data);
         }
@@ -84,5 +83,6 @@ function parseCSV(text) {
   export{
     readFile,
     usersData,
-    exportarData
+    exportarData,
+    userDataError
   }

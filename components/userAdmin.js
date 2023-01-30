@@ -30,12 +30,6 @@ const ModelusuariosAdmin = [
         required: true
     },
     {
-        texto: 'Usuario',
-        type: 'text',
-        placeholder: 'User Name',
-        required: true
-    },
-    {
         texto: 'Password',
         type: 'password',
         placeholder: 'Contraseña',
@@ -57,7 +51,6 @@ const editarusuarios = (obj) => {
     const telefono = document.getElementById('Telefono');
     const email = document.getElementById('Email');
     const cc = document.getElementById('CC');
-    const usuario = document.getElementById('Usuario');
     const password = document.getElementById('Password');
     const rol = document.getElementById('Rol');
     nombre.value = obj.nombres;
@@ -65,7 +58,6 @@ const editarusuarios = (obj) => {
     telefono.value = obj.telefono;
     email.value = obj.email;
     cc.value = obj.cc;
-    usuario.value = obj.usuario;
     password.value = obj.password;
     rol.value = obj.rol;
 }

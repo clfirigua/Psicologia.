@@ -5,7 +5,6 @@ const usuarios = {
     email: String,
     cc:Number,
     rol:String,
-    usuario:String,
     password:String,
     forms:[
         {

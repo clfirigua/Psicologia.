@@ -68,7 +68,6 @@ const rolesgroup = document.getElementById('Roles');
 const formularios = document.getElementById('Formularios');
 const asignaciones = document.getElementById('Asignaciones');
 const informes = document.getElementById('Informes');
-const copiaDeSeguridad = document.getElementById('Copia_de_seguridad');
 const cerrarSesion = document.getElementById('Cerrar_sesion');
 
 
@@ -86,7 +85,6 @@ btnGuardar.addEventListener('click', () => {
             Formularios: formularios.checked,
             Asignaciones: asignaciones.checked,
             Informes: informes.checked,
-            Copia_de_seguridad: copiaDeSeguridad.checked,
             Cerrar_sesion:cerrarSesion.checked,
             nombreRol: nombreRol.value,
             },'roles')
@@ -102,7 +100,6 @@ btnGuardar.addEventListener('click', () => {
             Formularios: formularios.checked,
             Asignaciones: asignaciones.checked,
             Informes: informes.checked,
-            Copia_de_seguridad: copiaDeSeguridad.checked,
             Cerrar_sesion:cerrarSesion.checked,
             nombreRol: nombreRol.value,
         }
@@ -136,7 +133,6 @@ const reiniciarForm = () => {
     formularios.checked = false;
     asignaciones.checked = false;
     informes.checked = false;
-    copiaDeSeguridad.checked = false;
     cerrarSesion.checked = true;
     nombreRol.value = '';
 }
@@ -145,7 +141,6 @@ const editarRoles =(obj) => {
     dashboard.checked = obj.Dashboard;
     asignaciones.checked = obj.Asignaciones;
     cerrarSesion.checked = obj.Cerrar_sesion;
-    copiaDeSeguridad.checked = obj.Copia_de_seguridad;
     formularios.checked = obj.Formularios;
     informes.checked = obj.Informes;
     rolesgroup.checked = obj.Roles;
@@ -167,7 +162,6 @@ $(document).ready(function () {
                     <td>${obj.data().Formularios}</td>
                     <td>${obj.data().Asignaciones}</td>
                     <td>${obj.data().Informes}</td>
-                    <td>${obj.data().Copia_de_seguridad}</td>
                     <td>${obj.data().Cerrar_sesion}</td>
                     <td scope="col"><button class= "btn btn-warning editar" data-id="${obj.id}" >Editar</button></td>
                     <td scope="col"><button class= "btn btn-danger eliminar" data-id="${obj.id}" >Eliminar</button></td>

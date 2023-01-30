@@ -80,7 +80,6 @@ onGetData((data)=>{
             <td scope="col">${obj.data().telefono}</td>
             <td scope="col">${obj.data().email}</td>
             <td scope="col">${obj.data().cc}</td>
-            <td scope="col">${obj.data().usuario}</td>
             <td scope="col">${obj.data().password}</td>
             <td scope="col">${buscarRol(obj.data().rol)}</td>
             <td scope="col"><button class= "btn btn-warning editar" data-id="${obj.id}" >Editar</button></td>
@@ -112,6 +111,7 @@ onGetData((data)=>{
 
 }, 'usuarios')
 
+
 btnGuardar.addEventListener('click', ()=>{
     const input = document.getElementsByClassName('userAdmin');
     if(idUpdate != 0 ){
@@ -122,8 +122,7 @@ btnGuardar.addEventListener('click', ()=>{
             telefono: input[2].value,
             email: input[3].value,
             cc: input[4].value,
-            usuario: input[5].value,
-            password: input[6].value,
+            password: input[5].value,
             rol: roles.value,
         }, 'usuarios')
         btnGuardar.value = "Guardar"
@@ -136,8 +135,7 @@ btnGuardar.addEventListener('click', ()=>{
         telefono: input[2].value,
         email: input[3].value,
         cc: input[4].value,
-        usuario: input[5].value,
-        password: input[6].value,
+        password: input[5].value,
         rol: roles.value,
     }
     addData(data, 'usuarios');

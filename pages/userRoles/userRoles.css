@@ -6,3 +6,8 @@ i{
 .import{
     width:15rem ;
 }
+/* .scrollable{
+    height:30vw;
+    overflow: auto;
+    overflow-y: scroll;
+} */

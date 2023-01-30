@@ -30,12 +30,6 @@ const Modelusuarios = [
         required:true
     },
     {
-        texto: 'usuario',
-        type: 'text',
-        placeholder:'User Name',
-        required:false
-    },
-    {
         texto: 'password',
         type: 'password',
         placeholder:'Contraseña',

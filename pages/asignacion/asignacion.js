@@ -15,12 +15,11 @@ const asignarTodos = document.getElementById('asignarTodos')
 const desasignarTodos = document.getElementById('desasignarTodos')
 const desasignarUno = document.getElementById('desasignarUno')
 const filtro = query(collection(db, "formularios"), orderBy("nombre", "asc"));
-let datosLocal 
+
 let idformulario = '';
 let formularioexistente = false;
-let asignacionexistente 
-let asignadosArray = [];
-let asignarArray = [];
+let asignacionexistente = ""
+let asignadosArray = [","];
 menu();
 validarSession();
 cargarFormularios(); 
@@ -39,6 +38,11 @@ function cargarFormularios(){
 
 
 formularios.addEventListener('change', (e)=>{
+    formularioexistente=false
+    asignacionexistente = ""
+    while (asignadosArray.length>0) {
+        asignadosArray.pop()
+    }
     idformulario = e.target.value;
     validarUsuarios(idformulario);
 })
@@ -48,8 +52,8 @@ const validarUsuarios =  (id) =>{
     const busqueda = query(collection(db, "asignaciones"), where("formulario", "==", id));
     onSnapshot(busqueda,(asignacion)=>{
         asignacion.forEach(data =>{
-            asignacionexistente =data.id
-            if(data.data().usuario.lenght != 0){
+            asignacionexistente = data.id
+            if(data.data().usuario.length != 0){
                 data.data().usuario.forEach(usuario =>usuariosAsignados.push(usuario.id));
                 data.data().usuario.forEach(usuario =>asignadosArray.push(usuario));
                 formularioexistente = true;
@@ -60,7 +64,6 @@ const validarUsuarios =  (id) =>{
             
         })
     });
-
     mostrarListaUsuarios(usuariosAsignados)
 }
 
@@ -83,7 +86,6 @@ const mostrarListaUsuarios = (userCa) =>{
             }
         });
     },'usuarios')
-
 }
 
 
@@ -100,63 +102,67 @@ const mostrarLista = (lista, id, nombre, apellido, index=0) =>{
 }
 
 const validarSeleccion = ()=>{
-    const validadrContenedor = document.getElementById('sinseleccion');
-    const validarCheck = validadrContenedor.querySelectorAll('.validar:checked');
-    const validarCheckId = [];
-    validarCheck.forEach((data)=>{
-        let id=data.id;
-        let resuelto=false;
-        console.log(idformulario)
-            validarCheckId.push({id,
-                resuelto
-            })
+    return new Promise((resolve, reject) => {
+        const validadrContenedor = document.getElementById('sinseleccion');
+        const validarCheck = validadrContenedor.querySelectorAll('.validar:checked');
+        const validarCheckId = [];
+        validarCheck.forEach((data)=>{
+            let id=data.id;
+            let resuelto=false;
+                validarCheckId.push({id,
+                    resuelto
+                })
+            }
+        )
+
+        const data = {
+            formulario: idformulario,
+            usuario: validarCheckId
         }
-    )
-    const usuario = validarCheckId;
-    const data = {
-        formulario: idformulario,
-        usuario: usuario
-    }
-    return data
+        resolve(data)
+    })
 }
 const adicionarSeleccion = ()=>{
-    const validarContenedor = document.getElementById('sinseleccion');
-    const validarCheck = validarContenedor.querySelectorAll('.validar:checked');
-    for (let i = 0; i < validarCheck.length; i++) {
-        const id = validarCheck[i].id;
-        const resuelto = false;
-        asignadosArray.push({id,resuelto})
-    }
-    return asignadosArray;
+    return new Promise((resolve, reject)=>{
+        const validarContenedor = document.getElementById('sinseleccion');
+        const validarCheck = validarContenedor.querySelectorAll('.validar:checked');
+        validarCheck.forEach(data=>{
+            const id = data.id;
+            const resuelto = false
+            asignadosArray.push({id,resuelto})
+        })
+        resolve(asignadosArray)
+    })
 }
 
  asignarUno.addEventListener("click", (e)=>{
     if(formularioexistente == false){
-        let data = validarSeleccion()
-        addData(data, "asignaciones")
+        validarSeleccion().then((result)=>{
+            addData(result, "asignaciones")
+        })
     }
     else{
-        let data = adicionarSeleccion()
-         updateData(asignacionexistente,{usuario:data}, "asignaciones")
+        adicionarSeleccion().then((result)=>{
+            updateData(asignacionexistente,{usuario:result}, "asignaciones")
+        })
     }   
 })
 const eliminarSeleccion = ()=>{
-    const validarCheck = document.querySelectorAll('.validar:checked');
-    for (let i = 0; i < asignadosArray.length; i++) {
-        for (let j = 0; j < validarCheck.length; j++) {
-            if(asignadosArray[i].id == validarCheck[j].id){
-                asignadosArray.splice(asignadosArray.indexOf(asignadosArray[i]),1)
+    return new Promise((resolve, reject)=>{
+        const validarCheck = document.querySelectorAll('.validar:checked');
+        for (let i = 0; i < asignadosArray.length; i++) {
+            for (let j = 0; j < validarCheck.length; j++) {
+                if(asignadosArray[i].id == validarCheck[j].id){
+                    asignadosArray.splice(asignadosArray.indexOf(asignadosArray[i]),1)
+                }
             }
-        }
-    }   
-        return asignadosArray;
+        }   
+        resolve(asignadosArray)
+    })
+
 }
 desasignarUno.addEventListener("click", (e)=>{
-    const data = eliminarSeleccion()
-    updateData(asignacionexistente, 
-        {
-            usuario:asignadosArray
-        },
-         "asignaciones")
-
+    eliminarSeleccion().then((result)=>{
+        updateData(asignacionexistente,{ usuario:result}, "asignaciones")
+    })
 })
