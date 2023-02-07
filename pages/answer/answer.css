@@ -6,3 +6,9 @@
 .header h2 {
     color: var(--blanco);
 }
+#cerrarSesion{
+    color:var(--negro)
+}
+#cerrarSesion:hover{
+    cursor: pointer;
+}

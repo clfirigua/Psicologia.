@@ -11,7 +11,29 @@
 
 <body>
     <header class="header">
-        <h2 class="fw-bold text-center pt-3 pb-3">Formularios asignados</h2>
+        <nav class="navbar navbar-dark bg-dark fixed-top">
+            <div class="container-fluid">
+              <a class="navbar-brand m-auto fw-bold" href="/../pages/formsAnswer/formAnswer.html">Formularios asignados</a>
+              <button title="No se" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Formularios asignados</h5>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                  <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                      <a class="nav-link" id="cerrarSesion" >Cerrar sesion</a>
+                    </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </nav>
     </header>
     <h1 id="nombreFormulario" class="text-center">Nombre Formulario</h1>
     <h1 id="tiempo" class="text-center">Tiempo formulario</h1>

@@ -8,6 +8,7 @@ const inptPregunta = document.getElementById('pregunta');
 const inptNombreBaremo = document.getElementById('baremoName');
 const inptMediaBaremo = document.getElementById('baremoMedia');
 const inptDEBaremo = document.getElementById('baremoDE');
+const numberRespuesta = document.getElementById('valorRespuesta');
 const inptNombreRespuesta = document.getElementById('inpRespuestas');
 
 const selectTipoRespuesta = document.getElementById('tpRespuesta');
@@ -38,6 +39,13 @@ const databaremo = () =>{
     baremo:inptNombreBaremo.value,
     media:inptMediaBaremo.value,
     desviacion: inptDEBaremo.value
+  }
+}
+
+const dataRespuestas = ()=>{
+  return{
+    index: numberRespuesta.value,
+    respuesta: inptNombreRespuesta.value,
   }
 }
 
@@ -112,8 +120,8 @@ const mostrarRespuestas = (respuestas = []) => {
   respuestas.forEach((element,index) => {
     $(addModalRespuestas).append(`
     <tr>
-    <th scope="row"><p>${index+1}</p></th>
-    <td>${element}</td>
+    <th scope="row"><p>${element.index}</p></th>
+    <td>${element.respuesta}</td>
     <td><input type="button" class="btn btn-danger mt-2 eliminar" data-id="${index}" value="Eliminar"></td>
   </tr>
       `);
@@ -133,7 +141,7 @@ const mostrarRespuestas = (respuestas = []) => {
 }
 
 const generarTargetas = (preguntas) => {
-
+  let eliminado = false
   if (preguntas.length === 0) {
     $(divPreguntas).append(`
       <p>Sin Preguntas Guardadas</p>
@@ -162,20 +170,21 @@ const generarTargetas = (preguntas) => {
     `);
 
     const list = document.getElementById(index);
-    pregunta.respuestas.forEach((respuesta, index) => {
+    pregunta.respuestas.forEach((respuesta) => {
       $(list).append(`
-        <li class="list-group-item">${index + 1}. ${respuesta}</li>
+        <li class="list-group-item">${respuesta.index}. ${respuesta.respuesta}</li>
       `);
     });
 
     const eliminar = document.querySelectorAll(".eliminar");
-    eliminar.forEach(btn => {
+    eliminar.forEach((btn,index) => {
       btn.addEventListener('click', (e) => {
-
-        Preguntas.splice(e.target.dataset.id, 1);
-        updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
-        generarTargetas(preguntas)
-
+        if(eliminado == false ){
+          eliminado = true
+          Preguntas.splice(e.target.dataset.id, 1);
+          updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
+          generarTargetas(preguntas)
+        }
       })
     });
     const editar = document.querySelectorAll('.editar');
@@ -240,12 +249,14 @@ btnGuardarPregunta.addEventListener('click', (event) => {
     updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
     respuestas = [];
     addModalRespuestas.innerHTML = '';
+    inptPregunta.value = '';
   } else {
     Preguntas[idUpdate]=dataForm();
     Preguntas[idUpdate].respuestas = respuestas;
     updateData(idFormulario, { preguntas: Preguntas }, 'formularios');
     respuestas = [];
     addModalRespuestas.innerHTML = '';
+    inptPregunta.value = '';
   }
 
 })
@@ -288,10 +299,11 @@ modalRespuestas.addEventListener('hidden.bs.modal', e => {
 
 const guardarRespuestas = () => {
   console.log(respuestas);
-  respuestas.push(inptNombreRespuesta.value);
+  const respuestaTerminado = dataRespuestas();
+  respuestas.push(respuestaTerminado);
   inptNombreRespuesta.value = '';
+  numberRespuesta.value="";
   addModalRespuestas.innerHTML = '';
-  selectRespuestaDepende.innerHTML='';
   mostrarRespuestas(respuestas)
 };
 

@@ -6,6 +6,7 @@ const timer = document.getElementById('tiempo');
 const btn = document.getElementById('siguiente');
 const id = localStorage.getItem("idformuser");
 const idAsignacion = localStorage.getItem('idAsignacion');
+const cerrarSesion = document.getElementById('cerrarSesion');
 const idUser  = JSON.parse(localStorage.getItem('user'));
 
 let pregunta = 0;
@@ -59,14 +60,15 @@ formulario();
 
 const cargarRespuestas = (index, respuestas) =>{
   let lista = '';
-  console.log(index);
+  console.log(respuestas);
   respuestas.forEach(respuesta =>{
+    console.log(respuesta);
       lista = lista +  `
               
       <div class="form-check">
-      <input class="form-check-input" type="radio" name="${index}" id="${index}" value=${respuesta}>
+      <input class="form-check-input" type="radio" name="${index}" id="${respuesta.index}" value=${respuesta.index}>
       <label class="form-check-label" >
-        ${respuesta}
+        ${respuesta.respuesta}
       </label>
       </div>
       
@@ -78,6 +80,7 @@ const cargarRespuestas = (index, respuestas) =>{
 function validacionRespuesta (){
   try {
     const radios = document.getElementsByName(pregunta);
+  console.log(radios);
   let valor = '';
   for (let i = 0; i < radios.length; i++) {
     if (radios[i].checked) {
@@ -86,10 +89,11 @@ function validacionRespuesta (){
     }
   }
   if(valor != ''){
-console.log($(`input:radio[name=${pregunta}]:checked`).val());
+  let respuesta = $(`input:radio[name=${pregunta}]:checked`).val();
+  respuesta = parseInt(respuesta,10);
   respuestas.push({
     index:pregunta,
-    respuesta:[$(`input:radio[name=${pregunta}]:checked`).val()],
+    respuesta:[respuesta],
     varemo
   });
   console.log(respuestas)
@@ -153,4 +157,9 @@ const actualizarAsignacion = async () => {
     }, 'asignaciones');
   }
 
+  cerrarSesion.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.removeItem('user');
+    location.href = '/..';
+})
 // End of pages\answer\answer.js
