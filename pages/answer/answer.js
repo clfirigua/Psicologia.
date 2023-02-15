@@ -26,6 +26,9 @@ const tiempo = (s) => {
     second = (second < 10) ? '0' + second : second;
     timer.innerText = hour + ':' + minute + ':' + second
     s = s - 1
+    if(s==0){
+      terminarFormulario()
+    }
   }, 1000)
 }
 
@@ -50,7 +53,6 @@ const formulario = async () => {
   const form = await getData(id, 'formularios');
   titulo.innerText = form.data().nombre;
   preguntasform = form.data().preguntas;
-  console.log(preguntasform, pregunta)
   cargarpregunta(pregunta);
   s=form.data().tiempo;
   tiempo(s);
@@ -60,11 +62,8 @@ formulario();
 
 const cargarRespuestas = (index, respuestas) =>{
   let lista = '';
-  console.log(respuestas);
   respuestas.forEach(respuesta =>{
-    console.log(respuesta);
       lista = lista +  `
-              
       <div class="form-check">
       <input class="form-check-input" type="radio" name="${index}" id="${respuesta.index}" value=${respuesta.index}>
       <label class="form-check-label" >
@@ -80,7 +79,6 @@ const cargarRespuestas = (index, respuestas) =>{
 function validacionRespuesta (){
   try {
     const radios = document.getElementsByName(pregunta);
-  console.log(radios);
   let valor = '';
   for (let i = 0; i < radios.length; i++) {
     if (radios[i].checked) {
@@ -96,7 +94,6 @@ function validacionRespuesta (){
     respuesta:[respuesta],
     varemo
   });
-  console.log(respuestas)
   pregunta++
   cargarpregunta(pregunta)
   return true
@@ -114,17 +111,8 @@ function ultimaRespuesta (validacion){
     btn.innerText = 'Finalizar'
     btn.onclick = () => {
       if(validacion){ 
-        respuestasFinales = JSON.stringify(respuestas);
-        console.log(respuestasFinales )
-        respuestasSave.formulario = id;
-        respuestasSave.usuario = idUser.id;
-        respuestasSave.respuestas = respuestas;
-        actualizarAsignacion();
-        addData(respuestasSave, 'respuestas');
-        // revisar toca tomar el id del usuario para actualizarlo
-        
-       setTimeout(() => {
-        window.location.href = '/pages/formsAnswer/formAnswer.html'}, 2000);
+        terminarFormulario()
+
       }
   }  
 }
@@ -157,6 +145,18 @@ const actualizarAsignacion = async () => {
     }, 'asignaciones');
   }
 
+  function terminarFormulario() {
+    respuestasFinales = JSON.stringify(respuestas);
+    respuestasSave.formulario = id;
+    respuestasSave.usuario = idUser.id;
+    respuestasSave.respuestas = respuestas;
+    actualizarAsignacion();
+    addData(respuestasSave, 'respuestas');
+    // revisar toca tomar el id del usuario para actualizarlo
+    
+   setTimeout(() => {
+    window.location.href = '/pages/formsAnswer/formAnswer.html'}, 2000);
+  }
   cerrarSesion.addEventListener('click', (e) => {
     e.preventDefault();
     localStorage.removeItem('user');
