@@ -13,6 +13,7 @@ const tablaInformes = document.getElementById('tablaInformes');
 const exportar = document.getElementById('exportar');
 let idFormulario;
 let idUsuario;
+let formularioSeleccionado = false
 var listBaremo = [];
 let z, t;
 
@@ -33,6 +34,7 @@ function cargarFormularios() {
 formularios.addEventListener('change', (e) => {
   idFormulario = e.target.value;
   usuariosAsignados(idFormulario)
+  formularioSeleccionado = true
 })
 
 function usuariosAsignados(formulario) {
@@ -69,7 +71,7 @@ usuarios.addEventListener('change', (e) => {
 })
 // function cargarusuarios
 function cargarResultados(idFormulario, idUsuario) {
-  const formulario = onSnapshot(doc(db, "formularios", idFormulario), (doc) => {
+  onSnapshot(doc(db, "formularios", idFormulario), (doc) => {
 
 
     const baremos = doc.data().varemoMedicion;
@@ -95,7 +97,7 @@ function cargarResultados(idFormulario, idUsuario) {
       </tr>`);
       
       if (index == baremos.length-1) {
-        grafica(listBaremo)
+        grafica({data:listBaremo})
       }
       })
 
@@ -130,11 +132,19 @@ function cargarRespuestas(idUsuario, baremo) {
     });
   });
 }
-exportar.addEventListener('clic', ()=>{
-  
+
+exportar.addEventListener("click", ()=>{
+
+  if(formularioSeleccionado){
+    "exportando"
+  }else{
+    "seleciona un formulario"
+  }
 })
 
- function  grafica  (list = [""]) {
+ function  grafica  (list) {
+  // var data = []
+  // data = list
 
     am5.ready(function() {
 
@@ -195,11 +205,16 @@ exportar.addEventListener('clic', ()=>{
       chart.set("scrollbarX", am5.Scrollbar.new(root, {
         orientation: "horizontal"
       }));
+
+
       
       // Set data
-      var data = list
+      console.log(list);
+      var data = list.data || [];
       xAxis.data.setAll(data);
       series.data.setAll(data);
+      // chart.xAxes.getIndex(0).data.setAll(data);
+      // chart.series.getIndex(0).data.setAll(data);
 
       //create bullets
       series.bullets.push(function () {
@@ -211,6 +226,8 @@ exportar.addEventListener('clic', ()=>{
           })
         })
       });
+      
+
       // Make stuff animate on load
       // https://www.amcharts.com/docs/v5/concepts/animations/
       series.appear(1000);
