@@ -1,9 +1,8 @@
 import { menu } from "../../shared/menu.js";
 import { validarSession } from "../../components/validador.js"
 //import {informes} from "../../models/informes.js"
-import { addData, onGetData, deleteData, getData, updateData, onSnapshot, doc, collection, db, onGetDocument } from "../../services/crudservice.js";
+import { addData, onGetData, deleteData, getData,getDoc, updateData, onSnapshot, doc, collection, db, onGetDocument } from "../../services/crudservice.js";
 import { query, where, orderBy, arrayRemove } from "../../services/firebaseservice.js";
-
 
 const filtroFormularios = query(collection(db, "formularios"), orderBy("nombre", "asc"));
 const filtroUsuarios = query(collection(db, "usuarios"), orderBy("nombres", "asc"));
@@ -42,7 +41,7 @@ function usuariosAsignados(formulario) {
   const busqueda = query(collection(db, "asignaciones"), where("formulario", "==", formulario));
   onSnapshot(busqueda, (asignacion) => {
     asignacion.forEach(data => {
-      if (data.data().usuario.lenght != 0) {
+      if (data.data().usuario.length != 0) {
         data.data().usuario.forEach(usuario => usuariosAsignados.push(usuario.id));
       } else {
         console.log('Sin usuarios ');
@@ -133,14 +132,53 @@ function cargarRespuestas(idUsuario, baremo) {
   });
 }
 
-exportar.addEventListener("click", ()=>{
 
-  if(formularioSeleccionado){
-    "exportando"
-  }else{
-    "seleciona un formulario"
+exportar.addEventListener("click", () => {
+  if (formularioSeleccionado) {
+    const q = query(collection(db, "respuestas"), where("formulario", "==", idFormulario))
+    onSnapshot(q,(querySnapshot)=>{
+      // obtener los nombres de las columnas
+      let columns = [];
+      const firstDoc = querySnapshot.docs[0].data();
+      Object.keys(firstDoc.respuestas).forEach((key) => {
+        columns.push(key);
+        console.log(querySnapshot.docs[0].data(),columns);
+      });
+
+      // crear un arreglo para almacenar los datos de cada fila
+      let rows = [];
+
+      querySnapshot.forEach((doc) => {
+        const docData = doc.data();
+//        console.log(docData.respuestas);
+
+        const row = {
+          Usuario: docData.usuario,
+          respuestas: docData.respuestas[1].respuesta
+        };
+        Object.keys(docData.respuestas).forEach((key) => {
+          row[key] = docData.respuestas[key];
+        });
+        rows.push(row);
+      });
+
+      // crear un objeto de libro de Excel
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(rows, { header: columns });
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Respuestas");
+
+      // descargar el archivo Excel
+      const filename = `respuestas_formulario_${idFormulario}.xlsx`;
+      XLSX.writeFile(workbook, filename);
+    })
+    // getDoc(
+    //   collection(db, "respuestas"),
+    //   where("formulario", "==", idFormulario)
+    // ).then((querySnapshot) => {
+
+    // });
   }
-})
+});
 
  function  grafica  (list) {
   // var data = []

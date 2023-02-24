@@ -34,4 +34,5 @@ export{
     db,
     onSnapshot,
     collection,
+    getDoc,
 }
