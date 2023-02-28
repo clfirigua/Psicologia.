@@ -140,9 +140,9 @@ exportar.addEventListener("click", () => {
       // obtener los nombres de las columnas
       let columns = [];
       const firstDoc = querySnapshot.docs[0].data();
+
       Object.keys(firstDoc.respuestas).forEach((key) => {
         columns.push(key);
-        console.log(querySnapshot.docs[0].data(),columns);
       });
 
       // crear un arreglo para almacenar los datos de cada fila
@@ -150,17 +150,19 @@ exportar.addEventListener("click", () => {
 
       querySnapshot.forEach((doc) => {
         const docData = doc.data();
-//        console.log(docData.respuestas);
 
         const row = {
           Usuario: docData.usuario,
-          respuestas: docData.respuestas[1].respuesta
         };
+
         Object.keys(docData.respuestas).forEach((key) => {
           row[key] = docData.respuestas[key];
         });
+
         rows.push(row);
       });
+
+      
 
       // crear un objeto de libro de Excel
       const workbook = XLSX.utils.book_new();
@@ -169,7 +171,7 @@ exportar.addEventListener("click", () => {
 
       // descargar el archivo Excel
       const filename = `respuestas_formulario_${idFormulario}.xlsx`;
-      XLSX.writeFile(workbook, filename);
+      // XLSX.writeFile(workbook, filename);
     })
     // getDoc(
     //   collection(db, "respuestas"),
