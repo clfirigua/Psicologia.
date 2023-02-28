@@ -173,7 +173,8 @@ exportar.addEventListener("click", () => {
           if(index == 0){
             trasformData[`${key}`] = usuario;
           }else{
-            const [numero] = Resultrespuestas[index-1]
+            let [numero] = Resultrespuestas[index-1]
+            if(numero == undefined){ numero = Resultrespuestas[index-1] }
             trasformData[`${key}`] = numero ;
             datosExportar.push(trasformData);
           }
