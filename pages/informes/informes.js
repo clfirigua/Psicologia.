@@ -136,56 +136,78 @@ function cargarRespuestas(idUsuario, baremo) {
 
 
 exportar.addEventListener("click", () => {
-  let datosRespuestas = []
+  let foreykey = ['Usuario'];
+  const datosExportar = [];
   if (formularioSeleccionado) {
     const q = query(collection(db, "respuestas"), where("formulario", "==", idFormulario))
     onSnapshot(q,(querySnapshot)=>{
-      // obtener los nombres de las columnas
-      let columns = [];
-      const firstDoc = querySnapshot.docs[0].data();
-      Object.keys(firstDoc.respuestas).forEach((key) => {
-        columns.push(key);
-        console.log(querySnapshot.docs[0].data(),columns);
-      });
-
-      // crear un arreglo para almacenar los datos de cada fila
-      let rows = [];
-
-      querySnapshot.forEach((doc) => {
-        const docData = doc.data();
-//        console.log(docData.respuestas);
-
-        const row = {
-          Usuario: docData.usuario,
-          respuestas: docData.respuestas[1].respuesta
-        };
-        Object.keys(docData.respuestas).forEach((key) => {
-          row[key] = docData.respuestas[key];
-        });
-
-        rows.push(row);
-        console.log(rows);
-      });
 
       
+      if(foreykey.length == 1){
+        querySnapshot.forEach((doc) => {
+          const docData = doc.data();
+          docData?.respuestas.forEach(arrIndex =>{
+            foreykey.push(arrIndex?.index)
+          })
+        });
+      }
 
-      // crear un objeto de libro de Excel
-      const workbook = XLSX.utils.book_new();
-      const worksheet = XLSX.utils.json_to_sheet(rows, { header: columns });
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Respuestas");
+      querySnapshot.forEach(resRespuestas =>{
+        const basica = resRespuestas.data();
+        const respuestas = basica.respuestas;
+        const usuario =  basica.usuario;
+        const Resultrespuestas = []
 
-      // descargar el archivo Excel
-      const filename = `respuestas_formulario_${idFormulario}.xlsx`;
-      XLSX.writeFile(workbook, filename);
-    })
-    // getDoc(
-    //   collection(db, "respuestas"),
-    //   where("formulario", "==", idFormulario)
-    // ).then((querySnapshot) => {
-//15, 15, { 'width': 170 }
-    // });
+        respuestas.forEach(arrRespuestas => {
+          if(arrRespuestas.respuesta.length == 1){
+            Resultrespuestas.push(arrRespuestas.respuesta)
+          }else{
+            // TODO: manejoc con varias respuestas
+          }
+        });
+
+        // TODO: usuario+ respuestas
+        const trasformData = {};
+        
+        foreykey.forEach((key,index) =>{
+          if(index == 0){
+            trasformData[`${key}`] = usuario;
+          }else{
+            const [numero] = Resultrespuestas[index-1]
+            trasformData[`${key}`] = numero ;
+            datosExportar.push(trasformData);
+          }
+        })
+
+        exportarDatosExcel(datosExportar);
+      });
+    });
+
+
+
+
+    
   }
 });
+
+const exportarDatosExcel =(data)=>{
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    XLSX.utils.book_append_sheet(workbook, worksheet);
+    XLSX.writeFile(workbook, "Presidents.xlsx");
+}
+
+
+
+
+
+
+
+
+      
+      // descargar el archivo Excel
+      // const filename = `respuestas_formulario_${idFormulario}.xlsx`;
+      // XLSX.writeFile(workbook, filename);
 
 // pdf.addEventListener("click", ()=>{
 //   const doc = new jsPDF();
