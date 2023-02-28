@@ -3,6 +3,7 @@ import { validarSession } from "../../components/validador.js"
 //import {informes} from "../../models/informes.js"
 import { addData, onGetData, deleteData, getData,getDoc, updateData, onSnapshot, doc, collection, db, onGetDocument } from "../../services/crudservice.js";
 import { query, where, orderBy, arrayRemove } from "../../services/firebaseservice.js";
+window.jsPDF = window.jspdf.jsPDF;
 
 const filtroFormularios = query(collection(db, "formularios"), orderBy("nombre", "asc"));
 const filtroUsuarios = query(collection(db, "usuarios"), orderBy("nombres", "asc"));
@@ -10,6 +11,7 @@ const formularios = document.getElementById('formularios');
 const usuarios = document.getElementById('usuarios');
 const tablaInformes = document.getElementById('tablaInformes');
 const exportar = document.getElementById('exportar');
+const pdf = document.getElementById('exportarPdf');
 let idFormulario;
 let idUsuario;
 let formularioSeleccionado = false
@@ -134,15 +136,18 @@ function cargarRespuestas(idUsuario, baremo) {
 
 
 exportar.addEventListener("click", () => {
+  let datosRespuestas = []
   if (formularioSeleccionado) {
     const q = query(collection(db, "respuestas"), where("formulario", "==", idFormulario))
     onSnapshot(q,(querySnapshot)=>{
       // obtener los nombres de las columnas
       let columns = [];
-      const firstDoc = querySnapshot.docs[0].data();
+      const firstDoc = querySnapshot.docs[1].data();
+      // console.log(querySnapshot.docs[1].data());
       Object.keys(firstDoc.respuestas).forEach((key) => {
         columns.push(key);
-        console.log(querySnapshot.docs[0].data(),columns);
+        datosRespuestas.push(firstDoc.respuestas[parseInt(key)].respuesta)
+        // console.log(firstDoc.respuestas[parseInt(key)].respuesta);
       });
 
       // crear un arreglo para almacenar los datos de cada fila
@@ -150,16 +155,16 @@ exportar.addEventListener("click", () => {
 
       querySnapshot.forEach((doc) => {
         const docData = doc.data();
-//        console.log(docData.respuestas);
-
         const row = {
           Usuario: docData.usuario,
-          respuestas: docData.respuestas[1].respuesta
+          Respuestas: datosRespuestas
         };
+        console.log(row);
         Object.keys(docData.respuestas).forEach((key) => {
           row[key] = docData.respuestas[key];
         });
         rows.push(row);
+        console.log(rows);
       });
 
       // crear un objeto de libro de Excel
@@ -168,17 +173,27 @@ exportar.addEventListener("click", () => {
       XLSX.utils.book_append_sheet(workbook, worksheet, "Respuestas");
 
       // descargar el archivo Excel
-      const filename = `respuestas_formulario_${idFormulario}.xlsx`;
-      XLSX.writeFile(workbook, filename);
+      // const filename = `respuestas_formulario_${idFormulario}.xlsx`;
+      // XLSX.writeFile(workbook, filename);
     })
     // getDoc(
     //   collection(db, "respuestas"),
     //   where("formulario", "==", idFormulario)
     // ).then((querySnapshot) => {
-
+//15, 15, { 'width': 170 }
     // });
   }
 });
+
+// pdf.addEventListener("click", ()=>{
+//   const doc = new jsPDF();
+//   doc.html(document.documentElement, { callback: function () {
+//     // Guarda el documento PDF con el nombre "documento.pdf"
+//     doc.save("documento.pdf");
+//   },});
+//   //doc.save("prueba.pdf")
+
+// })
 
  function  grafica  (list) {
   // var data = []
