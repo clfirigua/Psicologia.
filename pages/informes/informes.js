@@ -11,7 +11,10 @@ const formularios = document.getElementById('formularios');
 const usuarios = document.getElementById('usuarios');
 const tablaInformes = document.getElementById('tablaInformes');
 const exportar = document.getElementById('exportar');
+
 const pdf = document.getElementById('exportarPdf');
+
+ 
 let idFormulario;
 let idUsuario;
 let formularioSeleccionado = false
@@ -85,7 +88,7 @@ function cargarResultados(idFormulario, idUsuario) {
         t = (z * 10) + 50
         listBaremo.push({
           baremo: baremo.baremo,
-          t: t
+          t
         });
         $(tablaInformes).append(`
       <tr>
@@ -136,58 +139,26 @@ function cargarRespuestas(idUsuario, baremo) {
 
 
 exportar.addEventListener("click", () => {
-  let foreykey = ['Usuario'];
+
   const datosExportar = [];
   if (formularioSeleccionado) {
     const q = query(collection(db, "respuestas"), where("formulario", "==", idFormulario))
     onSnapshot(q,(querySnapshot)=>{
 
-      
-      if(foreykey.length == 1){
-        querySnapshot.forEach((doc) => {
-          const docData = doc.data();
-          docData?.respuestas.forEach(arrIndex =>{
-            foreykey.push(arrIndex?.index)
-          })
-        });
-      }
-
-      querySnapshot.forEach(resRespuestas =>{
-        const basica = resRespuestas.data();
-        const respuestas = basica.respuestas;
-        const usuario =  basica.usuario;
-        const Resultrespuestas = []
-
-        respuestas.forEach(arrRespuestas => {
-          if(arrRespuestas.respuesta.length == 1){
-            Resultrespuestas.push(arrRespuestas.respuesta)
-          }else{
-            // TODO: manejoc con varias respuestas
+      querySnapshot.forEach(response => {
+        if(response.data().respuestas.length  != 0){
+          console.log(response.data())
+          const objRespuesta = {
+            usuario: response.data().usuario,
           }
-        });
-
-        // TODO: usuario+ respuestas
-        const trasformData = {};
-        
-        foreykey.forEach((key,index) =>{
-          if(index == 0){
-            trasformData[`${key}`] = usuario;
-          }else{
-            let [numero] = Resultrespuestas[index-1]
-            if(numero == undefined){ numero = Resultrespuestas[index-1] }
-            trasformData[`${key}`] = numero ;
-            datosExportar.push(trasformData);
-          }
-        })
-
-        exportarDatosExcel(datosExportar);
+          response.data().respuestas.forEach(value =>{
+            objRespuesta[`${value.index}`] = value.respuesta.length != 0 ? value.respuesta[0] : value.respuesta
+          });
+          datosExportar.push(objRespuesta);
+        }
       });
+      exportarDatosExcel(datosExportar);
     });
-
-
-
-
-    
   }
 });
 
@@ -198,27 +169,16 @@ const exportarDatosExcel =(data)=>{
     XLSX.writeFile(workbook, "Presidents.xlsx");
 }
 
-
-
-
-
-
-
-
-      
-      // descargar el archivo Excel
-      // const filename = `respuestas_formulario_${idFormulario}.xlsx`;
-      // XLSX.writeFile(workbook, filename);
-
 // pdf.addEventListener("click", ()=>{
+//   const body = $('body').html();
 //   const doc = new jsPDF();
-//   doc.html(document.documentElement, { callback: function () {
-//     // Guarda el documento PDF con el nombre "documento.pdf"
-//     doc.save("documento.pdf");
-//   },});
-//   //doc.save("prueba.pdf")
-
+//   doc.html(body,{scale: 0.5, callback: function(){
+//     doc.save("archivo.pdf");
+//   }});
 // })
+
+
+
 
  function  grafica  (list) {
   // var data = []
