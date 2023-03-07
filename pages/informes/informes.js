@@ -136,37 +136,64 @@ function cargarRespuestas(idUsuario, baremo) {
     });
   });
 }
+function traerusuarios(idUsuario){
+  let promesa =  new Promise((resolve, reject)=>{
+    const query = doc(db, "usuarios", idUsuario);
+    onSnapshot(query, (doc)=>{
+      try{
+        let nombre = doc.data().nombres
+        let apellido =doc.data().apellidos 
+        let identificacion  = doc.data().cc
+        // const nombreApellido = concat(doc.data().nombres," ",doc.data().apellidos)
+        resolve({nombre: nombre, apellido: apellido, identificacion:identificacion })
+      }
+      catch(e){
+        console.error(e.name+ ": "+ e.message)
+      }
 
+   })
+  })
+return promesa
+}
 
-exportar.addEventListener("click", () => {
+exportar.addEventListener("click", async () => {
 
   const datosExportar = [];
   if (formularioSeleccionado) {
     const q = query(collection(db, "respuestas"), where("formulario", "==", idFormulario))
-    onSnapshot(q,(querySnapshot)=>{
+    onSnapshot(q, async (querySnapshot) => {
 
-      querySnapshot.forEach(response => {
-        if(response.data().respuestas.length  != 0){
-          console.log(response.data())
-          const objRespuesta = {
-            usuario: response.data().usuario,
+      for (const response of querySnapshot.docs) {
+        if (response.data().respuestas.length != 0) {
+          const user = await traerusuarios(response.data().usuario);
+          console.log(user);
+          try{
+            const objRespuesta = {
+              nombre: user.nombre,
+              apellido: user.apellido,
+              identificacion:user.identificacion
+            }
+            response.data().respuestas.forEach(value => {
+              objRespuesta[`${value.index}`] = value.respuesta.length != 0 ? value.respuesta[0] : value.respuesta
+            });
+            datosExportar.push(objRespuesta);
           }
-          response.data().respuestas.forEach(value =>{
-            objRespuesta[`${value.index}`] = value.respuesta.length != 0 ? value.respuesta[0] : value.respuesta
-          });
-          datosExportar.push(objRespuesta);
+          catch(e){
+            console.error(e.name+ ": "+ e.message)
+          }
+
         }
-      });
+      }
       exportarDatosExcel(datosExportar);
     });
   }
 });
-
 const exportarDatosExcel =(data)=>{
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(workbook, worksheet);
-    XLSX.writeFile(workbook, "Presidents.xlsx");
+    const filename = `respuestas_${idFormulario}.xlsx`;
+    XLSX.writeFile(workbook, filename);
 }
 
 // pdf.addEventListener("click", ()=>{
