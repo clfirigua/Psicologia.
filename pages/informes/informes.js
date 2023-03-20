@@ -147,6 +147,7 @@ exportar.addEventListener("click", () => {
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
           docData?.respuestas.forEach(arrIndex =>{
+            console.log(arrIndex);
             foreykey.push(arrIndex?.index)
           })
         });
@@ -173,6 +174,7 @@ exportar.addEventListener("click", () => {
           if(index == 0){
             trasformData[`${key}`] = usuario;
           }else{
+            console.log(Resultrespuestas);
             let [numero] = Resultrespuestas[index-1]
             if(numero == undefined){ numero = Resultrespuestas[index-1] }
             trasformData[`${key}`] = numero ;
@@ -195,7 +197,7 @@ const exportarDatosExcel =(data)=>{
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(data);
     XLSX.utils.book_append_sheet(workbook, worksheet);
-    XLSX.writeFile(workbook, "Presidents.xlsx");
+    XLSX.writeFile(workbook, "Resultados.xlsx");
 }
 
 

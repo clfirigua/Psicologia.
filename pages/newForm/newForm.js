@@ -282,16 +282,16 @@ const guardarBaremo = () => {
   updateData(idFormulario, { varemoMedicion: varemos }, 'formularios');
 }
 
+
 modalRespuestas.addEventListener('show.bs.modal', e => {
-  btnGuardarRespuesta.addEventListener('click', (e) => {
-   guardarRespuestas();
-  })
+  btnGuardarRespuesta.addEventListener('click', guardarRespuestas);
   document.addEventListener("keyup", (e)=>{
     if(e.key=="Enter"){
-      guardarRespuestas();
-    };
+      guardarRespuestas;
+    }
   });
 });
+
 modalRespuestas.addEventListener('hidden.bs.modal', e => {
   btnGuardarRespuesta.removeEventListener('click', guardarRespuestas);
   document.removeEventListener("keyup", guardarRespuestas);
