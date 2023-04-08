@@ -20,6 +20,7 @@ ModelusuariosAdmin.forEach(data => {
             `
                 <select class="form-select " aria-label="Default select example" id="${data.texto}">
                     <option selected>${data.placeholder}</option>
+                    <option selected value=""> Usuario </option>
                 </select>
 
             `
@@ -45,6 +46,7 @@ const roles = document.getElementById('Rol');
 
 onGetData((data)=>{
     roles.innerHTML = ``
+    roles.innerHTML = `<option selected value=""> Usuario </option>`
     data.forEach((obj) => {
         $(roles).append(`
             <option value="${obj.id}">${obj.data().nombreRol}</option>

@@ -21,7 +21,7 @@ const ModelusuariosAdmin = [
         texto: 'Email',
         type: 'email',
         placeholder: 'email',
-        required: false
+        required: true
     },
     {
         texto: 'CC',
