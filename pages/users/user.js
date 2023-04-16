@@ -12,7 +12,6 @@ const btnGuardarfire = document.getElementById('fire');
 importCSV.addEventListener('change', readFile, false);
 
 cargarCsv.addEventListener('click', ()=>{
-    if(userDataError==[]){
 
         usersData.forEach((data, index) => {
             $(tcuerpo).append(
@@ -40,9 +39,9 @@ if(confirmar){
 else{
     alert("los datos no se guardaron en la base de datos")
 }
-    }else{
-        alert("error al subir la informacion")
-    }
+if(userDataError !=[]){
+    console.log(userDataError);
+}
 });
 
 // btnGuardarfire.addEventListener('click', ()=>{
@@ -64,7 +63,7 @@ btnGuardar.addEventListener('click', ()=>{
 
 exportar.addEventListener('click',()=>{
     alert("remplaza los datos correspondientes")
-const data = "nombres;apellidos;Celular;Correo;identificacion;usuario;contraseña"
+const data = "nombres;apellidos;Celular;Correo;identificacion;contraseña"
 const nombreArchivo = "ejemplo.csv"
 exportarData(data, nombreArchivo)
 })

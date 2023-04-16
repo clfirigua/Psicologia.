@@ -39,14 +39,14 @@ window.onbeforeunload = function() {
 const cargarpregunta = (pregunta) => {
   cardForms.innerHTML = '';
   varemo = preguntasform[pregunta].varemo;
-  $(cardForms).append(`
-      <div class="card">
-        <div class="card-body" id="${pregunta}">
-          <h5 class="card-title">${preguntasform[pregunta].nombrePregunta}</h5>
-          ${cargarRespuestas(pregunta, preguntasform[pregunta].respuestas)}
+    $(cardForms).append(`
+        <div class="card">
+          <div class="card-body" id="${pregunta}">
+            <h5 class="card-title">${preguntasform[pregunta].nombrePregunta}</h5>
+            ${cargarRespuestas(pregunta, preguntasform[pregunta].respuestas,preguntasform[pregunta].tipoDeRespuesta)}
+          </div>
         </div>
-      </div>
-        `);
+          `);
 }
 
 const formulario = async () => {
@@ -60,8 +60,10 @@ const formulario = async () => {
 
 formulario();
 
-const cargarRespuestas = (index, respuestas) =>{
+const cargarRespuestas = (index, respuestas,tipoRespuesta) =>{
   let lista = '';
+  console.log(tipoRespuesta);
+  if(tipoRespuesta == "seleccion unica"){
   respuestas.forEach(respuesta =>{
       lista = lista +  `
       <div class="form-check">
@@ -73,6 +75,19 @@ const cargarRespuestas = (index, respuestas) =>{
       
   `
   })
+}else{
+  respuestas.forEach(respuesta =>{
+    lista = lista +  `
+    <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="${index}" id="${respuesta.index}" value=${respuesta.index}>
+    <label class="form-check-label" >
+      ${respuesta.respuesta}
+    </label>
+    </div>
+    
+`
+})
+}
 
   return lista
 }
@@ -83,11 +98,11 @@ function validacionRespuesta (){
   for (let i = 0; i < radios.length; i++) {
     if (radios[i].checked) {
       valor = radios[i].value;
-      break;
     }
   }
   if(valor != ''){
   let respuesta = $(`input:radio[name=${pregunta}]:checked`).val();
+  console.log(respuesta);
   respuesta = parseInt(respuesta,10);
   respuestas.push({
     index:pregunta,

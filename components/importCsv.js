@@ -34,7 +34,6 @@ function parseCSV(text) {
       let lines = parseCSV(e.target.result);
       let output = reverseMatrix(lines);
       arrUser = output[0];
-      arrUser.pop();
       convertidor()
     };
     // Leemos el contenido del archivo seleccionado
@@ -42,7 +41,7 @@ function parseCSV(text) {
   }
 
   const convertidor = () =>{
-
+    arrUser.shift()
     arrUser.forEach((data)=>{
         const arr = data.split(';')
         if(arr.length == 6 && arr[3].includes('@')  && arr[2].length == 10){
@@ -57,7 +56,6 @@ function parseCSV(text) {
               rol:""
             }
             usersData.push(userArrConver)
-            console.log(usersData);
         }else{
           userDataError.push(data);
         }
