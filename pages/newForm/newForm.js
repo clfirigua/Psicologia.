@@ -319,18 +319,20 @@ const selecPreguntadepende = (tipo, id, repuestas = []) => {
   if (tipo == true) {
     let respuestasForm = Preguntas[id].respuestas;
     respuestasForm.forEach((data, i) => {
+      console.log(data,i);
       $(selectRespuestaDepende).append(
         `
-          <option value="${i}" class="seleccionar" >${data}</option>
+          <option value="${i}" class="seleccionar" >${data.index}. ${data.respuesta}</option>
           `
       )
     }
     )
   } else {
     repuestas.forEach((data, i) => {
+      console.log(data,i);
       $(selectRespuestaDepende).append(
         `
-          <option value="${i}" class="seleccionar" >${data}</option>
+          <option value="${i}" class="seleccionar" >${data.index}. ${data.respuesta}</option>
           `
       )
     }
