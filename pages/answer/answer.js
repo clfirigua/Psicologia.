@@ -15,6 +15,7 @@ let s = 0;
 const respuestas = [];
 let varemo = '';
 let respuestasFinales
+let asignacionActualizada = false;
 
 const tiempo = (s) => {
   setInterval(function () {
@@ -139,6 +140,7 @@ btn.addEventListener('click', ()=>{
 })  
 
 const actualizarAsignacion = async () => {
+  return new Promise(resolve =>{
   onGetData((asignaciones) => {  
      asignaciones.forEach(asignacion => {
       if(asignacion.data().formulario == id){
@@ -157,20 +159,27 @@ const actualizarAsignacion = async () => {
         }
        }
       });
+      asignacionActualizada = true;
+      resolve()
     }, 'asignaciones');
-  }
+  });
+}
 
-  function terminarFormulario() {
+  async function terminarFormulario() {
     respuestasFinales = JSON.stringify(respuestas);
     respuestasSave.formulario = id;
     respuestasSave.usuario = idUser.id;
     respuestasSave.respuestas = respuestas;
-    actualizarAsignacion();
+    await actualizarAsignacion();
     addData(respuestasSave, 'respuestas');
     // revisar toca tomar el id del usuario para actualizarlo
     
-   setTimeout(() => {
-    window.location.href = '/pages/formsAnswer/formAnswer.html'}, 2000);
+    const interval = setInterval(() => {
+      if (asignacionActualizada) {
+        clearInterval(interval); // detener el intervalo
+        window.location.href = '/pages/formsAnswer/formAnswer.html'; // redirigir
+      }
+    }, 100); 
   }
   cerrarSesion.addEventListener('click', (e) => {
     e.preventDefault();
