@@ -4,16 +4,15 @@ const listaDatos = document.getElementById('listaDatos')
 
 
 //console.log(roles[0].texto);
-console.log(roles);
+console.log(roles[0].texto);
 const menu = async(arr) =>{
 
     const userLocal = JSON.parse(localStorage.getItem('user'));
     const valores = await getData(userLocal.rol, 'roles');
-   // const obj = JSON.parse(valores.data())
     const keys = Object.keys(valores.data())
-    keys.sort()
+    const order = ['Dashboard','Usuarios','Roles','Formularios','Asignaciones','Informes','Cerrar_sesion']
     const sortedObj = {}
-    keys.forEach(key=>{
+    order.forEach(key=>{
         sortedObj[key]=valores.data()[key]
     })
 
