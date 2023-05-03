@@ -4,18 +4,22 @@ const listaDatos = document.getElementById('listaDatos')
 
 
 //console.log(roles[0].texto);
-
+console.log(roles);
 const menu = async(arr) =>{
 
     const userLocal = JSON.parse(localStorage.getItem('user'));
     const valores = await getData(userLocal.rol, 'roles');
-   // console.log(valores.data());
-    for(let i=0; i<roles.length; i++){
-       // console.log(i);
-    }
+   // const obj = JSON.parse(valores.data())
+    const keys = Object.keys(valores.data())
+    keys.sort()
+    const sortedObj = {}
+    keys.forEach(key=>{
+        sortedObj[key]=valores.data()[key]
+    })
 
-    Object.entries(valores.data()).forEach((data)=>{
-        //console.log(data);
+    console.log(sortedObj);
+    Object.entries(sortedObj).forEach((data)=>{
+        console.log(data);
         for (let i = 0; i < roles.length; i++) {
             if( roles[i].slug == data[0]  && data[1] == true ){
                 $(listaDatos).append(`
