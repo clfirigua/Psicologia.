@@ -20,7 +20,7 @@ onGetData((data) => {
             informe.forEach(data =>{
                 if(data.id == usuario.data().formulario){
                     $(graficos).append(`
-                    <div class="card mt-3 ml-3" style="width: 50%;">
+                    <div class="card mt-3 ml-3" >
                         <div class="card-body">
                         <h5 class="card-title text-center">${data.data().nombre}</h5>
                             <div id="${usuario.id}" class="chartdiv"></div>
