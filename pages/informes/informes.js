@@ -134,71 +134,91 @@ function cargarRespuestas(idUsuario, baremo) {
   });
 }
 
+function traerusuarios(idUsuario){
+  let promesa =  new Promise((resolve, reject)=>{
+    const query = doc(db, "usuarios", idUsuario);
+    onSnapshot(query, (doc)=>{
+      try{
+        let nombre = doc.data().nombres
+        let apellido =doc.data().apellidos 
+        let identificacion  = doc.data().cc
+        // const nombreApellido = concat(doc.data().nombres," ",doc.data().apellidos)
+        resolve({nombre: nombre, apellido: apellido, identificacion:identificacion })
+      }
+      catch(e){
+        console.error(e.name+ ": "+ e.message)
+      }
+
+   })
+  })
+return promesa
+}
 
 exportar.addEventListener("click", () => {
   let foreykey = ['Usuario'];
   const datosExportar = [];
   if (formularioSeleccionado) {
     const q = query(collection(db, "respuestas"), where("formulario", "==", idFormulario))
-    onSnapshot(q,(querySnapshot)=>{
+    onSnapshot(q, (querySnapshot) => {
 
-      
-      if(foreykey.length == 1){
+      if (foreykey.length == 1) {
         querySnapshot.forEach((doc) => {
           const docData = doc.data();
-          docData?.respuestas.forEach(arrIndex =>{
+          docData?.respuestas.forEach(arrIndex => {
             console.log(arrIndex);
             foreykey.push(arrIndex?.index)
           })
         });
       }
 
-      querySnapshot.forEach(resRespuestas =>{
+      let Resultrespuestas = []; // declarar la variable fuera del bucle
+
+      querySnapshot.forEach(resRespuestas => {
         const basica = resRespuestas.data();
         const respuestas = basica.respuestas;
-        const usuario =  basica.usuario;
-        const Resultrespuestas = []
+        const usuario = basica.usuario;
 
         respuestas.forEach(arrRespuestas => {
-          if(arrRespuestas.respuesta.length == 1){
+          if (arrRespuestas.respuesta.length == 1) {
             Resultrespuestas.push(arrRespuestas.respuesta)
-          }else{
+          } else {
             // TODO: manejoc con varias respuestas
           }
         });
 
         // TODO: usuario+ respuestas
         const trasformData = {};
-        
-        foreykey.forEach((key,index) =>{
-          if(index == 0){
-            trasformData[`${key}`] = usuario;
-          }else{
-            console.log(Resultrespuestas);
-            let [numero] = Resultrespuestas[index-1]
-            if(numero == undefined){ numero = Resultrespuestas[index-1] }
-            trasformData[`${key}`] = numero ;
-            datosExportar.push(trasformData);
+
+        foreykey.forEach(async (key, index) => {
+          if (index == 0) {
+            let JsonUsuarios = await traerusuarios(usuario)
+            trasformData[`${key}`] = JsonUsuarios.nombre + " " +JsonUsuarios.apellido
+          } else {
+            if (Resultrespuestas.length > index - 1) { // verificar la longitud de Resultrespuestas antes de acceder al índice
+              let [numero] = Resultrespuestas[index - 1]
+              if (numero == undefined) { numero = Resultrespuestas[index - 1] }
+              trasformData[`${key}`] = numero;
+
+            }
           }
         })
 
-        exportarDatosExcel(datosExportar);
+        datosExportar.push(trasformData);
+        Resultrespuestas = []; // reiniciar la variable para la siguiente iteración
       });
+      exportarDatosExcel(datosExportar);
     });
-
-
-
-
-    
   }
 });
 
-const exportarDatosExcel =(data)=>{
-    const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    XLSX.utils.book_append_sheet(workbook, worksheet);
-    XLSX.writeFile(workbook, "Resultados.xlsx");
+const exportarDatosExcel = (data) => {
+  const workbook = XLSX.utils.book_new();
+  const worksheet = XLSX.utils.json_to_sheet(data);
+  XLSX.utils.book_append_sheet(workbook, worksheet);
+  XLSX.writeFile(workbook, "Resultados.xlsx");
 }
+
+
 
 
 
