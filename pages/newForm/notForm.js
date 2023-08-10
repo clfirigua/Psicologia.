@@ -18,6 +18,13 @@ validarSession();
 mostrarFormulario();
 cargarFormularios();
 
+/**
+ * Generates a dynamic form based on the data provided in the 'question' array.
+ * The function creates form elements such as input fields, select dropdowns, and buttons based on the type of data provided in the array.
+ *
+ * @param {Array} question - An array of objects containing data for generating form elements.
+ * @returns {void}
+ */
 function mostrarFormulario() {
   question.forEach(data => {
     switch (data.type) {
@@ -71,96 +78,83 @@ const selectVaremo = document.getElementById("varemo");
 const agregarRespuestas = document.getElementById("agregarRespuestas");
 
 
+/**
+ * Loads and displays the data of a specific form from the Firestore database.
+ * Populates the form with the questions, varemo options, and dependent responses based on the user's selection.
+ */
 function cargarFormularios() {
   onSnapshot(doc(db, "formularios", idForm), (doc) => {
-    //declaramos variables usadas en la base de datos
-    let varemos = doc.data().varemoMedicion
-    let preguntas = doc.data().preguntas
-    let nombre = doc.data().nombre
-    let datosForm = doc.data()
+    // Declaring variables used in the database
+    let varemos = doc.data().varemoMedicion;
+    let preguntas = doc.data().preguntas;
+    let nombre = doc.data().nombre;
+    let datosForm = doc.data();
     let respuestas = [];
 
+    nameForm.innerHTML = nombre;
 
-    nameForm.innerHTML = nombre
+    modalVaremo.innerHTML = "";
 
-    modalVaremo.innerHTML = ""
+    selectVaremo.innerHTML = `<option selected disabled value="false">Varemo de medicion</option>`;
+    
+    // Event listener for adding a response
+    btnRespuesta.addEventListener("click", async (e) => {
+      e.preventDefault();
 
-
-    selectVaremo.innerHTML= `<option selected disabled value="false">Varemo de medicion</option>`
-    //si depende de alguna pregunt
-    // const preguntas2 = [];
-    btnRespuesta.addEventListener("click", async (e)=>{
-      e.preventDefault()
-      
-      if(doc.data().preguntas.lenght == undefined){
+      if (doc.data().preguntas.length == undefined) {
         datosForm.preguntas.push({
-          respuesta:inpRespuesta.value
-        })
-        // datosForm.preguntas = preguntas2;
-        updateData(doc.id,datosForm,'formularios')
-        console.log('exito')
-        
+          respuesta: inpRespuesta.value
+        });
+        updateData(doc.id, datosForm, 'formularios');
+        console.log('exito');
       }
-      
-    })
+    });
 
-    if(preguntas.lenght > 0){
-      preguntas.forEach((data,i) => {
-      
+    if (preguntas.length > 0) {
+      preguntas.forEach((data, i) => {
         $(preguntaDepende).append(
-          `
-            <option value="${i}" class="seleccionar" >${data.pregunta}</option>
-            `
-        )
-      })
+          `<option value="${i}" class="seleccionar">${data.pregunta}</option>`
+        );
+      });
     }
 
-    //varemos form
-    try{
-    varemos.forEach((data,i) => {
-      $(selectVaremo).append(
-        `
-          <option value="${i}" class="seleccionar" >${data}</option>
-          `
-      )
-      $(modalVaremo).append(
-        `
-    <div class="row">
-      <p class="col-sm-10">${data}</p>
-      <i class="fas fa-trash red col-sm-2 eliminar" data-id="${data}" ></i>
-    </div>
+    // Varemos form
+    try {
+      varemos.forEach((data, i) => {
+        $(selectVaremo).append(
+          `<option value="${i}" class="seleccionar">${data}</option>`
+        );
+        $(modalVaremo).append(
+          `<div class="row">
+            <p class="col-sm-10">${data}</p>
+            <i class="fas fa-trash red col-sm-2 eliminar" data-id="${data}"></i>
+          </div>`
+        );
 
-    `
-      )
-      const eliminar = document.querySelectorAll(".eliminar");
-      eliminar.forEach(btn => {
-        btn.addEventListener("click", (e) => {
-
-          updateData(idForm, { varemoMedicion: arrayRemove(e.target.dataset.id) }, "formularios")
-        })
-      })
-    })}
-    catch{
+        const eliminar = document.querySelectorAll(".eliminar");
+        eliminar.forEach(btn => {
+          btn.addEventListener("click", (e) => {
+            updateData(idForm, { varemoMedicion: arrayRemove(e.target.dataset.id) }, "formularios");
+          });
+        });
+      });
+    } catch {
       console.log("error");
     }
 
-        // respuesta dependiente
+    // Response dependent on question
     $(preguntaDepende).on("change", function (e) {
-      
       const idFormPregunta = $(this).val();
       let respuestasForm = preguntas[idFormPregunta].Respuestas;
 
-      respuestaDepende.innerHTML=""
-      respuestasForm.forEach((data,i) => {
-
+      respuestaDepende.innerHTML = "";
+      respuestasForm.forEach((data, i) => {
         $(respuestaDepende).append(
-          `
-            <option value="${i}" class="seleccionar" >${data}</option>
-            `
-        )
-      })
-    })
-  })
+          `<option value="${i}" class="seleccionar">${data}</option>`
+        );
+      });
+    });
+  });
 }
 btnvaremo.addEventListener("click", (e) => {
   updateData(idForm, { varemoMedicion: arrayUnion(inpVaremo.value) }, "formularios")
@@ -176,6 +170,19 @@ btnGuardar.addEventListener('click', async(e)=>{
   const varemo = document.getElementById('varemo');
 
   const preguntas = await  getData(idForm, 'formularios');
+  preguntas.data().preguntas.push({
+    nuevaPregunta,
+    tipoDeRespuesta,
+    preguntaDepende,
+    respuestaDepende,
+    varemo
+  })
+  // updateData(idForm,{
+    
+  // },'formularios')
+  // console.log('hola')
+})
+
   preguntas.data().preguntas.push({
     nuevaPregunta,
     tipoDeRespuesta,
