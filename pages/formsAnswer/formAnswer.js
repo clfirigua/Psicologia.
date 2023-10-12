@@ -8,16 +8,17 @@ let idAsignacion
 const url = '../../assets/img/list-2389219.png' //Imagen de <a href="https://pixabay.com/es/users/memed_nurrohmad-3307648/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2389219">Memed_Nurrohmad</a> en <a href="https://pixabay.com/es//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2389219">Pixabay</a>
 const forms = [];
 
-onGetData((asignaciones) => {   
+onGetData((asignaciones)  => {   
     asignaciones.forEach(asignacion => {
         asignacion.data().usuario.forEach(card => {
+            console.log(card)
             if (card.id == id) {
                 if (card.resuelto == false) {
                     console.log(card);
                     idAsignacion =asignacion.id;
                     forms.push(asignacion.data().formulario);
                 }else{
-                    alert('No tienes formularios pendientes');
+                    //alert('No tienes formularios pendientes');
                     }
             }
         })

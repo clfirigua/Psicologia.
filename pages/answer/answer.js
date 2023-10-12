@@ -152,8 +152,9 @@ const actualizarAsignacion = async () => {
               if (ubicacion !== -1) {
                 dataUser.splice(ubicacion, 1);
                 dataUser.push({id:idUser.id,
-                  resuelto:true,})
+                  resuelto:true,}) 
             }
+            
               updateData(idAsignacion, {usuario:dataUser},'asignaciones')
           }
         }
