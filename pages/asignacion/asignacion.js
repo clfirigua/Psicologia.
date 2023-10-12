@@ -153,6 +153,8 @@ const eliminarSeleccion = ()=>{
         for (let i = 0; i < asignadosArray.length; i++) {
             for (let j = 0; j < validarCheck.length; j++) {
                 if(asignadosArray[i].id == validarCheck[j].id){
+                    console.log(asignadosArray[i].id)
+                    console.log( asignadosArray.splice(asignadosArray.indexOf(asignadosArray[i]),1))
                     asignadosArray.splice(asignadosArray.indexOf(asignadosArray[i]),1)
                 }
             }

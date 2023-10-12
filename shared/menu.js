@@ -1,10 +1,6 @@
 import { roles } from "../components/checks.js";
 import { getData } from "../services/crudservice.js";
 const listaDatos = document.getElementById('listaDatos')
-
-
-//console.log(roles[0].texto);
-console.log(roles[0].texto);
 const menu = async(arr) =>{
 
     const userLocal = JSON.parse(localStorage.getItem('user'));
@@ -16,9 +12,8 @@ const menu = async(arr) =>{
         sortedObj[key]=valores.data()[key]
     })
 
-    console.log(sortedObj);
+
     Object.entries(sortedObj).forEach((data)=>{
-        console.log(data);
         for (let i = 0; i < roles.length; i++) {
             if( roles[i].slug == data[0]  && data[1] == true ){
                 $(listaDatos).append(`
