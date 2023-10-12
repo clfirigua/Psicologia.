@@ -82,7 +82,7 @@ onGetData((data)=>{
             <td scope="col">${obj.data().telefono}</td>
             <td scope="col">${obj.data().email}</td>
             <td scope="col">${obj.data().cc}</td>
-            <td scope="col">${obj.data().password}</td>
+            <td class="hidetext" scope="col">${obj.data().password}</td>
             <td scope="col">${buscarRol(obj.data().rol)}</td>
             <td scope="col"><button class= "btn btn-warning editar" data-id="${obj.id}" >Editar</button></td>
             <td scope="col"><button class= "btn btn-danger eliminar" data-id="${obj.id}" >Eliminar</button></td>

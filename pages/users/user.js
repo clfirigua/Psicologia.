@@ -23,7 +23,7 @@ cargarCsv.addEventListener('click', ()=>{
                     <td>${data.telefono}</td>
                     <td>${data.email}</td>
                     <td>${data.cc}</td>
-                    <td>${data.password}</td>
+                    <td >${data.password}</td>
                 </tr>
                 `
             )

@@ -11,3 +11,6 @@ i{
     overflow: auto;
     overflow-y: scroll;
 } */
+.hidetext {
+    -webkit-text-security: disc;
+  }
